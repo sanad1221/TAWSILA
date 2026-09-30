@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oper Fleet - Gasser Top Edition</title>
+    <title>Oper Fleet - Gasser Top Logout Edition</title>
     
     <!-- استدعاء مكتبات Firebase السحابية -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -159,6 +159,7 @@
             letter-spacing: 1px;
         }
 
+        /* زرار الخروج العلوي */
         .top-logout-btn {
             background: rgba(255, 77, 77, 0.15);
             border: 1px solid #ff4d4d;
@@ -261,36 +262,15 @@
             box-shadow: 0 0 15px #ffcc00;
         }
 
-        /* نظام السلايدر الأفقي المتحرك الديناميكي */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            margin: 20px 0;
-            padding: 10px 0;
-        }
-
-        .slider-track {
-            display: flex;
+        /* تصميم الكاردز الديناميكية الجديدة */
+        .dynamic-fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding-bottom: 10px;
-            scrollbar-width: thin;
-            scrollbar-color: #ffcc00 #11111b;
-        }
-
-        .slider-track::-webkit-scrollbar {
-            height: 6px;
-        }
-        .slider-track::-webkit-scrollbar-thumb {
-            background: #ffcc00;
-            border-radius: 10px;
+            margin: 20px 0;
         }
 
         .fleet-card {
-            min-width: 230px;
-            flex: 0 0 auto;
             background: linear-gradient(145deg, rgba(25, 25, 35, 0.9), rgba(12, 12, 18, 0.95));
             border: 2px solid rgba(255, 204, 0, 0.2);
             border-radius: 18px;
@@ -306,6 +286,7 @@
             transform: translateY(-5px);
             border-color: #ffcc00;
             box-shadow: 0 10px 25px rgba(255, 204, 0, 0.25);
+            background: linear-gradient(145deg, rgba(35, 35, 48, 0.95), rgba(18, 18, 26, 0.98));
         }
 
         .fleet-card.selected {
@@ -398,7 +379,6 @@
         }
 
         .hidden { display: none; }
-        
         .driver-offer-box {
             background: rgba(25, 25, 35, 0.8);
             border-left: 4px solid #ffcc00;
@@ -408,7 +388,7 @@
             text-align: right;
         }
 
-        .schedule-offer-box {
+        .nursery-offer-box {
             background: rgba(255, 204, 0, 0.06);
             border: 2px solid #ffcc00;
             padding: 15px;
@@ -437,7 +417,7 @@
         <div class="intro-abstract-bg"></div>
         <div class="snapshot-overlay">
             <div class="snapshot-title">Oper Fleet</div>
-            <div class="snapshot-subtitle">Gasser Top Edition</div>
+            <div class="snapshot-subtitle">Gasser Top Logout Edition</div>
         </div>
     </div>
 
@@ -481,56 +461,44 @@
             </div>
 
             <button class="action-btn" style="margin-top: 15px;" onclick="goToRoleSelection()">ابدأ الآن</button>
-            <button class="action-btn" style="background: rgba(255,0,0,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-top: 10px;" onclick="openAdminLogin()">🔐 لوحة تحكم الأدمن</button>
+            <button class="action-btn" style="background: rgba(255,0,0,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-top: 10px;" onclick="openAdminLogin()">🔐 لوحة تحكم الأدمن (كلمة المرور: 212008)</button>
         </div>
 
         <!-- 2. اختيار الدور -->
         <div id="roleScreen" class="card hidden">
             <h2>اختر نوع الحساب</h2>
             <div class="btn-grid" style="flex-direction: column;">
-                <button class="action-btn" onclick="selectRole('customer')">أنا زبون (أبحث عن توصيلة أو جدول مواعيد منتظم)</button>
+                <button class="action-btn" onclick="selectRole('customer')">أنا زبون (أبحث عن توصيلة أو اشتراك حضانة)</button>
                 <button class="action-btn" style="background: rgba(255, 204, 0, 0.1); color: #fff;" onclick="selectRole('driver')">أنا سائق أسطول (أريد اختيار مركبتي والعمل)</button>
             </div>
         </div>
 
-        <!-- 3. شاشة اختيار المركبة السلايد المتحركة للسائق -->
+        <!-- 3. شاشة اختيار المركبة الديناميكية للسائق -->
         <div id="driverVehicleScreen" class="card hidden" style="text-align: right;">
             <h2>🚗 اختر نوع مركبتك في الأسطول</h2>
-            <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">تصفح واختار نوع المركبة عبر السلايد أدناه:</p>
+            <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">اختر نوع المركبة التي تقودها لتظهر في ملفك الشخصي وتستقبل الطلبات المخصصة لها:</p>
             
-            <div class="slider-container">
-                <div class="slider-track">
-                    <div class="fleet-card" id="card-tuktuk" onclick="selectVehicleType('توكتوك 🛺')">
-                        <span class="fleet-icon">🛺</span>
-                        <div class="fleet-title">توكتوك</div>
-                        <div class="fleet-desc">سريع ومثالي للمشاوير الداخلية</div>
-                    </div>
-                    
-                    <div class="fleet-card" id="card-bike" onclick="selectVehicleType('موتوسيكل 🛵')">
-                        <span class="fleet-icon">🛵</span>
-                        <div class="fleet-title">موتوسيكل</div>
-                        <div class="fleet-desc">للتوصيل السريع وتفادي الزحام</div>
-                    </div>
+            <div class="dynamic-fleet-grid">
+                <div class="fleet-card" id="card-tuktuk" onclick="selectVehicleType('توكتوك 🛺')">
+                    <span class="fleet-icon">🛺</span>
+                    <div class="fleet-title">توكتوك</div>
+                    <div class="fleet-desc">سريع ومثالي للمشاوير الداخلية</div>
+                </div>
+                
+                <div class="fleet-card" id="card-bike" onclick="selectVehicleType('موتوسيكل 🛵')">
+                    <span class="fleet-icon">🛵</span>
+                    <div class="fleet-title">موتوسيكل</div>
+                    <div class="fleet-desc">للتوصيل السريع وتفادي الزحام</div>
+                </div>
 
-                    <div class="fleet-card" id="card-car" onclick="selectVehicleType('عربية 🚗')">
-                        <span class="fleet-icon">🚗</span>
-                        <div class="fleet-title">عربية فاخرة</div>
-                        <div class="fleet-desc">لرحلات مريحة وعائلية</div>
-                    </div>
+                <div class="fleet-card" id="card-car" onclick="selectVehicleType('عربية 🚗')">
+                    <span class="fleet-icon">🚗</span>
+                    <div class="fleet-title">عربية فاخرة</div>
+                    <div class="fleet-desc">لرحلات مريحة وعائلية مميزة</div>
                 </div>
             </div>
 
-            <!-- اختيار فئة السيارة إذا تم اختيار العربية -->
-            <div id="carSubCategoryBox" class="form-group hidden" style="margin-top: 15px;">
-                <label style="color: #00f2fe;">اختر فئة العربية بالتحديد:</label>
-                <select id="carSubCategorySelect">
-                    <option value="ملاكي">عربية ملاكي</option>
-                    <option value="كاشف">عربية كاشف</option>
-                    <option value="تويوتا">عربية تويوتا (ميكروباص/فان)</option>
-                </select>
-            </div>
-
-            <button class="action-btn" style="margin-top: 20px; background: #ffcc00; color: #000;" onclick="confirmDriverVehicleSelection()">تأكيد المركبة والانتقال لوحة السائق</button>
+            <button class="action-btn" style="margin-top: 20px; background: #ffcc00; color: #000;" onclick="confirmDriverVehicleSelection()">تأكيد المركبة والانتقال للوحة السائق</button>
         </div>
 
         <!-- 4. تسجيل الزبون -->
@@ -588,46 +556,46 @@
         <!-- 6. لوحة خدمات الزبون -->
         <div id="bookingScreen" class="hidden">
             <div class="card" style="text-align: right;">
-                <h2>🎒 إدارة مواعيد المشاوير والرحلات المنتظمة</h2>
+                <h2>🎒 إدارة مشاوير الحضانة والرحلات</h2>
                 
                 <div class="btn-grid" style="margin-bottom: 20px;">
-                    <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="switchBookingMode('schedule')">📅 مواعيد ثابتة (للطلاب والموظفين)</button>
+                    <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="switchBookingMode('nursery')">🎒 مشاوير الحضانة الشهرية</button>
                     <button class="action-btn" style="background: rgba(0, 242, 254, 0.1); border-color: #00f2fe; color: #00f2fe;" onclick="switchBookingMode('normal')">🚖 رحلة عادية مفردة</button>
                 </div>
 
-                <!-- نموذج المواعيد الثابتة للطلاب والموظفين -->
-                <div id="scheduleBookingForm">
+                <!-- نموذج مشاوير الحضانة الشهرية -->
+                <div id="nurseryBookingForm">
                     <div style="background: rgba(255, 204, 0, 0.05); border: 1px dashed #ffcc00; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
-                        <h3 style="color: #ffcc00; font-size: 16px; margin-bottom: 8px;">📅 حجز مواعيد جدول منتظم (جامعة، مدرسة، عمل)</h3>
-                        <p style="font-size: 13px; color: #aaa;">حدد مواعيد الذهاب والعودة الثابتة، ويتم إرسال الطلب لقسم السواقين مباشرة.</p>
+                        <h3 style="color: #ffcc00; font-size: 16px; margin-bottom: 8px;">🎒 حجز توصيل شهري ثابت للحضانة</h3>
+                        <p style="font-size: 13px; color: #aaa;">حدد مواعيد حضور السائق صباحاً وموعد رجوعه ظهراً، ويتم إرسال الطلب لقسم الحضانة الخاص بالسواقين مباشرة.</p>
                     </div>
                     <div class="form-group">
-                        <label>اسم صاحب الموعد (طالب / موظف):</label>
-                        <input type="text" id="schedulePersonName" placeholder="اكتب الاسم...">
+                        <label>اسم الطفل:</label>
+                        <input type="text" id="childName" placeholder="اكتب اسم الطفل...">
                     </div>
                     <div class="form-group">
-                        <label>عنوان الانطلاق (المنزل):</label>
-                        <input type="text" id="schedulePickup" placeholder="عنوان البيت والمنطقة...">
+                        <label>منزل الراكب (عنوان الانطلاق):</label>
+                        <input type="text" id="nurseryPickup" placeholder="عنوان البيت والمنطقة...">
                     </div>
                     <div class="form-group">
-                        <label>الوجهة (الجامعة / المدرسة / مكان العمل):</label>
-                        <input type="text" id="scheduleDestination" placeholder="اكتب اسم ومكان الوجهة...">
+                        <label>اسم الحضانة (المنشأة التعليمية):</label>
+                        <input type="text" id="nurseryName" placeholder="اكتب اسم ومكان الحضانة...">
                     </div>
                     <div style="display: flex; gap: 10px;">
                         <div class="form-group" style="flex:1;">
-                            <label>⏰ وقت الذهاب (صباحاً):</label>
+                            <label>⏰ وقت الحضور (الذهاب صباحاً):</label>
                             <input type="time" id="morningTime" value="08:00">
                         </div>
                         <div class="form-group" style="flex:1;">
-                            <label>⏰ وقت العودة (ظهراً/مساءً):</label>
+                            <label>⏰ وقت الرجوع (العودة ظهراً):</label>
                             <input type="time" id="returnTime" value="14:00">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>السعر المقترح للشهر كامل (جنيه):</label>
-                        <input type="number" id="scheduleMonthlyPrice" placeholder="مثال: 1500 جنيه...">
+                        <input type="number" id="nurseryMonthlyPrice" placeholder="مثال: 1200 جنيه...">
                     </div>
-                    <button class="action-btn" style="background: #ffcc00; color: #000; border-color: #ffcc00;" onclick="sendOfferToCloud('schedule')">إرسال جدول المواعيد لقسم السواقين</button>
+                    <button class="action-btn" style="background: #ffcc00; color: #000; border-color: #ffcc00;" onclick="sendOfferToCloud('nursery')">إرسال طلب اشتراك الحضانة لقسم السواقين</button>
                 </div>
 
                 <!-- نموذج الرحلة العادية -->
@@ -637,9 +605,7 @@
                         <select id="tukTukType">
                             <option value="توكتوك 🛺">توكتوك 🛺</option>
                             <option value="موتوسيكل 🛵">موتوسيكل 🛵</option>
-                            <option value="عربية ملاكي 🚗">عربية ملاكي 🚗</option>
-                            <option value="عربية كاشف 🚗">عربية كاشف 🚗</option>
-                            <option value="عربية تويوتا 🚐">عربية تويوتا 🚐</option>
+                            <option value="عربية 🚗">عربية 🚗</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -659,13 +625,13 @@
                 
                 <div id="negotiationBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 1px solid #ffcc00; padding: 15px; border-radius: 10px; margin-top: 15px;">
                     <p style="color: #ffcc00;" id="negotiationText"></p>
-                    <button class="action-btn" style="background: #ffcc00; color: #000; padding: 8px; font-size: 14px;" onclick="acceptCounterOffer()">موافقة على السعر الجديد وحفظ الطلب</button>
+                    <button class="action-btn" style="background: #ffcc00; color: #000; padding: 8px; font-size: 14px;" onclick="acceptCounterOffer()">موافقة على السعر الجديد وحفظ المشوار</button>
                 </div>
 
-                <!-- قسم الجدول الثابت المحفوظ للراكب -->
-                <div id="customerSavedScheduleBox" class="hidden" style="background: rgba(255, 204, 0, 0.08); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-top: 20px;">
-                    <h3 style="color: #ffcc00; font-size: 17px; margin-bottom: 10px;">📋 جدول المواعيد المنتظم المحفوظ</h3>
-                    <div id="customerSavedScheduleDetails" style="font-size: 14px; line-height: 1.6; color: #eee;"></div>
+                <!-- قسم المشوار الشهري المحفوظ للراكب -->
+                <div id="customerSavedNurseryBox" class="hidden" style="background: rgba(255, 204, 0, 0.08); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-top: 20px;">
+                    <h3 style="color: #ffcc00; font-size: 17px; margin-bottom: 10px;">📋 مشوار الحضانة الشهري المحفوظ</h3>
+                    <div id="customerSavedNurseryDetails" style="font-size: 14px; line-height: 1.6; color: #eee;"></div>
                 </div>
 
                 <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
@@ -693,21 +659,21 @@
                     <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display: block; text-align: center; text-decoration: none; margin-top: 12px; background: #25d366; border-color: #25d366; color: #fff; font-size: 15px;">إرسال إيصال التحويل عبر واتساب (01008204580) 💬</a>
                 </div>
 
-                <!-- قسم طلبات الجداول المنتظمة الواردة -->
+                <!-- قسم طلبات الحضانة الشهرية الواردة -->
                 <div style="background: rgba(255, 204, 0, 0.08); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-bottom: 25px;">
                     <h3 style="color: #ffcc00; font-size: 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                        <span>📅 قسم طلبات المواعيد المنتظمة الجديدة</span>
+                        <span>🎒 قسم طلبات الحضانة الشهرية الجديدة</span>
                         <span style="font-size: 12px; background: #ffcc00; color: #000; padding: 2px 8px; border-radius: 10px;">إشعارات 🔔</span>
                     </h3>
-                    <div id="driverScheduleFeed">
-                        <p style="color: #aaa; text-align: center; padding: 10px; font-size: 14px;">لا توجد طلبات مواعيد منتظمة جديدة حتى الآن.</p>
+                    <div id="driverNurseryFeed">
+                        <p style="color: #aaa; text-align: center; padding: 10px; font-size: 14px;">لا توجد طلبات حضانة شهرية جديدة حتى الآن.</p>
                     </div>
                 </div>
 
-                <!-- الجداول المنتظمة المحفوظة -->
+                <!-- مشاوير الحضانة المحفوظة -->
                 <div style="background: rgba(0, 242, 254, 0.05); border: 1px solid #00f2fe; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
-                    <h3 style="color: #00f2fe; font-size: 17px; margin-bottom: 10px;">📋 المواعيد المنتظمة المحفوظة (الخاصة بك)</h3>
-                    <div id="driverSavedScheduleContainer" style="font-size: 14px; color: #ccc;">لا توجد جداول مواعيد نشطة مسجلة معك حالياً.</div>
+                    <h3 style="color: #00f2fe; font-size: 17px; margin-bottom: 10px;">📋 مشاوير الحضانة الشهرية المحفوظة (الخاصة بك)</h3>
+                    <div id="driverSavedNurseryContainer" style="font-size: 14px; color: #ccc;">لا توجد اشتراكات حضانة نشطة مسجلة معك حالياً.</div>
                 </div>
 
                 <p>🚖 قسم طلبات الرحلات العادية:</p>
@@ -722,7 +688,6 @@
                 </div>
 
                 <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
-                    <button class="action-btn" style="background: rgba(255,77,77,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-bottom: 15px;" onclick="logoutApp()">تسجيل خروج السائق 🚪</button>
                     <p style="font-size: 12px; color: #888; margin-bottom: 8px;">تابع مطور التطبيق:</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn" style="padding: 6px 12px; font-size: 12px;">📘 فيسبوك</a>
@@ -747,7 +712,7 @@
                 <p style="color: #777;">جاري جلب السواقين من السحابة...</p>
             </div>
 
-            <button class="action-btn" style="margin-top: 20px; background: rgba(255,77,77,0.2); border-color: #ff4d4d; color: #ff4d4d;" onclick="logoutApp()">تسجيل خروج الأدمن 🚪</button>
+            <button class="action-btn" style="margin-top: 20px; background: transparent; color: #fff;" onclick="logoutApp()">تسجيل خروج الأدمن</button>
         </div>
 
     </div>
@@ -800,6 +765,7 @@
 
         let currentDriverDebt = parseFloat(localStorage.getItem('gasser_driver_debt')) || 0;
         let totalPlatformRevenue = parseFloat(localStorage.getItem('gasser_total_revenue')) || 0;
+        let driverTripHistory = JSON.parse(localStorage.getItem('gasser_driver_history')) || [];
         let generatedCustomerOtp = "";
         let generatedDriverOtp = "";
         let registeredDriver = JSON.parse(localStorage.getItem('gasser_driver_data')) || { name: "", phone: "", email: "", vehicle: "", idCardUrl: "", isBanned: false };
@@ -818,7 +784,7 @@
             } else if(savedRole === 'customer') {
                 document.getElementById('homeScreen').classList.add('hidden');
                 document.getElementById('bookingScreen').classList.remove('hidden');
-                loadCustomerSavedSchedule();
+                loadCustomerSavedNursery();
             }
         };
 
@@ -841,7 +807,7 @@
                 document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle || "غير محدد";
                 updateWalletDisplay();
                 listenForTripsFromCloud();
-                loadDriverSavedSchedule();
+                loadDriverSavedNursery();
             });
         }
 
@@ -862,11 +828,11 @@
         }
 
         function switchBookingMode(mode) {
-            if(mode === 'schedule') {
-                document.getElementById('scheduleBookingForm').classList.remove('hidden');
+            if(mode === 'nursery') {
+                document.getElementById('nurseryBookingForm').classList.remove('hidden');
                 document.getElementById('normalBookingForm').classList.add('hidden');
             } else {
-                document.getElementById('scheduleBookingForm').classList.add('hidden');
+                document.getElementById('nurseryBookingForm').classList.add('hidden');
                 document.getElementById('normalBookingForm').classList.remove('hidden');
             }
         }
@@ -885,7 +851,7 @@
                 alert("تم تسجيل الدخول بنجاح!");
                 document.getElementById('authCustomerScreen').classList.add('hidden');
                 document.getElementById('bookingScreen').classList.remove('hidden');
-                loadCustomerSavedSchedule();
+                loadCustomerSavedNursery();
             } else { alert("الكود خطأ!"); }
         }
 
@@ -909,7 +875,7 @@
 
         function verifyDriverOTP() {
             if(document.getElementById('enteredDriverOtp').value === generatedDriverOtp) {
-                alert("تم التحقق بنجاح! اختر مركبتك الآن عبر السلايد.");
+                alert("تم التحقق بنجاح! اختر مركبتك الآن.");
                 document.getElementById('authDriverScreen').classList.add('hidden');
                 document.getElementById('driverVehicleScreen').classList.remove('hidden');
             } else { alert("الكود خطأ!"); }
@@ -919,28 +885,15 @@
             currentSelectedVehicle = vehicleName;
             document.querySelectorAll('.fleet-card').forEach(card => card.classList.remove('selected'));
             
-            if(vehicleName.includes('توكتوك')) {
-                document.getElementById('card-tuktuk').classList.add('selected');
-                document.getElementById('carSubCategoryBox').classList.add('hidden');
-            } else if(vehicleName.includes('موتوسيكل')) {
-                document.getElementById('card-bike').classList.add('selected');
-                document.getElementById('carSubCategoryBox').classList.add('hidden');
-            } else if(vehicleName.includes('عربية')) {
-                document.getElementById('card-car').classList.add('selected');
-                document.getElementById('carSubCategoryBox').classList.remove('hidden');
-            }
+            if(vehicleName.includes('توكتوك')) document.getElementById('card-tuktuk').classList.add('selected');
+            else if(vehicleName.includes('موتوسيكل')) document.getElementById('card-bike').classList.add('selected');
+            else if(vehicleName.includes('عربية')) document.getElementById('card-car').classList.add('selected');
         }
 
         function confirmDriverVehicleSelection() {
-            if(!currentSelectedVehicle) { alert("من فضلك اختر مركبة واحدة من السلايد!"); return; }
+            if(!currentSelectedVehicle) { alert("من فضلك اختر مركبة واحدة على الأقل!"); return; }
             
-            let finalVehicleString = currentSelectedVehicle;
-            if(currentSelectedVehicle.includes('عربية')) {
-                let subCategory = document.getElementById('carSubCategorySelect').value;
-                finalVehicleString = `عربية (${subCategory}) 🚗`;
-            }
-
-            registeredDriver.vehicle = finalVehicleString;
+            registeredDriver.vehicle = currentSelectedVehicle;
             localStorage.setItem('gasser_driver_data', JSON.stringify(registeredDriver));
 
             db.ref('drivers/' + registeredDriver.phone.replace(/\D/g,'')).set({
@@ -957,7 +910,7 @@
             document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle;
             updateWalletDisplay();
             listenForTripsFromCloud();
-            loadDriverSavedSchedule();
+            loadDriverSavedNursery();
             alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل بالأسطول!");
         }
 
@@ -988,23 +941,23 @@
 
                 tripData = { mode: 'normal', vehicleType, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", eta: "", counterPrice: "" };
             } else {
-                let personName = document.getElementById('schedulePersonName').value;
-                let schedulePickup = document.getElementById('schedulePickup').value;
-                let destination = document.getElementById('scheduleDestination').value;
+                let childName = document.getElementById('childName').value;
+                let nurseryPickup = document.getElementById('nurseryPickup').value;
+                let nurseryName = document.getElementById('nurseryName').value;
                 let morningTime = document.getElementById('morningTime').value;
                 let returnTime = document.getElementById('returnTime').value;
-                let monthlyPrice = document.getElementById('scheduleMonthlyPrice').value;
+                let monthlyPrice = document.getElementById('nurseryMonthlyPrice').value;
 
-                if(!personName || !schedulePickup || !destination || !morningTime || !returnTime || !monthlyPrice) { 
-                    alert("أكمل جميع بيانات الموعد والمكان والسعر الشهري!"); 
+                if(!childName || !nurseryPickup || !nurseryName || !morningTime || !returnTime || !monthlyPrice) { 
+                    alert("أكمل جميع بيانات الطفل والمواعيد والسعر الشهري!"); 
                     return; 
                 }
 
                 tripData = { 
-                    mode: 'schedule', 
-                    childName: personName, // تم الحفاظ على المفتاح ليتوافق مع السجلات السابقة
-                    pickup: schedulePickup, 
-                    dropoff: destination, 
+                    mode: 'nursery', 
+                    childName, 
+                    pickup: nurseryPickup, 
+                    dropoff: nurseryName, 
                     morningTime, 
                     returnTime, 
                     price: monthlyPrice, 
@@ -1025,53 +978,53 @@
 
                 if(data.status === "counter" && data.counterPrice) {
                     document.getElementById('negotiationBox').classList.remove('hidden');
-                    document.getElementById('negotiationText').innerText = `السائق اقترح سعراً جديداً: ${data.counterPrice} جنيه (${data.mode === 'schedule' ? 'شهرياً' : 'لرحلة'})`;
+                    document.getElementById('negotiationText').innerText = `السائق اقترح سعراً جديداً: ${data.counterPrice} جنيه (${data.mode === 'nursery' ? 'شهرياً' : 'لرحلة'})`;
                 } else if(data.status === "accepted") {
                     document.getElementById('negotiationBox').classList.add('hidden');
-                    saveActiveScheduleSubscription(data);
+                    saveActiveNurserySubscription(data);
                 }
             });
         }
 
-        function saveActiveScheduleSubscription(tripData) {
-            if(tripData.mode === 'schedule') {
-                localStorage.setItem('gasser_saved_schedule', JSON.stringify(tripData));
-                loadCustomerSavedSchedule();
-                alert("📅 تم حفظ جدول المواعيد المنتظم بنجاح في سجلك الدائم!");
+        function saveActiveNurserySubscription(tripData) {
+            if(tripData.mode === 'nursery') {
+                localStorage.setItem('gasser_saved_nursery', JSON.stringify(tripData));
+                loadCustomerSavedNursery();
+                alert("🎒 تم حفظ مشوار الحضانة الشهري بنجاح في سجلك الدائم!");
             }
         }
 
-        function loadCustomerSavedSchedule() {
-            let saved = localStorage.getItem('gasser_saved_schedule');
-            let box = document.getElementById('customerSavedScheduleBox');
-            let details = document.getElementById('customerSavedScheduleDetails');
+        function loadCustomerSavedNursery() {
+            let saved = localStorage.getItem('gasser_saved_nursery');
+            let box = document.getElementById('customerSavedNurseryBox');
+            let details = document.getElementById('customerSavedNurseryDetails');
 
             if(saved) {
                 let d = JSON.parse(saved);
                 box.classList.remove('hidden');
                 details.innerHTML = `
-                    <p><strong>👤 صاحب الموعد:</strong> ${d.childName}</p>
-                    <p><strong>🏠 منزل الانطلاق:</strong> ${d.pickup}</p>
-                    <p><strong>📍 الوجهة:</strong> ${d.dropoff}</p>
-                    <p><strong>⏰ المواعيد الثابتة:</strong> ذهاب صباحاً (${d.morningTime}) ➔ عودة (${d.returnTime})</p>
+                    <p><strong>👶 اسم الطفل:</strong> ${d.childName}</p>
+                    <p><strong>🏠 منزل الراكب:</strong> ${d.pickup}</p>
+                    <p><strong>🏫 اسم الحضانة:</strong> ${d.dropoff}</p>
+                    <p><strong>⏰ مواعيد اليوم:</strong> حضور صباحاً (${d.morningTime}) ➔ رجوع ظهراً (${d.returnTime})</p>
                     <p><strong>💰 السعر الشهري المتفق عليه:</strong> <span style="color:#ffcc00; font-size:16px;">${d.price} جنيه</span> (الحساب آخر الشهر)</p>
                     <p style="color: #00ff00; margin-top:5px;"><strong>🛵 السائق المسؤول:</strong> ${d.driverName || 'قيد التعيين'} (${d.driverPhone || '---'})</p>
                 `;
             }
         }
 
-        function loadDriverSavedSchedule() {
-            let saved = localStorage.getItem('gasser_saved_schedule');
-            let container = document.getElementById('driverSavedScheduleContainer');
+        function loadDriverSavedNursery() {
+            let saved = localStorage.getItem('gasser_saved_nursery');
+            let container = document.getElementById('driverSavedNurseryContainer');
 
             if(saved) {
                 let d = JSON.parse(saved);
                 container.innerHTML = `
                     <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; margin-top: 5px;">
-                        <p><strong>👤 صاحب الموعد:</strong> ${d.childName}</p>
+                        <p><strong>👶 اسم الطفل:</strong> ${d.childName}</p>
                         <p><strong>🏠 المنزل:</strong> ${d.pickup}</p>
-                        <p><strong>📍 الوجهة:</strong> ${d.dropoff}</p>
-                        <p><strong>⏰ المواعيد:</strong> صباحاً (${d.morningTime}) | عودة (${d.returnTime})</p>
+                        <p><strong>🏫 الحضانة:</strong> ${d.dropoff}</p>
+                        <p><strong>⏰ المواعيد:</strong> صباحاً (${d.morningTime}) | ظهراً (${d.returnTime})</p>
                         <p style="color: #ffcc00; margin-top: 5px;"><strong>💰 السعر الشهري:</strong> ${d.price} جنيه (الحساب آخر الشهر)</p>
                     </div>
                 `;
@@ -1086,17 +1039,17 @@
                 if(trip.status === "pending") {
                     playNewTripAlertSound();
 
-                    if(trip.mode === 'schedule') {
-                        document.getElementById('driverScheduleFeed').innerHTML = `
-                            <div class="schedule-offer-box" id="trip-${tripId}">
-                                <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">📅 طلب جدول مواعيد منتظم جديد!</p>
-                                <p><strong>صاحب الموعد:</strong> ${trip.childName}</p>
+                    if(trip.mode === 'nursery') {
+                        document.getElementById('driverNurseryFeed').innerHTML = `
+                            <div class="nursery-offer-box" id="trip-${tripId}">
+                                <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">🎒 طلب اشتراك حضانة شهري جديد!</p>
+                                <p><strong>اسم الطفل:</strong> ${trip.childName}</p>
                                 <p><strong>🏠 من (المنزل):</strong> ${trip.pickup}</p>
-                                <p><strong>📍 إلى (الوجهة):</strong> ${trip.dropoff}</p>
-                                <p><strong>⏰ المواعيد:</strong> صباحاً (${trip.morningTime}) - عودة (${trip.returnTime})</p>
+                                <p><strong>🏫 إلى (الحضانة):</strong> ${trip.dropoff}</p>
+                                <p><strong>⏰ المواعيد:</strong> صباحاً (${trip.morningTime}) - ظهراً (${trip.returnTime})</p>
                                 <p style="color: #ffcc00; margin: 8px 0; font-size: 17px;">السعر المقترح: <strong id="price-display-${tripId}">${trip.price}</strong> جنيه (شهرياً)</p>
                                 <div style="display: flex; gap: 10px;" id="driver-actions-${tripId}">
-                                    <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول وحفظ جدول المواعيد</button>
+                                    <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول وحفظ المشوار الشهري</button>
                                 </div>
                             </div>
                         `;
@@ -1145,11 +1098,11 @@
 
                 db.ref('trips/' + tripId).update(tripData);
 
-                if(tripData.mode === 'schedule') {
-                    localStorage.setItem('gasser_saved_schedule', JSON.stringify(tripData));
-                    loadDriverSavedSchedule();
-                    document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ تم قبول وحفظ جدول المواعيد المنتظم بنجاح!</p>`;
-                    alert("📅 تم حفظ جدول المواعيد المنتظم في قائمتك الدائمة بنجاح!");
+                if(tripData.mode === 'nursery') {
+                    localStorage.setItem('gasser_saved_nursery', JSON.stringify(tripData));
+                    loadDriverSavedNursery();
+                    document.getElementById('driverNurseryFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ تم قبول وحفظ مشوار الحضانة الشهري بنجاح!</p>`;
+                    alert("🎒 تم حفظ مشوار الحضانة الشهري في قائمتك الدائمة بنجاح!");
                 } else {
                     document.getElementById('driverFeed').innerHTML = `<p style="color: #777; text-align: center;">جاري تنفيذ الرحلة العادية...</p>`;
                     document.getElementById('activeDriverTrip').classList.remove('hidden');
@@ -1174,7 +1127,7 @@
         }
 
         function openAdminLogin() {
-            let pass = prompt("أدخل كلمة مرور الأدمن السرية:", "");
+            let pass = prompt("أدخل كلمة مرور الأدمن السرية (Gasser):", "");
             if(pass === "212008") {
                 document.getElementById('homeScreen').classList.add('hidden');
                 document.getElementById('adminPanel').classList.remove('hidden');
