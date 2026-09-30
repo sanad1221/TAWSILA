@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oper Fleet - Gasser Dynamic Edition</title>
+    <title>Oper Fleet - Gasser Final Edition</title>
     
     <!-- استدعاء مكتبات Firebase السحابية -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -261,7 +261,7 @@
             box-shadow: 0 0 15px #ffcc00;
         }
 
-        /* نظام السلايدر الأفقي المتحرك الديناميكي للفئات */
+        /* نظام السلايدر الأفقي المتحرك الديناميكي */
         .slider-container {
             position: relative;
             width: 100%;
@@ -289,12 +289,12 @@
         }
 
         .fleet-card {
-            min-width: 210px;
+            min-width: 200px;
             flex: 0 0 auto;
             background: linear-gradient(145deg, rgba(25, 25, 35, 0.9), rgba(12, 12, 18, 0.95));
             border: 2px solid rgba(255, 204, 0, 0.2);
             border-radius: 18px;
-            padding: 22px 15px;
+            padding: 20px 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -315,17 +315,17 @@
         }
 
         .fleet-icon {
-            font-size: 42px;
-            margin-bottom: 10px;
+            font-size: 38px;
+            margin-bottom: 8px;
             display: block;
             filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.4));
         }
 
         .fleet-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .fleet-desc {
@@ -437,7 +437,7 @@
         <div class="intro-abstract-bg"></div>
         <div class="snapshot-overlay">
             <div class="snapshot-title">Oper Fleet</div>
-            <div class="snapshot-subtitle">Gasser Dynamic Edition</div>
+            <div class="snapshot-subtitle">Gasser Final Edition</div>
         </div>
     </div>
 
@@ -587,11 +587,11 @@
             </div>
         </div>
 
-        <!-- 6. لوحة خدمات الزبون (سلايدات المركبات والمشاوير جوة كل سلايد) -->
+        <!-- 6. لوحة خدمات الزبون (سلايدات المركبات ونماذج الحجز جوتها) -->
         <div id="bookingScreen" class="hidden">
             <div class="card" style="text-align: right;">
-                <h2>🎒 حجز المشاوير والجدول المنتظم عبر السلايد</h2>
-                <p style="font-size: 13px; color: #aaa; margin-bottom: 10px;">اختر نوع المركبة من السلايد أدناه ليظهر لك نموذج تسجيل الطلب الخاص بها مباشرة:</p>
+                <h2>🎒 اختر نوع المركبة من السلايد لتسجيل رحلتك</h2>
+                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اضغط على الكارت المطلوب بالأسفل ليظهر لك نموذج الحجز الخاص به مباشرة:</p>
                 
                 <!-- سلايدات فئات المركبات للزبون -->
                 <div class="slider-container">
@@ -628,13 +628,13 @@
                     </div>
                 </div>
 
-                <!-- نموذج تسجيل الرحلة الديناميكي يظهر هنا بعد اختيار السلايد -->
-                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 1px solid #ffcc00; padding: 20px; border-radius: 15px; margin-top: 20px;">
-                    <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 18px; margin-bottom: 15px;"></h3>
+                <!-- نموذج تسجيل الرحلة الديناميكي يظهر جوه السلايد بعد الاختيار -->
+                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px; animation: fadeInTitle 0.5s ease;">
+                    <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 12px; text-align: center;"></h3>
                     
                     <div class="btn-grid" style="margin-bottom: 15px;">
-                        <button class="action-btn" style="background: #ffcc00; color: #000; font-size: 14px; padding: 8px;" onclick="switchTripType('schedule')">📅 جدول مواعيد منتظم (شهري)</button>
-                        <button class="action-btn" style="background: rgba(0, 242, 254, 0.1); border-color: #00f2fe; color: #00f2fe; font-size: 14px; padding: 8px;" onclick="switchTripType('normal')">🚖 رحلة عادية مفردة</button>
+                        <button class="action-btn" style="background: #ffcc00; color: #000; font-size: 13px; padding: 8px;" onclick="switchTripType('schedule')">📅 جدول مواعيد منتظم (شهري)</button>
+                        <button class="action-btn" style="background: rgba(0, 242, 254, 0.1); border-color: #00f2fe; color: #00f2fe; font-size: 13px; padding: 8px;" onclick="switchTripType('normal')">🚖 رحلة عادية مفردة</button>
                     </div>
 
                     <!-- نموذج الجدول الثابت -->
