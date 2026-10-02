@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oper Fleet - Gasser Final Edition</title>
+    <title>Oper Fleet - Gasser Ultra Luxury Edition</title>
     
     <!-- استدعاء مكتبات Firebase السحابية -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -18,7 +18,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #070709 0%, #11111b 50%, #030305 100%);
+            background: linear-gradient(135deg, #050508 0%, #0d0d15 50%, #020204 100%);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -28,7 +28,7 @@
             position: relative;
         }
 
-        /* شاشة الإنترو */
+        /* شاشة الإنترو الفخمة */
         #introScreen {
             position: fixed;
             top: 0;
@@ -49,7 +49,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(255,204,0,0.15) 0%, rgba(11,11,18,0.98) 70%);
+            background: radial-gradient(circle at center, rgba(255,204,0,0.2) 0%, rgba(11,11,18,0.98) 70%);
             animation: abstractPulse 2s ease-in-out infinite alternate;
         }
 
@@ -68,13 +68,13 @@
         }
 
         .snapshot-title {
-            font-size: 42px;
+            font-size: 44px;
             font-weight: 900;
-            background: linear-gradient(90deg, #ffcc00, #00f2fe);
+            background: linear-gradient(90deg, #ffcc00, #00f2fe, #ffcc00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 4px;
-            text-shadow: 0 0 30px rgba(255, 204, 0, 0.5);
+            text-shadow: 0 0 35px rgba(255, 204, 0, 0.6);
             margin-bottom: 5px;
         }
 
@@ -94,7 +94,7 @@
         .gasser-rain {
             position: absolute;
             top: -30px;
-            color: rgba(255, 204, 0, 0.15);
+            color: rgba(255, 204, 0, 0.12);
             font-size: 12px;
             font-weight: bold;
             letter-spacing: 2px;
@@ -187,12 +187,12 @@
 
         .card {
             background: rgba(18, 18, 26, 0.85);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 204, 0, 0.3);
             border-radius: 20px;
             padding: 30px 20px;
             margin-bottom: 25px;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.1);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.1);
             text-align: center;
         }
 
@@ -261,76 +261,103 @@
             box-shadow: 0 0 15px #ffcc00;
         }
 
-        /* نظام السلايدر الأفقي المتحرك الديناميكي */
+        /* 🌟 تصميم السلايدات الفاخرة (Ultra Luxury Cards Slider) */
         .slider-container {
             position: relative;
             width: 100%;
             overflow: hidden;
-            margin: 20px 0;
-            padding: 10px 0;
+            margin: 25px 0;
+            padding: 10px 5px;
         }
 
         .slider-track {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             overflow-x: auto;
             scroll-behavior: smooth;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
             scrollbar-width: thin;
             scrollbar-color: #ffcc00 #11111b;
         }
 
         .slider-track::-webkit-scrollbar {
-            height: 6px;
+            height: 8px;
+        }
+        .slider-track::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
         }
         .slider-track::-webkit-scrollbar-thumb {
-            background: #ffcc00;
+            background: linear-gradient(90deg, #ffcc00, #00f2fe);
             border-radius: 10px;
         }
 
         .fleet-card {
-            min-width: 200px;
+            min-width: 210px;
             flex: 0 0 auto;
-            background: linear-gradient(145deg, rgba(25, 25, 35, 0.9), rgba(12, 12, 18, 0.95));
-            border: 2px solid rgba(255, 204, 0, 0.2);
-            border-radius: 18px;
-            padding: 20px 12px;
+            background: linear-gradient(145deg, rgba(30, 30, 45, 0.7), rgba(15, 15, 25, 0.85));
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 204, 0, 0.25);
+            border-radius: 22px;
+            padding: 25px 15px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* تأثير إضاءة نيون خفيف على الأطراف */
+        .fleet-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,204,0,0.1), transparent);
+            opacity: 0;
+            transition: 0.4s;
         }
 
         .fleet-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.03);
             border-color: #ffcc00;
-            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.25);
+            box-shadow: 0 15px 35px rgba(255, 204, 0, 0.3);
+        }
+
+        .fleet-card:hover::before {
+            opacity: 1;
         }
 
         .fleet-card.selected {
             border-color: #00f2fe;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
-            background: linear-gradient(145deg, rgba(0, 242, 254, 0.15), rgba(18, 18, 26, 0.98));
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.5), inset 0 0 15px rgba(0, 242, 254, 0.2);
+            background: linear-gradient(145deg, rgba(0, 242, 254, 0.15), rgba(18, 18, 26, 0.95));
+            transform: translateY(-5px);
         }
 
         .fleet-icon {
-            font-size: 38px;
-            margin-bottom: 8px;
+            font-size: 52px;
+            margin-bottom: 12px;
             display: block;
-            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.4));
+            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.5));
+            transition: 0.3s;
+        }
+
+        .fleet-card:hover .fleet-icon {
+            transform: scale(1.1);
         }
 
         .fleet-title {
-            font-size: 15px;
+            font-size: 17px;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
         }
 
         .fleet-desc {
-            font-size: 11px;
-            color: #8c8c9b;
+            font-size: 12px;
+            color: #a0a0b0;
         }
 
         .social-links {
@@ -437,7 +464,7 @@
         <div class="intro-abstract-bg"></div>
         <div class="snapshot-overlay">
             <div class="snapshot-title">Oper Fleet</div>
-            <div class="snapshot-subtitle">Gasser Final Edition</div>
+            <div class="snapshot-subtitle">Gasser Luxury Edition</div>
         </div>
     </div>
 
@@ -493,10 +520,10 @@
             </div>
         </div>
 
-        <!-- 3. شاشة اختيار المركبة السلايد المتحركة للسائق -->
+        <!-- 3. شاشة اختيار المركبة السلايد الفخمة للسائق -->
         <div id="driverVehicleScreen" class="card hidden" style="text-align: right;">
             <h2>🚗 اختر نوع مركبتك في الأسطول</h2>
-            <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">تصفح واختار نوع المركبة عبر السلايد أدناه:</p>
+            <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">اختر مركبتك من السلايد الفاخر أدناه:</p>
             
             <div class="slider-container">
                 <div class="slider-track">
@@ -587,13 +614,13 @@
             </div>
         </div>
 
-        <!-- 6. لوحة خدمات الزبون (سلايدات المركبات ونماذج الحجز جوتها) -->
+        <!-- 6. لوحة خدمات الزبون (السلايدات الفاخرة ونماذج الحجز جوتها) -->
         <div id="bookingScreen" class="hidden">
             <div class="card" style="text-align: right;">
-                <h2>🎒 اختر نوع المركبة من السلايد لتسجيل رحلتك</h2>
-                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اضغط على الكارت المطلوب بالأسفل ليظهر لك نموذج الحجز الخاص به مباشرة:</p>
+                <h2>🎒 اختر نوع المركبة من السلايد الفاخر لتسجيل رحلتك</h2>
+                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اضغط على الكارت بالأسفل ليفتح لك نموذج الحجز الخاص به مباشرة:</p>
                 
-                <!-- سلايدات فئات المركبات للزبون -->
+                <!-- سلايدات فئات المركبات الفاخرة للزبون -->
                 <div class="slider-container">
                     <div class="slider-track">
                         <div class="fleet-card customer-vehicle-card" id="cust-card-tuktuk" onclick="selectCustomerVehicle('توكتوك 🛺')">
@@ -930,7 +957,7 @@
 
         function verifyDriverOTP() {
             if(document.getElementById('enteredDriverOtp').value === generatedDriverOtp) {
-                alert("تم التحقق بنجاح! اختر مركبتك الآن عبر السلايد.");
+                alert("تم التحقق بنجاح! اختر مركبتك الآن عبر السلايد الفاخر.");
                 document.getElementById('authDriverScreen').classList.add('hidden');
                 document.getElementById('driverVehicleScreen').classList.remove('hidden');
             } else { alert("الكود خطأ!"); }
@@ -971,7 +998,7 @@
             alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل بالأسطول!");
         }
 
-        /* اختيار الزبون من السلايد لعرض نموذج الرحلة جوة السلايد */
+        /* اختيار الزبون من السلايد الفاخر لعرض نموذج الرحلة جوته */
         function selectCustomerVehicle(vehicleName) {
             selectedCustomerVehicle = vehicleName;
             document.querySelectorAll('.customer-vehicle-card').forEach(card => card.classList.remove('selected'));
