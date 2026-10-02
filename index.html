@@ -609,13 +609,12 @@
             </div>
         </div>
 
-        <!-- 6. لوحة خدمات الزبون (السلايدات والواجهة المتكاملة بعد قبول السائق) -->
+        <!-- 6. لوحة خدمات الزبون -->
         <div id="bookingScreen" class="hidden">
             <div class="card" style="text-align: right;">
                 <h2>🎒 اختر نوع المركبة من السلايد لتسجيل رحلتك</h2>
                 <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اضغط على الكارت بالأسفل ليفتح لك نموذج الحجز الخاص به مباشرة:</p>
                 
-                <!-- سلايدات فئات المركبات -->
                 <div class="slider-container">
                     <div class="slider-track">
                         <div class="fleet-card customer-vehicle-card" id="cust-card-tuktuk" onclick="selectCustomerVehicle('توكتوك 🛺')">
@@ -650,7 +649,6 @@
                     </div>
                 </div>
 
-                <!-- نموذج تسجيل الطلب -->
                 <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px;">
                     <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 12px; text-align: center;"></h3>
                     
@@ -706,7 +704,6 @@
                     </div>
                 </div>
 
-                <!-- 🌟 واجهة الزبون المتكاملة بعد قبول السائق -->
                 <div id="customerActiveTripBox" class="hidden" style="background: rgba(0, 255, 0, 0.05); border: 2px solid #00ff00; padding: 20px; border-radius: 16px; margin-top: 20px; text-align: right;">
                     <h3 style="color: #00ff00; font-size: 20px; margin-bottom: 12px;">✅ تم قبول طلبك بنجاح من قبل السائق!</h3>
                     <div id="acceptedTripDetailsContent" style="font-size: 15px; line-height: 1.8; color: #eee; margin-bottom: 15px;"></div>
@@ -790,7 +787,7 @@
             </div>
         </div>
 
-        <!-- 8. لوحة تحكم الأدمن (تعرض بيانات كل السواقين بالكامل) -->
+        <!-- 8. لوحة تحكم الأدمن -->
         <div id="adminPanel" class="card hidden" style="text-align: right;">
             <h2 style="color: #ff4d4d;">🛡️ لوحة تحكم الأدمن وحماية الحقوق (Gasser)</h2>
             <p>متابعة أرباح المنصة وإدارة جميع السواقين المسجلين وحظر المخالفين:</p>
@@ -866,23 +863,27 @@
         let currentTripTypeMode = 'schedule';
         let currentTripKey = null;
 
+        // 🌟 التحقق التلقائي من حالة الدخول المحفوظة عند فتح التطبيق
         window.onload = function() {
-            let savedRole = localStorage.getItem('gasser_active_role');
+            let savedRole = localStorage.getItem('tawsila_active_role');
+            let customerLoggedIn = localStorage.getItem('tawsila_customer_logged');
+
             if(savedRole === 'driver' && registeredDriver.name) {
+                document.getElementById('homeScreen').classList.add('hidden');
                 if(!registeredDriver.vehicle) {
-                    document.getElementById('homeScreen').classList.add('hidden');
                     document.getElementById('driverVehicleScreen').classList.remove('hidden');
                 } else {
                     checkBanStatusAndLoad();
                 }
-            } else if(savedRole === 'customer') {
+            } else if(savedRole === 'customer' && customerLoggedIn === 'true') {
                 document.getElementById('homeScreen').classList.add('hidden');
                 document.getElementById('bookingScreen').classList.remove('hidden');
             }
         };
 
         function logoutApp() {
-            localStorage.removeItem('gasser_active_role');
+            localStorage.removeItem('tawsila_active_role');
+            localStorage.removeItem('tawsila_customer_logged');
             location.reload();
         }
 
@@ -891,8 +892,7 @@
                 let data = snapshot.val();
                 if(data && data.isBanned) {
                     alert("🚫 عذراً، لقد تم حظر حسابك من قبل إدارة المنصة (Gasser) بسبب تجاوز المديونية!");
-                    localStorage.removeItem('gasser_active_role');
-                    location.reload();
+                    logoutApp();
                     return;
                 }
                 document.getElementById('homeScreen').classList.add('hidden');
@@ -911,10 +911,10 @@
         function selectRole(role) {
             document.getElementById('roleScreen').classList.add('hidden');
             if(role === 'customer') {
-                localStorage.setItem('gasser_active_role', 'customer');
+                localStorage.setItem('tawsila_active_role', 'customer');
                 document.getElementById('authCustomerScreen').classList.remove('hidden');
             } else {
-                localStorage.setItem('gasser_active_role', 'driver');
+                localStorage.setItem('tawsila_active_role', 'driver');
                 document.getElementById('authDriverScreen').classList.remove('hidden');
             }
         }
@@ -930,6 +930,7 @@
 
         function verifyCustomerOTP() {
             if(document.getElementById('enteredCustomerOtp').value === generatedCustomerOtp) {
+                localStorage.setItem('tawsila_customer_logged', 'true');
                 alert("تم تسجيل الدخول بنجاح!");
                 document.getElementById('authCustomerScreen').classList.add('hidden');
                 document.getElementById('bookingScreen').classList.remove('hidden');
@@ -1084,7 +1085,6 @@
             newTripRef.set(tripData);
             alert("🚀 تم إرسال الطلب بنجاح لقسم السواقين في TAWSILA!");
 
-            // الاستماع لتحديثات الرحلة من السائق (القبول والـ ETA)
             newTripRef.on('value', (snapshot) => {
                 let data = snapshot.val();
                 if(!data) return;
