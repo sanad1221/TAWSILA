@@ -15,11 +15,34 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        :root {
+            --bg-gradient: linear-gradient(135deg, #050508 0%, #0d0d15 50%, #020204 100%);
+            --text-color: #ffffff;
+            --card-bg: rgba(18, 18, 26, 0.85);
+            --border-color: rgba(255, 204, 0, 0.3);
+            --nav-bg: rgba(11, 11, 15, 0.95);
+            --subtext-color: #a0a0a5;
+            --input-bg: #0b0b0f;
+            --input-border: #2a2a3a;
+        }
+
+        body.light-mode {
+            --bg-gradient: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 50%, #cbd5e1 100%);
+            --text-color: #1e293b;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-color: rgba(217, 119, 6, 0.4);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --subtext-color: #475569;
+            --input-bg: #ffffff;
+            --input-border: #cbd5e1;
         }
 
         body {
-            background: linear-gradient(135deg, #050508 0%, #0d0d15 50%, #020204 100%);
-            color: #ffffff;
+            background: var(--bg-gradient);
+            color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -90,11 +113,11 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* مطر كلمة GASSER في الخلفية */
+        /* مطر اسم Gasser في الخلفية */
         .gasser-rain {
             position: absolute;
             top: -30px;
-            color: rgba(255, 204, 0, 0.12);
+            color: rgba(255, 204, 0, 0.15);
             font-size: 12px;
             font-weight: bold;
             letter-spacing: 2px;
@@ -141,13 +164,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            background: rgba(11, 11, 15, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255, 204, 0, 0.2);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .logo {
@@ -158,6 +181,29 @@
             -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
             text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .nav-buttons-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .theme-toggle-btn {
+            background: rgba(255, 204, 0, 0.15);
+            border: 1px solid #ffcc00;
+            color: #ffcc00;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .theme-toggle-btn:hover {
+            background: #ffcc00;
+            color: #000;
+            box-shadow: 0 0 10px #ffcc00;
         }
 
         .top-logout-btn {
@@ -187,9 +233,9 @@
         }
 
         .card {
-            background: rgba(18, 18, 26, 0.85);
+            background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 204, 0, 0.3);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 30px 20px;
             margin-bottom: 25px;
@@ -206,7 +252,7 @@
         }
 
         .card p {
-            color: #a0a0a5;
+            color: var(--subtext-color);
             font-size: 15px;
             margin-bottom: 15px;
         }
@@ -219,17 +265,17 @@
         .form-group label {
             display: block;
             margin-bottom: 6px;
-            color: #a0a0a5;
+            color: var(--subtext-color);
             font-size: 14px;
         }
 
         .form-group input, .form-group select {
             width: 100%;
             padding: 12px 15px;
-            background: #0b0b0f;
-            border: 1px solid #2a2a3a;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
             border-radius: 10px;
-            color: #fff;
+            color: var(--text-color);
             font-size: 15px;
         }
 
@@ -337,7 +383,7 @@
             color: #a0a0b0;
         }
 
-        /* 🌟 السلايدين الكبار الفخمين (نوع الرحلة: شهري أو مفرد) */
+        /* السلايدين الكبار الفخمين */
         .big-mode-grid {
             display: flex;
             gap: 20px;
@@ -497,14 +543,14 @@
             border-top: 1px solid #1a1a22;
             position: relative;
             z-index: 2;
-            background: rgba(11, 11, 15, 0.95);
+            background: var(--nav-bg);
         }
         .creator-footer span { color: #ffcc00; font-weight: bold; }
     </style>
 </head>
 <body onclick="handleScreenClick(event)">
 
-    <!-- شاشة الإنترو -->
+    <!-- شاشة الإنترو الفخمة -->
     <div id="introScreen">
         <div class="intro-abstract-bg"></div>
         <div class="snapshot-overlay">
@@ -517,7 +563,7 @@
         for (let i = 0; i < 20; i++) {
             let drop = document.createElement('div');
             drop.className = 'gasser-rain';
-            drop.innerText = 'GASSER';
+            drop.innerText = 'Gasser';
             drop.style.left = Math.random() * 100 + 'vw';
             drop.style.animationDuration = (Math.random() * 6 + 4) + 's';
             drop.style.animationDelay = (Math.random() * 5) + 's';
@@ -533,7 +579,10 @@
 
     <nav>
         <div class="logo">TAWSILA 🚖</div>
-        <button class="top-logout-btn" onclick="logoutApp()">تسجيل خروج 🚪</button>
+        <div class="nav-buttons-group">
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">الوضع الفاتح ☀️</button>
+            <button class="top-logout-btn" onclick="logoutApp()">خروج 🚪</button>
+        </div>
     </nav>
 
     <div class="container">
@@ -544,7 +593,7 @@
             
             <div class="creator-box">
                 <span style="font-size: 11px; color: #8c8c9b; letter-spacing: 2px; text-transform: uppercase;">WEB DESIGNED & DEVELOPED BY</span>
-                <div class="creator-name">GASSER</div>
+                <div class="creator-name">Gasser</div>
                 
                 <div class="social-links">
                     <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn">📘 فيسبوك</a>
@@ -561,44 +610,44 @@
             <h2>اختر نوع الحساب</h2>
             <div class="btn-grid" style="flex-direction: column;">
                 <button class="action-btn" onclick="selectRole('customer')">أنا زبون (أبحث عن توصيلة أو جدول مواعيد منتظم)</button>
-                <button class="action-btn" style="background: rgba(255, 204, 0, 0.1); color: #fff;" onclick="selectRole('driver')">أنا سائق أسطول (أريد اختيار مركبتي والعمل)</button>
+                <button class="action-btn" style="background: rgba(255, 204, 0, 0.1); color: var(--text-color);" onclick="selectRole('driver')">أنا سائق أسطول (أريد اختيار مركبتي والعمل)</button>
             </div>
         </div>
 
         <!-- 3. شاشة اختيار المركبة للسائق -->
         <div id="driverVehicleScreen" class="card hidden" style="text-align: right;">
             <h2>🚗 اختر نوع مركبتك في الأسطول</h2>
-            <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">اختر مركبتك من السلايد الفاخر أدناه:</p>
+            <p style="color: var(--subtext-color); font-size: 13px; margin-bottom: 20px;">اختر مركبتك من السلايد الفاخر أدناه:</p>
             
             <div class="slider-container">
                 <div class="slider-track">
                     <div class="fleet-card" id="driver-card-tuktuk" onclick="selectDriverVehicle('توكتوك 🛺')">
                         <span class="fleet-icon">🛺</span>
-                        <div class="fleet-title">توكتوك</div>
+                        <div class="fleet-title" style="color:var(--text-color);">توكتوك</div>
                         <div class="fleet-desc">سريع للمشاوير الداخلية</div>
                     </div>
                     
                     <div class="fleet-card" id="driver-card-bike" onclick="selectDriverVehicle('موتوسيكل 🛵')">
                         <span class="fleet-icon">🛵</span>
-                        <div class="fleet-title">موتوسيكل</div>
+                        <div class="fleet-title" style="color:var(--text-color);">موتوسيكل</div>
                         <div class="fleet-desc">لتفادي الزحام</div>
                     </div>
 
                     <div class="fleet-card" id="driver-card-car" onclick="selectDriverVehicle('عربية ملاكي 🚗')">
                         <span class="fleet-icon">🚗</span>
-                        <div class="fleet-title">عربية ملاكي</div>
+                        <div class="fleet-title" style="color:var(--text-color);">عربية ملاكي</div>
                         <div class="fleet-desc">لرحلات مريحة</div>
                     </div>
 
                     <div class="fleet-card" id="driver-card-kashef" onclick="selectDriverVehicle('عربية كاشف 🚗')">
                         <span class="fleet-icon">🚙</span>
-                        <div class="fleet-title">عربية كاشف</div>
+                        <div class="fleet-title" style="color:var(--text-color);">عربية كاشف</div>
                         <div class="fleet-desc">طرق خاصة ومميزة</div>
                     </div>
 
                     <div class="fleet-card" id="driver-card-toyota" onclick="selectDriverVehicle('عربية تويوتا 🚐')">
                         <span class="fleet-icon">🚐</span>
-                        <div class="fleet-title">عربية تويوتا</div>
+                        <div class="fleet-title" style="color:var(--text-color);">عربية تويوتا</div>
                         <div class="fleet-desc">رحلات جماعية وفان</div>
                     </div>
                 </div>
@@ -663,68 +712,64 @@
         <div id="bookingScreen" class="hidden">
             <div class="card" style="text-align: right;">
                 <h2>🎒 الخطوة 1: اختر نوع المركبة</h2>
-                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اختر مركبتك من السلايد أدناه:</p>
+                <p style="font-size: 13px; color: var(--subtext-color); margin-bottom: 15px;">اختر مركبتك من السلايد أدناه:</p>
                 
-                <!-- السلايد الأول للمركبات -->
                 <div class="slider-container">
                     <div class="slider-track">
                         <div class="fleet-card customer-vehicle-card" id="cust-card-tuktuk" onclick="selectCustomerVehicle('توكتوك 🛺')">
                             <span class="fleet-icon">🛺</span>
-                            <div class="fleet-title">توكتوك</div>
+                            <div class="fleet-title" style="color:var(--text-color);">توكتوك</div>
                             <div class="fleet-desc">للمشاوير السريعة</div>
                         </div>
                         
                         <div class="fleet-card customer-vehicle-card" id="cust-card-bike" onclick="selectCustomerVehicle('موتوسيكل 🛵')">
                             <span class="fleet-icon">🛵</span>
-                            <div class="fleet-title">موتوسيكل</div>
+                            <div class="fleet-title" style="color:var(--text-color);">موتوسيكل</div>
                             <div class="fleet-desc">تفادي الزحام</div>
                         </div>
 
                         <div class="fleet-card customer-vehicle-card" id="cust-card-malahi" onclick="selectCustomerVehicle('عربية ملاكي 🚗')">
                             <span class="fleet-icon">🚗</span>
-                            <div class="fleet-title">عربية ملاكي</div>
+                            <div class="fleet-title" style="color:var(--text-color);">عربية ملاكي</div>
                             <div class="fleet-desc">راحة وعائلية</div>
                         </div>
 
                         <div class="fleet-card customer-vehicle-card" id="cust-card-kashef" onclick="selectCustomerVehicle('عربية كاشف 🚗')">
                             <span class="fleet-icon">🚙</span>
-                            <div class="fleet-title">عربية كاشف</div>
+                            <div class="fleet-title" style="color:var(--text-color);">عربية كاشف</div>
                             <div class="fleet-desc">طرق مخصصة</div>
                         </div>
 
                         <div class="fleet-card customer-vehicle-card" id="cust-card-toyota" onclick="selectCustomerVehicle('عربية تويوتا 🚐')">
                             <span class="fleet-icon">🚐</span>
-                            <div class="fleet-title">عربية تويوتا</div>
+                            <div class="fleet-title" style="color:var(--text-color);">عربية تويوتا</div>
                             <div class="fleet-desc">جماعي وفان</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 🌟 الخطوة 2: السلايدين الكبار الفخمين لاختيار نوع الرحلة (مخفيين حتى يتم اختيار المركبة) -->
-                <div id="bigModeSelectionContainer" class="hidden" style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); pt: 15px;">
+                <div id="bigModeSelectionContainer" class="hidden" style="margin-top: 25px; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 15px;">
                     <h2 style="font-size: 20px; margin-top: 15px;">⚡ الخطوة 2: اختر نظام الحجز والرحلة</h2>
-                    <p style="font-size: 13px; color: #aaa;">اختر أحد النظامين بالأسفل لتفتح لك واجهة ملء البيانات مباشرة:</p>
+                    <p style="font-size: 13px; color: var(--subtext-color);">اختر أحد النظامين بالأسفل لتفتح لك واجهة ملء البيانات مباشرة:</p>
                     
                     <div class="big-mode-grid">
                         <div class="big-mode-card" id="modeCardSchedule" onclick="selectTripMode('schedule')">
                             <span class="big-mode-icon">📅</span>
-                            <div class="big-mode-title">جدول مواعيد منتظم (شهري)</div>
+                            <div class="big-mode-title" style="color:var(--text-color);">جدول مواعيد منتظم (شهري)</div>
                             <div class="big-mode-desc">مواعيد ثابتة ذهاب وعودة شهرياً للعمل أو الدراسة</div>
                         </div>
 
                         <div class="big-mode-card" id="modeCardNormal" onclick="selectTripMode('normal')">
                             <span class="big-mode-icon">🚖</span>
-                            <div class="big-mode-title">رحلة عادية مفردة</div>
+                            <div class="big-mode-title" style="color:var(--text-color);">رحلة عادية مفردة</div>
                             <div class="big-mode-desc">مشوار سريع ومباشر من نقطة لأخرى الآن</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 🌟 واجهة ملء البيانات (مخفية ولا تظهر إلا عند اختيار السلايد الكبير المناسب) -->
-                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px; animation: fadeInTitle 0.4s ease;">
+                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px;">
                     <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 15px; text-align: center;"></h3>
 
-                    <!-- نموذج جدول المواعيد المنتظم -->
                     <div id="formScheduleSection" class="hidden">
                         <div class="form-group">
                             <label>اسم صاحب الموعد (طالب / موظف):</label>
@@ -755,7 +800,6 @@
                         <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="sendOfferToCloud('schedule')">إرسال جدول المواعيد للسواقين</button>
                     </div>
 
-                    <!-- نموذج الرحلة العادية المفردة -->
                     <div id="formNormalSection" class="hidden">
                         <div class="form-group">
                             <label>من (مكان الانطلاق):</label>
@@ -773,12 +817,11 @@
                     </div>
                 </div>
 
-                <!-- واجهة الزبون بعد قبول السائق -->
                 <div id="customerActiveTripBox" class="hidden" style="background: rgba(0, 255, 0, 0.05); border: 2px solid #00ff00; padding: 20px; border-radius: 16px; margin-top: 20px; text-align: right;">
                     <h3 style="color: #00ff00; font-size: 20px; margin-bottom: 12px;">✅ تم قبول طلبك بنجاح من قبل السائق!</h3>
-                    <div id="acceptedTripDetailsContent" style="font-size: 15px; line-height: 1.8; color: #eee; margin-bottom: 15px;"></div>
+                    <div id="acceptedTripDetailsContent" style="font-size: 15px; line-height: 1.8; color: var(--text-color); margin-bottom: 15px;"></div>
                     
-                    <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px;">
+                    <div style="background: rgba(0,0,0,0.1); padding: 15px; border-radius: 12px; margin-top: 15px;">
                         <h4 style="color: #ffcc00; margin-bottom: 8px; font-size: 16px;">⭐ تقييم السائق:</h4>
                         <div class="star-rating" id="starRatingContainer">
                             <span class="star" onclick="rateDriver(1)">★</span>
@@ -791,8 +834,8 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
-                    <p style="font-size: 12px; color: #888; margin-bottom: 8px;">تابع مطور التطبيق:</p>
+                <div style="margin-top: 25px; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 15px; text-align: center;">
+                    <p style="font-size: 12px; color: var(--subtext-color); margin-bottom: 8px;">تابع مطور التطبيق:</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn" style="padding: 6px 12px; font-size: 12px;">📘 فيسبوك</a>
                         <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn ig-btn" style="padding: 6px 12px; font-size: 12px;">📸 انستجرام</a>
@@ -812,17 +855,17 @@
                 <div class="wallet-box">
                     <h3 style="color: #ffcc00; margin-bottom: 8px; font-size: 17px;">💳 المحفظة الشخصية (خصم المنصة 10%)</h3>
                     <p>نوع مركبتك المسجلة: <strong id="driverVehicleDisplay" style="color: #00f2fe;">---</strong></p>
-                    <p>المديونية المستحقة للأستاذ غاسر: <strong id="driverDebt" style="font-size: 18px; color: #ff4d4d;">0 جنيه</strong></p>
+                    <p>المديونية المستحقة للأستاذ Gasser: <strong id="driverDebt" style="font-size: 18px; color: #ff4d4d;">0 جنيه</strong></p>
                     <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display: block; text-align: center; text-decoration: none; margin-top: 12px; background: #25d366; border-color: #25d366; color: #fff; font-size: 15px;">إرسال إيصال التحويل عبر واتساب (01008204580) 💬</a>
                 </div>
 
-                <div style="background: rgba(255, 204, 0, 0.08); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-bottom: 25px;">
+                <div style="background: rgba(255, 204, 0, 0.06); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-bottom: 25px;">
                     <h3 style="color: #ffcc00; font-size: 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
                         <span>📅 طلبات التوصيل الواردة</span>
                         <span style="font-size: 12px; background: #ffcc00; color: #000; padding: 2px 8px; border-radius: 10px;">إشعارات 🔔</span>
                     </h3>
                     <div id="driverScheduleFeed">
-                        <p style="color: #aaa; text-align: center; padding: 10px; font-size: 14px;">لا توجد طلبات جديدة حتى الآن.</p>
+                        <p style="color: var(--subtext-color); text-align: center; padding: 10px; font-size: 14px;">لا توجد طلبات جديدة حتى الآن.</p>
                     </div>
                 </div>
 
@@ -837,7 +880,7 @@
                     <button class="action-btn" style="background: #ff4d4d; border-color: #ff4d4d; color: #fff; margin-top: 10px;" onclick="driverCompleteTrip()">إنهاء الرحلة وتحصيل العمولة</button>
                 </div>
 
-                <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
+                <div style="margin-top: 25px; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 15px; text-align: center;">
                     <button class="action-btn" style="background: rgba(255,77,77,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-bottom: 15px;" onclick="logoutApp()">تسجيل خروج السائق 🚪</button>
                     <div class="social-links">
                         <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn" style="padding: 6px 12px; font-size: 12px;">📘 فيسبوك</a>
@@ -854,12 +897,12 @@
             
             <div class="admin-stat-card">
                 <p>💰 إجمالي أرباح المنصة المحصلة: <strong id="adminTotalRevenue" style="color: #00ff00; font-size: 18px;">0 جنيه</strong></p>
-                <p style="font-size: 13px; color: #aaa; margin-top: 5px;">تتجمع تلقائياً من نسبة الـ 10% لكل رحلة منتهية.</p>
+                <p style="font-size: 13px; color: var(--subtext-color); margin-top: 5px;">تتجمع تلقائياً من نسبة الـ 10% لكل رحلة منتهية.</p>
             </div>
 
             <h3 style="color: #ffcc00; margin-bottom: 10px; font-size: 16px;">📋 قائمة جميع السواقين المسجلين بالأسطول:</h3>
             <div id="adminDriversList">
-                <p style="color: #777;">جاري جلب السواقين من السحابة...</p>
+                <p style="color: var(--subtext-color);">جاري جلب السواقين من السحابة...</p>
             </div>
 
             <button class="action-btn" style="margin-top: 20px; background: rgba(255,77,77,0.2); border-color: #ff4d4d; color: #ff4d4d;" onclick="logoutApp()">تسجيل خروج الأدمن 🚪</button>
@@ -868,10 +911,31 @@
     </div>
 
     <div class="creator-footer">
-        Web Designed & Developed By <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" style="color: #ffcc00; text-decoration: none; font-weight: bold;">GASSER</a> &copy; 2026
+        Web Designed & Developed By <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" style="color: #ffcc00; text-decoration: none; font-weight: bold;">Gasser</a> &copy; 2026
     </div>
 
     <script>
+        function toggleTheme() {
+            let body = document.body;
+            let btn = document.getElementById('themeBtn');
+            if(body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                btn.innerText = "الوضع الفاتح ☀️";
+                localStorage.setItem('tawsila_theme', 'dark');
+            } else {
+                body.classList.add('light-mode');
+                btn.innerText = "الوضع الليلي 🌙";
+                localStorage.setItem('tawsila_theme', 'light');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if(localStorage.getItem('tawsila_theme') === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeBtn').innerText = "الوضع الليلي 🌙";
+            }
+        });
+
         function handleScreenClick(event) {
             if(['BUTTON', 'INPUT', 'SELECT', 'A', 'SPAN'].includes(event.target.tagName)) return;
 
@@ -1056,7 +1120,6 @@
             alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل بالأسطول!");
         }
 
-        // الخطوة 1: اختيار المركبة وإظهار سلايدين نوع الرحلة الكبار
         function selectCustomerVehicle(vehicleName) {
             selectedCustomerVehicle = vehicleName;
             document.querySelectorAll('.customer-vehicle-card').forEach(card => card.classList.remove('selected'));
@@ -1067,13 +1130,10 @@
             else if(vehicleName.includes('كاشف')) document.getElementById('cust-card-kashef').classList.add('selected');
             else if(vehicleName.includes('تويوتا')) document.getElementById('cust-card-toyota').classList.add('selected');
 
-            // إظهار سلايدين اختيار نظام الرحلة
             document.getElementById('bigModeSelectionContainer').classList.remove('hidden');
-            // إخفاء نموذج البيانات حتى يتم اختيار نوع الرحلة
             document.getElementById('dynamicBookingFormBox').classList.add('hidden');
         }
 
-        // الخطوة 2: اختيار نوع الرحلة (شهري أو مفرد) وإظهار نموذج ملء البيانات
         function selectTripMode(mode) {
             currentTripTypeMode = mode;
             document.getElementById('modeCardSchedule').classList.remove('selected');
@@ -1101,7 +1161,7 @@
                 db.ref('drivers/' + registeredDriver.phone.replace(/\D/g,'')).update({ debt: currentDriverDebt });
             }
 
-            let msg = encodeURIComponent("مرحباً أستاذ غاسر، أنا السائق " + registeredDriver.name + " (" + registeredDriver.vehicle + ") وقمت بتحويل مديونية بقيمة " + currentDriverDebt + " جنيه.");
+            let msg = encodeURIComponent("مرحباً Gasser، أنا السائق " + registeredDriver.name + " (" + registeredDriver.vehicle + ") وقمت بتحويل مديونية بقيمة " + currentDriverDebt + " جنيه.");
             document.getElementById('whatsappPayBtn').href = `https://wa.me/201008204580?text=${msg}`;
         }
 
@@ -1262,7 +1322,7 @@
 
             alert("تم إنهاء الرحلة! تم احتساب العمولة للمنصة (10%).");
             document.getElementById('activeDriverTrip').classList.add('hidden');
-            document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #777; text-align: center;">بحث عن طلبات جديدة...</p>`;
+            document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: var(--subtext-color); text-align: center;">بحث عن طلبات جديدة...</p>`;
             if(currentTripKey) db.ref('trips/' + currentTripKey).remove();
         }
 
@@ -1286,7 +1346,7 @@
                 listContainer.innerHTML = "";
 
                 if(!drivers) {
-                    listContainer.innerHTML = "<p style='color:#777;'>لا يوجد سواقين مسجلين حتى الآن.</p>";
+                    listContainer.innerHTML = "<p style='color:var(--subtext-color);'>لا يوجد سواقين مسجلين حتى الآن.</p>";
                     return;
                 }
 
@@ -1297,7 +1357,7 @@
                     let banBtnColor = d.isBanned ? "green" : "red";
 
                     listContainer.innerHTML += `
-                        <div class="admin-stat-card" style="background: rgba(0,0,0,0.3);">
+                        <div class="admin-stat-card">
                             <p><strong>السائق:</strong> ${d.name} (${d.phone})</p>
                             <p><strong>المركبة:</strong> ${d.vehicle || 'غير محدد'}</p>
                             <p><strong>الإيميل:</strong> ${d.email}</p>
