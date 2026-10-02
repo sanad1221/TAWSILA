@@ -262,12 +262,12 @@
             box-shadow: 0 0 15px #ffcc00;
         }
 
-        /* السلايدات الفاخرة */
+        /* السلايدات الفاخرة للسيارات */
         .slider-container {
             position: relative;
             width: 100%;
             overflow: hidden;
-            margin: 25px 0;
+            margin: 20px 0;
             padding: 10px 5px;
         }
 
@@ -335,6 +335,56 @@
         .fleet-desc {
             font-size: 12px;
             color: #a0a0b0;
+        }
+
+        /* 🌟 السلايدين الكبار الفخمين (نوع الرحلة: شهري أو مفرد) */
+        .big-mode-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .big-mode-card {
+            flex: 1;
+            background: linear-gradient(145deg, rgba(25, 25, 40, 0.8), rgba(12, 12, 20, 0.95));
+            border: 2px solid rgba(255, 204, 0, 0.3);
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .big-mode-card:hover {
+            transform: translateY(-6px);
+            border-color: #ffcc00;
+            box-shadow: 0 15px 35px rgba(255, 204, 0, 0.25);
+        }
+
+        .big-mode-card.selected {
+            border-color: #00f2fe;
+            background: linear-gradient(145deg, rgba(0, 242, 254, 0.15), rgba(15, 15, 25, 0.98));
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
+        }
+
+        .big-mode-icon {
+            font-size: 44px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .big-mode-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .big-mode-desc {
+            font-size: 13px;
+            color: #aaa;
         }
 
         /* نظام النجوم للتقييم */
@@ -515,7 +565,7 @@
             </div>
         </div>
 
-        <!-- 3. شاشة اختيار المركبة السلايد للسائق -->
+        <!-- 3. شاشة اختيار المركبة للسائق -->
         <div id="driverVehicleScreen" class="card hidden" style="text-align: right;">
             <h2>🚗 اختر نوع مركبتك في الأسطول</h2>
             <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">اختر مركبتك من السلايد الفاخر أدناه:</p>
@@ -609,13 +659,13 @@
             </div>
         </div>
 
-        <!-- 6. لوحة خدمات الزبون (السلايدات وبداخلها نموذج ملء البيانات الديناميكي) -->
+        <!-- 6. لوحة خدمات الزبون -->
         <div id="bookingScreen" class="hidden">
             <div class="card" style="text-align: right;">
-                <h2>🎒 اختر نوع المركبة من السلايد الفاخر</h2>
-                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اختر الكارت المناسب لفتح نموذج ملء البيانات تحته مباشرة:</p>
+                <h2>🎒 الخطوة 1: اختر نوع المركبة</h2>
+                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اختر مركبتك من السلايد أدناه:</p>
                 
-                <!-- السلايد الفاخر لاختيار المركبة -->
+                <!-- السلايد الأول للمركبات -->
                 <div class="slider-container">
                     <div class="slider-track">
                         <div class="fleet-card customer-vehicle-card" id="cust-card-tuktuk" onclick="selectCustomerVehicle('توكتوك 🛺')">
@@ -650,17 +700,32 @@
                     </div>
                 </div>
 
-                <!-- نموذج ملء البيانات الديناميكي يفتح جوه السلايد بعد الاختيار -->
-                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px; animation: fadeInTitle 0.4s ease;">
-                    <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 12px; text-align: center;"></h3>
+                <!-- 🌟 الخطوة 2: السلايدين الكبار الفخمين لاختيار نوع الرحلة (مخفيين حتى يتم اختيار المركبة) -->
+                <div id="bigModeSelectionContainer" class="hidden" style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); pt: 15px;">
+                    <h2 style="font-size: 20px; margin-top: 15px;">⚡ الخطوة 2: اختر نظام الحجز والرحلة</h2>
+                    <p style="font-size: 13px; color: #aaa;">اختر أحد النظامين بالأسفل لتفتح لك واجهة ملء البيانات مباشرة:</p>
                     
-                    <div class="btn-grid" style="margin-bottom: 15px;">
-                        <button class="action-btn" style="background: #ffcc00; color: #000; font-size: 13px; padding: 8px;" onclick="switchTripType('schedule')">📅 جدول مواعيد منتظم (شهري)</button>
-                        <button class="action-btn" style="background: rgba(0, 242, 254, 0.1); border-color: #00f2fe; color: #00f2fe; font-size: 13px; padding: 8px;" onclick="switchTripType('normal')">🚖 رحلة عادية مفردة</button>
+                    <div class="big-mode-grid">
+                        <div class="big-mode-card" id="modeCardSchedule" onclick="selectTripMode('schedule')">
+                            <span class="big-mode-icon">📅</span>
+                            <div class="big-mode-title">جدول مواعيد منتظم (شهري)</div>
+                            <div class="big-mode-desc">مواعيد ثابتة ذهاب وعودة شهرياً للعمل أو الدراسة</div>
+                        </div>
+
+                        <div class="big-mode-card" id="modeCardNormal" onclick="selectTripMode('normal')">
+                            <span class="big-mode-icon">🚖</span>
+                            <div class="big-mode-title">رحلة عادية مفردة</div>
+                            <div class="big-mode-desc">مشوار سريع ومباشر من نقطة لأخرى الآن</div>
+                        </div>
                     </div>
+                </div>
+
+                <!-- 🌟 واجهة ملء البيانات (مخفية ولا تظهر إلا عند اختيار السلايد الكبير المناسب) -->
+                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px; animation: fadeInTitle 0.4s ease;">
+                    <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 15px; text-align: center;"></h3>
 
                     <!-- نموذج جدول المواعيد المنتظم -->
-                    <div id="formScheduleSection">
+                    <div id="formScheduleSection" class="hidden">
                         <div class="form-group">
                             <label>اسم صاحب الموعد (طالب / موظف):</label>
                             <input type="text" id="schedulePersonName" placeholder="اكتب الاسم...">
@@ -855,7 +920,7 @@
         let registeredDriver = JSON.parse(localStorage.getItem('gasser_driver_data')) || { name: "", phone: "", email: "", vehicle: "", idCardUrl: "", isBanned: false };
         let selectedDriverVehicle = "";
         let selectedCustomerVehicle = "";
-        let currentTripTypeMode = 'schedule';
+        let currentTripTypeMode = '';
         let currentTripKey = null;
 
         window.onload = function() {
@@ -991,7 +1056,7 @@
             alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل بالأسطول!");
         }
 
-        // اختيار الزبون للمركبة من السلايد وفتح نموذج البيانات تحته فوراً
+        // الخطوة 1: اختيار المركبة وإظهار سلايدين نوع الرحلة الكبار
         function selectCustomerVehicle(vehicleName) {
             selectedCustomerVehicle = vehicleName;
             document.querySelectorAll('.customer-vehicle-card').forEach(card => card.classList.remove('selected'));
@@ -1002,19 +1067,30 @@
             else if(vehicleName.includes('كاشف')) document.getElementById('cust-card-kashef').classList.add('selected');
             else if(vehicleName.includes('تويوتا')) document.getElementById('cust-card-toyota').classList.add('selected');
 
-            document.getElementById('dynamicBookingFormBox').classList.remove('hidden');
-            document.getElementById('selectedVehicleFormTitle').innerText = `📝 ملء بيانات الطلب لـ: ${vehicleName}`;
+            // إظهار سلايدين اختيار نظام الرحلة
+            document.getElementById('bigModeSelectionContainer').classList.remove('hidden');
+            // إخفاء نموذج البيانات حتى يتم اختيار نوع الرحلة
+            document.getElementById('dynamicBookingFormBox').classList.add('hidden');
         }
 
-        function switchTripType(type) {
-            currentTripTypeMode = type;
-            if(type === 'schedule') {
+        // الخطوة 2: اختيار نوع الرحلة (شهري أو مفرد) وإظهار نموذج ملء البيانات
+        function selectTripMode(mode) {
+            currentTripTypeMode = mode;
+            document.getElementById('modeCardSchedule').classList.remove('selected');
+            document.getElementById('modeCardNormal').classList.remove('selected');
+
+            if(mode === 'schedule') {
+                document.getElementById('modeCardSchedule').classList.add('selected');
                 document.getElementById('formScheduleSection').classList.remove('hidden');
                 document.getElementById('formNormalSection').classList.add('hidden');
             } else {
+                document.getElementById('modeCardNormal').classList.add('selected');
                 document.getElementById('formScheduleSection').classList.add('hidden');
                 document.getElementById('formNormalSection').classList.remove('hidden');
             }
+
+            document.getElementById('dynamicBookingFormBox').classList.remove('hidden');
+            document.getElementById('selectedVehicleFormTitle').innerText = `📝 ملء بيانات (${selectedCustomerVehicle}) - ${mode === 'schedule' ? 'جدول مواعيد منتظم' : 'رحلة عادية مفردة'}`;
         }
 
         function updateWalletDisplay() {
@@ -1030,8 +1106,8 @@
         }
 
         function sendOfferToCloud(typeMode) {
-            if(!selectedCustomerVehicle) {
-                alert("برجاء اختيار نوع المركبة من السلايد أولاً!");
+            if(!selectedCustomerVehicle || !currentTripTypeMode) {
+                alert("برجاء اختيار المركبة ونظام الرحلة أولاً!");
                 return;
             }
 
@@ -1085,6 +1161,7 @@
 
                 if(data.status === "accepted") {
                     document.getElementById('dynamicBookingFormBox').classList.add('hidden');
+                    document.getElementById('bigModeSelectionContainer').classList.add('hidden');
                     document.getElementById('customerActiveTripBox').classList.remove('hidden');
                     document.getElementById('acceptedTripDetailsContent').innerHTML = `
                         <p><strong>👨‍✈️ اسم السائق:</strong> ${data.driverName}</p>
