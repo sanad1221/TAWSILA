@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oper Fleet - Gasser Ultra Luxury Edition</title>
+    <title>TAWSILA - Gasser Ultra Luxury Edition</title>
     
     <!-- استدعاء مكتبات Firebase السحابية -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -68,12 +68,12 @@
         }
 
         .snapshot-title {
-            font-size: 44px;
+            font-size: 48px;
             font-weight: 900;
             background: linear-gradient(90deg, #ffcc00, #00f2fe, #ffcc00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             text-shadow: 0 0 35px rgba(255, 204, 0, 0.6);
             margin-bottom: 5px;
         }
@@ -151,12 +151,13 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 900;
-            background: linear-gradient(90deg, #ffcc00, #ff9900);
+            background: linear-gradient(90deg, #ffcc00, #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
         }
 
         .top-logout-btn {
@@ -261,7 +262,7 @@
             box-shadow: 0 0 15px #ffcc00;
         }
 
-        /* 🌟 تصميم السلايدات الفاخرة (Ultra Luxury Cards Slider) */
+        /* السلايدات الفاخرة */
         .slider-container {
             position: relative;
             width: 100%;
@@ -282,10 +283,6 @@
 
         .slider-track::-webkit-scrollbar {
             height: 8px;
-        }
-        .slider-track::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
         }
         .slider-track::-webkit-scrollbar-thumb {
             background: linear-gradient(90deg, #ffcc00, #00f2fe);
@@ -308,29 +305,15 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* تأثير إضاءة نيون خفيف على الأطراف */
-        .fleet-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,204,0,0.1), transparent);
-            opacity: 0;
-            transition: 0.4s;
-        }
-
         .fleet-card:hover {
             transform: translateY(-8px) scale(1.03);
             border-color: #ffcc00;
             box-shadow: 0 15px 35px rgba(255, 204, 0, 0.3);
         }
 
-        .fleet-card:hover::before {
-            opacity: 1;
-        }
-
         .fleet-card.selected {
             border-color: #00f2fe;
-            box-shadow: 0 0 30px rgba(0, 242, 254, 0.5), inset 0 0 15px rgba(0, 242, 254, 0.2);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.5);
             background: linear-gradient(145deg, rgba(0, 242, 254, 0.15), rgba(18, 18, 26, 0.95));
             transform: translateY(-5px);
         }
@@ -340,11 +323,6 @@
             margin-bottom: 12px;
             display: block;
             filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.5));
-            transition: 0.3s;
-        }
-
-        .fleet-card:hover .fleet-icon {
-            transform: scale(1.1);
         }
 
         .fleet-title {
@@ -352,12 +330,29 @@
             font-weight: bold;
             color: #fff;
             margin-bottom: 6px;
-            letter-spacing: 0.5px;
         }
 
         .fleet-desc {
             font-size: 12px;
             color: #a0a0b0;
+        }
+
+        /* نظام النجوم للتقييم */
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .star {
+            color: #444;
+            transition: 0.2s;
+        }
+        .star.rated {
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
         }
 
         .social-links {
@@ -463,7 +458,7 @@
     <div id="introScreen">
         <div class="intro-abstract-bg"></div>
         <div class="snapshot-overlay">
-            <div class="snapshot-title">Oper Fleet</div>
+            <div class="snapshot-title">TAWSILA</div>
             <div class="snapshot-subtitle">Gasser Luxury Edition</div>
         </div>
     </div>
@@ -487,7 +482,7 @@
     </script>
 
     <nav>
-        <div class="logo">Oper Fleet</div>
+        <div class="logo">TAWSILA 🚖</div>
         <button class="top-logout-btn" onclick="logoutApp()">تسجيل خروج 🚪</button>
     </nav>
 
@@ -520,7 +515,7 @@
             </div>
         </div>
 
-        <!-- 3. شاشة اختيار المركبة السلايد الفخمة للسائق -->
+        <!-- 3. شاشة اختيار المركبة السلايد للسائق -->
         <div id="driverVehicleScreen" class="card hidden" style="text-align: right;">
             <h2>🚗 اختر نوع مركبتك في الأسطول</h2>
             <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">اختر مركبتك من السلايد الفاخر أدناه:</p>
@@ -586,7 +581,7 @@
 
         <!-- 5. تسجيل السائق -->
         <div id="authDriverScreen" class="card hidden" style="text-align: right;">
-            <h2>🛵 انضم لأسطول سائقي Oper Fleet</h2>
+            <h2>🛵 انضم لأسطول سائقي TAWSILA</h2>
             <div class="form-group">
                 <label>الاسم الكامل:</label>
                 <input type="text" id="driverNameInput" placeholder="اكتب اسمك الثلاثي...">
@@ -614,13 +609,13 @@
             </div>
         </div>
 
-        <!-- 6. لوحة خدمات الزبون (السلايدات الفاخرة ونماذج الحجز جوتها) -->
+        <!-- 6. لوحة خدمات الزبون (السلايدات والواجهة المتكاملة بعد قبول السائق) -->
         <div id="bookingScreen" class="hidden">
             <div class="card" style="text-align: right;">
-                <h2>🎒 اختر نوع المركبة من السلايد الفاخر لتسجيل رحلتك</h2>
+                <h2>🎒 اختر نوع المركبة من السلايد لتسجيل رحلتك</h2>
                 <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اضغط على الكارت بالأسفل ليفتح لك نموذج الحجز الخاص به مباشرة:</p>
                 
-                <!-- سلايدات فئات المركبات الفاخرة للزبون -->
+                <!-- سلايدات فئات المركبات -->
                 <div class="slider-container">
                     <div class="slider-track">
                         <div class="fleet-card customer-vehicle-card" id="cust-card-tuktuk" onclick="selectCustomerVehicle('توكتوك 🛺')">
@@ -655,8 +650,8 @@
                     </div>
                 </div>
 
-                <!-- نموذج تسجيل الرحلة الديناميكي يظهر جوه السلايد بعد الاختيار -->
-                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px; animation: fadeInTitle 0.5s ease;">
+                <!-- نموذج تسجيل الطلب -->
+                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px;">
                     <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 12px; text-align: center;"></h3>
                     
                     <div class="btn-grid" style="margin-bottom: 15px;">
@@ -664,7 +659,6 @@
                         <button class="action-btn" style="background: rgba(0, 242, 254, 0.1); border-color: #00f2fe; color: #00f2fe; font-size: 13px; padding: 8px;" onclick="switchTripType('normal')">🚖 رحلة عادية مفردة</button>
                     </div>
 
-                    <!-- نموذج الجدول الثابت -->
                     <div id="formScheduleSection">
                         <div class="form-group">
                             <label>اسم صاحب الموعد (طالب / موظف):</label>
@@ -695,7 +689,6 @@
                         <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="sendOfferToCloud('schedule')">إرسال جدول المواعيد للسواقين</button>
                     </div>
 
-                    <!-- نموذج الرحلة العادية -->
                     <div id="formNormalSection" class="hidden">
                         <div class="form-group">
                             <label>من (مكان الانطلاق):</label>
@@ -712,16 +705,28 @@
                         <button class="action-btn" onclick="sendOfferToCloud('normal')">إرسال عرض الرحلة للسواقين</button>
                     </div>
                 </div>
+
+                <!-- 🌟 واجهة الزبون المتكاملة بعد قبول السائق (بيانات، ETA، تقييم النجوم) -->
+                <div id="customerActiveTripBox" class="hidden" style="background: rgba(0, 255, 0, 0.05); border: 2px solid #00ff00; padding: 20px; border-radius: 16px; margin-top: 20px; text-align: right;">
+                    <h3 style="color: #00ff00; font-size: 20px; margin-bottom: 12px;">✅ تم قبول طلبك بنجاح من قبل السائق!</h3>
+                    <div id="acceptedTripDetailsContent" style="font-size: 15px; line-height: 1.8; color: #eee; margin-bottom: 15px;"></div>
+                    
+                    <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px;">
+                        <h4 style="color: #ffcc00; margin-bottom: 8px; font-size: 16px;">⭐ تقييم السائق:</h4>
+                        <div class="star-rating" id="starRatingContainer">
+                            <span class="star" onclick="rateDriver(1)">★</span>
+                            <span class="star" onclick="rateDriver(2)">★</span>
+                            <span class="star" onclick="rateDriver(3)">★</span>
+                            <span class="star" onclick="rateDriver(4)">★</span>
+                            <span class="star" onclick="rateDriver(5)">★</span>
+                        </div>
+                        <p id="ratingFeedback" style="font-size: 13px; color: #00f2fe; text-align: center; margin-top: 5px;"></p>
+                    </div>
+                </div>
                 
                 <div id="negotiationBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 1px solid #ffcc00; padding: 15px; border-radius: 10px; margin-top: 15px;">
                     <p style="color: #ffcc00;" id="negotiationText"></p>
                     <button class="action-btn" style="background: #ffcc00; color: #000; padding: 8px; font-size: 14px;" onclick="acceptCounterOffer()">موافقة على السعر الجديد وحفظ الطلب</button>
-                </div>
-
-                <!-- قسم الجدول الثابت المحفوظ للراكب -->
-                <div id="customerSavedScheduleBox" class="hidden" style="background: rgba(255, 204, 0, 0.08); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-top: 20px;">
-                    <h3 style="color: #ffcc00; font-size: 17px; margin-bottom: 10px;">📋 جدول المواعيد المنتظم المحفوظ</h3>
-                    <div id="customerSavedScheduleDetails" style="font-size: 14px; line-height: 1.6; color: #eee;"></div>
                 </div>
 
                 <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
@@ -749,7 +754,6 @@
                     <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display: block; text-align: center; text-decoration: none; margin-top: 12px; background: #25d366; border-color: #25d366; color: #fff; font-size: 15px;">إرسال إيصال التحويل عبر واتساب (01008204580) 💬</a>
                 </div>
 
-                <!-- قسم طلبات الجداول المنتظمة الواردة -->
                 <div style="background: rgba(255, 204, 0, 0.08); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-bottom: 25px;">
                     <h3 style="color: #ffcc00; font-size: 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
                         <span>📅 طلبات المواعيد المنتظمة الواردة</span>
@@ -760,12 +764,6 @@
                     </div>
                 </div>
 
-                <!-- الجداول المنتظمة المحفوظة للسائق -->
-                <div style="background: rgba(0, 242, 254, 0.05); border: 1px solid #00f2fe; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
-                    <h3 style="color: #00f2fe; font-size: 17px; margin-bottom: 10px;">📋 المواعيد المنتظمة المحفوظة (الخاصة بك)</h3>
-                    <div id="driverSavedScheduleContainer" style="font-size: 14px; color: #ccc;">لا توجد جداول مواعيد نشطة مسجلة معك حالياً.</div>
-                </div>
-
                 <p>🚖 قسم طلبات الرحلات العادية:</p>
                 <div id="driverFeed">
                     <p style="color: #777; text-align: center; padding: 15px;">جارٍ الاستماع للرحلات العادية...</p>
@@ -774,12 +772,16 @@
                 <div id="activeDriverTrip" class="hidden" style="background: rgba(0,255,0,0.05); border: 1px solid #00ff00; padding: 15px; border-radius: 10px; margin-top: 15px;">
                     <h3 style="color: #00ff00; font-size: 18px;">🚖 رحلة عادية نشطة الآن</h3>
                     <p id="activeTripDetails" style="margin: 8px 0; font-size: 15px;"></p>
-                    <button class="action-btn" style="background: #ff4d4d; border-color: #ff4d4d; color: #fff;" onclick="driverCompleteTrip()">إنهاء الرحلة وتحصيل العمولة</button>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label style="color: #ffcc00;">حدد وقت الوصول المتوقع (ETA):</label>
+                        <input type="text" id="driverEtaInput" placeholder="مثال: خلال 10 دقائق...">
+                        <button class="action-btn" style="background: #00f2fe; color: #000; margin-top: 8px;" onclick="saveDriverEta()">إرسال وقت الوصول للزبون</button>
+                    </div>
+                    <button class="action-btn" style="background: #ff4d4d; border-color: #ff4d4d; color: #fff; margin-top: 10px;" onclick="driverCompleteTrip()">إنهاء الرحلة وتحصيل العمولة</button>
                 </div>
 
                 <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
                     <button class="action-btn" style="background: rgba(255,77,77,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-bottom: 15px;" onclick="logoutApp()">تسجيل خروج السائق 🚪</button>
-                    <p style="font-size: 12px; color: #888; margin-bottom: 8px;">تابع مطور التطبيق:</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn" style="padding: 6px 12px; font-size: 12px;">📘 فيسبوك</a>
                         <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn ig-btn" style="padding: 6px 12px; font-size: 12px;">📸 انستجرام</a>
@@ -788,17 +790,17 @@
             </div>
         </div>
 
-        <!-- 8. لوحة تحكم الأدمن -->
+        <!-- 8. لوحة تحكم الأدمن (تعرض بيانات كل السواقين بالكامل) -->
         <div id="adminPanel" class="card hidden" style="text-align: right;">
             <h2 style="color: #ff4d4d;">🛡️ لوحة تحكم الأدمن وحماية الحقوق (Gasser)</h2>
-            <p>متابعة أرباح المنصة وإدارة السواقين وحظر المخالفين:</p>
+            <p>متابعة أرباح المنصة وإدارة جميع السواقين المسجلين وحظر المخالفين:</p>
             
             <div class="admin-stat-card">
                 <p>💰 إجمالي أرباح المنصة المحصلة: <strong id="adminTotalRevenue" style="color: #00ff00; font-size: 18px;">0 جنيه</strong></p>
                 <p style="font-size: 13px; color: #aaa; margin-top: 5px;">تتجمع تلقائياً من نسبة الـ 10% لكل رحلة منتهية.</p>
             </div>
 
-            <h3 style="color: #ffcc00; margin-bottom: 10px; font-size: 16px;">📋 قائمة السواقين المسجلين (المحفظة والحالة):</h3>
+            <h3 style="color: #ffcc00; margin-bottom: 10px; font-size: 16px;">📋 قائمة جميع السواقين المسجلين بالأسطول:</h3>
             <div id="adminDriversList">
                 <p style="color: #777;">جاري جلب السواقين من السحابة...</p>
             </div>
@@ -824,7 +826,7 @@
 
             let tuk = document.createElement('div');
             tuk.className = 'touch-tuktuk';
-            tuk.innerText = '🛺';
+            tuk.innerText = '🚖';
             tuk.style.left = event.pageX + 'px';
             tuk.style.top = event.pageY + 'px';
             document.body.appendChild(tuk);
@@ -876,7 +878,6 @@
             } else if(savedRole === 'customer') {
                 document.getElementById('homeScreen').classList.add('hidden');
                 document.getElementById('bookingScreen').classList.remove('hidden');
-                loadCustomerSavedSchedule();
             }
         };
 
@@ -899,7 +900,6 @@
                 document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle || "غير محدد";
                 updateWalletDisplay();
                 listenForTripsFromCloud();
-                loadDriverSavedSchedule();
             });
         }
 
@@ -933,7 +933,6 @@
                 alert("تم تسجيل الدخول بنجاح!");
                 document.getElementById('authCustomerScreen').classList.add('hidden');
                 document.getElementById('bookingScreen').classList.remove('hidden');
-                loadCustomerSavedSchedule();
             } else { alert("الكود خطأ!"); }
         }
 
@@ -994,11 +993,9 @@
             document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle;
             updateWalletDisplay();
             listenForTripsFromCloud();
-            loadDriverSavedSchedule();
             alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل بالأسطول!");
         }
 
-        /* اختيار الزبون من السلايد الفاخر لعرض نموذج الرحلة جوته */
         function selectCustomerVehicle(vehicleName) {
             selectedCustomerVehicle = vehicleName;
             document.querySelectorAll('.customer-vehicle-card').forEach(card => card.classList.remove('selected'));
@@ -1053,7 +1050,7 @@
                 
                 if(!pickup || !dropoff || !price) { alert("أكمل بيانات الانطلاق والوجهة والسعر!"); return; }
 
-                tripData = { mode: 'normal', vehicleType: selectedCustomerVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", eta: "", counterPrice: "" };
+                tripData = { mode: 'normal', vehicleType: selectedCustomerVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", eta: "قيد التحديد...", counterPrice: "" };
             } else {
                 let personName = document.getElementById('schedulePersonName').value;
                 let schedulePickup = document.getElementById('schedulePickup').value;
@@ -1079,73 +1076,30 @@
                     status: "pending", 
                     driverName: "", 
                     driverPhone: "", 
-                    eta: "", 
+                    eta: "قيد التحديد...", 
                     counterPrice: "" 
                 };
             }
 
             newTripRef.set(tripData);
-            alert("🚀 تم إرسال الطلب بنجاح لقسم السواقين!");
+            alert("🚀 تم إرسال الطلب بنجاح لقسم السواقين في TAWSILA!");
 
+            // الاستماع لتحديثات الرحلة من السائق (القبول والـ ETA)
             newTripRef.on('value', (snapshot) => {
                 let data = snapshot.val();
                 if(!data) return;
 
-                if(data.status === "counter" && data.counterPrice) {
-                    document.getElementById('negotiationBox').classList.remove('hidden');
-                    document.getElementById('negotiationText').innerText = `السائق اقترح سعراً جديداً: ${data.counterPrice} جنيه (${data.mode === 'schedule' ? 'شهرياً' : 'لرحلة'})`;
-                } else if(data.status === "accepted") {
-                    document.getElementById('negotiationBox').classList.add('hidden');
-                    saveActiveScheduleSubscription(data);
+                if(data.status === "accepted") {
+                    document.getElementById('dynamicBookingFormBox').classList.add('hidden');
+                    document.getElementById('customerActiveTripBox').classList.remove('hidden');
+                    document.getElementById('acceptedTripDetailsContent').innerHTML = `
+                        <p><strong>👨‍✈️ اسم السائق:</strong> ${data.driverName}</p>
+                        <p><strong>📞 رقم الهاتف:</strong> <a href="tel:${data.driverPhone}" style="color:#00ff00;">${data.driverPhone}</a></p>
+                        <p><strong>🚗 المركبة:</strong> ${data.vehicleType}</p>
+                        <p><strong>⏰ وقت الوصول المتوقع (ETA):</strong> <span id="displayCustomerEta" style="color:#ffcc00; font-weight:bold;">${data.eta || 'جاري التحديد بواسطة السائق...'}</span></p>
+                    `;
                 }
             });
-        }
-
-        function saveActiveScheduleSubscription(tripData) {
-            if(tripData.mode === 'schedule') {
-                localStorage.setItem('gasser_saved_schedule', JSON.stringify(tripData));
-                loadCustomerSavedSchedule();
-                alert("📅 تم حفظ جدول المواعيد المنتظم بنجاح في سجلك الدائم!");
-            }
-        }
-
-        function loadCustomerSavedSchedule() {
-            let saved = localStorage.getItem('gasser_saved_schedule');
-            let box = document.getElementById('customerSavedScheduleBox');
-            let details = document.getElementById('customerSavedScheduleDetails');
-
-            if(saved) {
-                let d = JSON.parse(saved);
-                box.classList.remove('hidden');
-                details.innerHTML = `
-                    <p><strong>🚗 المركبة المختارة:</strong> ${d.vehicleType}</p>
-                    <p><strong>👤 صاحب الموعد:</strong> ${d.childName}</p>
-                    <p><strong>🏠 منزل الانطلاق:</strong> ${d.pickup}</p>
-                    <p><strong>📍 الوجهة:</strong> ${d.dropoff}</p>
-                    <p><strong>⏰ المواعيد الثابتة:</strong> ذهاب صباحاً (${d.morningTime}) ➔ عودة (${d.returnTime})</p>
-                    <p><strong>💰 السعر الشهري المتفق عليه:</strong> <span style="color:#ffcc00; font-size:16px;">${d.price} جنيه</span> (الحساب آخر الشهر)</p>
-                    <p style="color: #00ff00; margin-top:5px;"><strong>🛵 السائق المسؤول:</strong> ${d.driverName || 'قيد التعيين'} (${d.driverPhone || '---'})</p>
-                `;
-            }
-        }
-
-        function loadDriverSavedSchedule() {
-            let saved = localStorage.getItem('gasser_saved_schedule');
-            let container = document.getElementById('driverSavedScheduleContainer');
-
-            if(saved) {
-                let d = JSON.parse(saved);
-                container.innerHTML = `
-                    <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; margin-top: 5px;">
-                        <p><strong>🚗 المركبة:</strong> ${d.vehicleType}</p>
-                        <p><strong>👤 صاحب الموعد:</strong> ${d.childName}</p>
-                        <p><strong>🏠 المنزل:</strong> ${d.pickup}</p>
-                        <p><strong>📍 الوجهة:</strong> ${d.dropoff}</p>
-                        <p><strong>⏰ المواعيد:</strong> صباحاً (${d.morningTime}) | عودة (${d.returnTime})</p>
-                        <p style="color: #ffcc00; margin-top: 5px;"><strong>💰 السعر الشهري:</strong> ${d.price} جنيه (الحساب آخر الشهر)</p>
-                    </div>
-                `;
-            }
         }
 
         function listenForTripsFromCloud() {
@@ -1156,33 +1110,14 @@
                 if(trip.status === "pending") {
                     playNewTripAlertSound();
 
-                    if(trip.mode === 'schedule') {
-                        document.getElementById('driverScheduleFeed').innerHTML = `
-                            <div class="schedule-offer-box" id="trip-${tripId}">
-                                <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">📅 طلب جدول مواعيد منتظم (${trip.vehicleType})!</p>
-                                <p><strong>صاحب الموعد:</strong> ${trip.childName}</p>
-                                <p><strong>🏠 من (المنزل):</strong> ${trip.pickup}</p>
-                                <p><strong>📍 إلى (الوجهة):</strong> ${trip.dropoff}</p>
-                                <p><strong>⏰ المواعيد:</strong> صباحاً (${trip.morningTime}) - عودة (${trip.returnTime})</p>
-                                <p style="color: #ffcc00; margin: 8px 0; font-size: 17px;">السعر المقترح: <strong id="price-display-${tripId}">${trip.price}</strong> جنيه (شهرياً)</p>
-                                <div style="display: flex; gap: 10px;" id="driver-actions-${tripId}">
-                                    <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول وحفظ جدول المواعيد</button>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        document.getElementById('driverFeed').innerHTML = `
-                            <div class="driver-offer-box" id="trip-${tripId}">
-                                <p style="color: #00f2fe; font-weight: bold; margin-bottom: 5px;">🚖 رحلة عادية (${trip.vehicleType})</p>
-                                <p><strong>من:</strong> ${trip.pickup}</p>
-                                <p><strong>إلى:</strong> ${trip.dropoff}</p>
-                                <p style="color: #00f2fe; margin: 8px 0; font-size: 17px;">السعر: <strong id="price-display-${tripId}">${trip.price}</strong> جنيه</p>
-                                <div style="display: flex; gap: 10px;" id="driver-actions-${tripId}">
-                                    <button class="action-btn" style="background: #00f2fe; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول الرحلة</button>
-                                </div>
-                            </div>
-                        `;
-                    }
+                    document.getElementById('driverScheduleFeed').innerHTML = `
+                        <div class="schedule-offer-box" id="trip-${tripId}">
+                            <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">🚖 طلب توصيلة جديد (${trip.vehicleType})!</p>
+                            <p><strong>الاسم / الوجهة:</strong> ${trip.childName || trip.pickup} ➔ ${trip.dropoff}</p>
+                            <p style="color: #ffcc00; margin: 8px 0; font-size: 17px;">السعر: <strong>${trip.price}</strong> جنيه</p>
+                            <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول الطلب وبدء المتابعة</button>
+                        </div>
+                    `;
                 }
             });
         }
@@ -1205,7 +1140,6 @@
 
         function acceptTrip(tripId) {
             currentTripKey = tripId;
-            let currentDisplayPrice = document.getElementById(`price-display-${tripId}`).innerText;
 
             db.ref('trips/' + tripId).once('value', (snapshot) => {
                 let tripData = snapshot.val();
@@ -1215,31 +1149,45 @@
 
                 db.ref('trips/' + tripId).update(tripData);
 
-                if(tripData.mode === 'schedule') {
-                    localStorage.setItem('gasser_saved_schedule', JSON.stringify(tripData));
-                    loadDriverSavedSchedule();
-                    document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ تم قبول وحفظ جدول المواعيد المنتظم بنجاح!</p>`;
-                    alert("📅 تم حفظ جدول المواعيد المنتظم في قائمتك الدائمة بنجاح!");
-                } else {
-                    document.getElementById('driverFeed').innerHTML = `<p style="color: #777; text-align: center;">جاري تنفيذ الرحلة العادية...</p>`;
-                    document.getElementById('activeDriverTrip').classList.remove('hidden');
-                    document.getElementById('activeTripDetails').innerHTML = `سعر الرحلة المؤكد: <strong>${currentDisplayPrice} جنيه</strong>`;
-                    window.activeAcceptedTripPrice = currentDisplayPrice;
-                }
+                document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ تم قبول الطلب بنجاح! حدد وقت الوصول أدناه.</p>`;
+                document.getElementById('activeDriverTrip').classList.remove('hidden');
+                document.getElementById('activeTripDetails').innerHTML = `العميل: <strong>${tripData.childName || 'رحلة عادية'}</strong> | السعر: <strong>${tripData.price} جنيه</strong>`;
             });
         }
 
+        function saveDriverEta() {
+            let etaVal = document.getElementById('driverEtaInput').value;
+            if(!etaVal) { alert("أدخل وقت الوصول!"); return; }
+
+            if(currentTripKey) {
+                db.ref('trips/' + currentTripKey).update({ eta: etaVal });
+                alert("🚀 تم إرسال وقت الوصول (ETA) للزبون بنجاح!");
+            }
+        }
+
+        function rateDriver(starsCount) {
+            let stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if(index < starsCount) {
+                    star.classList.add('rated');
+                } else {
+                    star.classList.remove('rated');
+                }
+            });
+            document.getElementById('ratingFeedback').innerText = `شكراً لتقييمك! تم تسجيل (${starsCount} / 5 نجوم) بنجاح.`;
+        }
+
         function driverCompleteTrip() {
-            let price = parseFloat(window.activeAcceptedTripPrice) || 50;
+            let price = 50;
             let commission = price * 0.10;
             currentDriverDebt += commission;
             totalPlatformRevenue += commission;
             localStorage.setItem('gasser_total_revenue', totalPlatformRevenue);
             updateWalletDisplay();
 
-            alert("تم إنهاء الرحلة العادية! تم احتساب العمولة (10% = " + commission + "ج).");
+            alert("تم إنهاء الرحلة! تم احتساب العمولة للمنصة (10%).");
             document.getElementById('activeDriverTrip').classList.add('hidden');
-            document.getElementById('driverFeed').innerHTML = `<p style="color: #777; text-align: center;">بحث عن رحلات جديدة...</p>`;
+            document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #777; text-align: center;">بحث عن طلبات جديدة...</p>`;
             if(currentTripKey) db.ref('trips/' + currentTripKey).remove();
         }
 
