@@ -822,8 +822,18 @@
                     </div>
                 </div>
 
+                <!-- صندوق استقبال اقتراح السعر للزبون وقبوله أو رفضه -->
+                <div id="customerDriverOfferNotification" class="hidden" style="background: rgba(0, 242, 254, 0.08); border: 2px solid #00f2fe; padding: 20px; border-radius: 16px; margin-top: 20px; text-align: right;">
+                    <h3 style="color: #00f2fe; font-size: 19px; margin-bottom: 10px;">🚖 وصلك عرض سعر جديد من السائق!</h3>
+                    <div id="customerDriverOfferDetails" style="font-size: 15px; line-height: 1.8; margin-bottom: 15px;"></div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="action-btn" style="background: #00ff00; color: #000; border-color: #00ff00; margin-top: 0;" onclick="acceptDriverPriceOffer()">قبول السعر ✅</button>
+                        <button class="action-btn" style="background: #ff4d4d; color: #fff; border-color: #ff4d4d; margin-top: 0;" onclick="rejectDriverPriceOffer()">رفض السعر ❌</button>
+                    </div>
+                </div>
+
                 <div id="customerActiveTripBox" class="hidden" style="background: rgba(0, 255, 0, 0.05); border: 2px solid #00ff00; padding: 20px; border-radius: 16px; margin-top: 20px; text-align: right;">
-                    <h3 style="color: #00ff00; font-size: 20px; margin-bottom: 12px;">✅ تم قبول طلبك بنجاح من قبل السائق!</h3>
+                    <h3 style="color: #00ff00; font-size: 20px; margin-bottom: 12px;">✅ تم تأكيد الرحلة وبدء التوصيل بنجاح!</h3>
                     <div id="acceptedTripDetailsContent" style="font-size: 15px; line-height: 1.8; color: var(--text-color); margin-bottom: 15px;"></div>
                     
                     <div style="background: rgba(0,0,0,0.1); padding: 15px; border-radius: 12px; margin-top: 15px;">
@@ -1187,7 +1197,7 @@
                 
                 if(!pickup || !dropoff || !price) { alert("أكمل بيانات الانطلاق والوجهة والسعر!"); return; }
 
-                tripData = { mode: 'normal', vehicleType: selectedCustomerVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", eta: "قيد التحديد..." };
+                tripData = { mode: 'normal', vehicleType: selectedCustomerVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", driverProposedPrice: "", eta: "قيد التحديد..." };
             } else {
                 let personName = document.getElementById('schedulePersonName').value;
                 let schedulePickup = document.getElementById('schedulePickup').value;
@@ -1213,6 +1223,7 @@
                     status: "pending", 
                     driverName: "", 
                     driverPhone: "", 
+                    driverProposedPrice: "", 
                     eta: "قيد التحديد..." 
                 };
             }
@@ -1220,18 +1231,31 @@
             newTripRef.set(tripData);
             alert("🚀 تم إرسال الطلب بنجاح لسواقين TAWSILA!");
 
+            // الاستماع لتحديثات الطلب (مثل اقتراح السعر أو القبول)
             newTripRef.on('value', (snapshot) => {
                 let data = snapshot.val();
                 if(!data) return;
 
+                // إذا اقترح السائق سعر جديد ويصل للزبون
+                if(data.status === "driver_proposed" && data.driverProposedPrice) {
+                    document.getElementById('customerDriverOfferNotification').classList.remove('hidden');
+                    document.getElementById('customerDriverOfferDetails').innerHTML = `
+                        <p><strong>👨‍✈️ السائق:</strong> ${data.driverName}</p>
+                        <p><strong>🚗 المركبة:</strong> ${data.vehicleType}</p>
+                        <p><strong>💰 السعر المقترح من السائق:</strong> <span style="color:#ffcc00; font-size:18px; font-weight:bold;">${data.driverProposedPrice} جنيه</span> (سعرك الأصلي: ${data.price} جنيه)</p>
+                    `;
+                }
+
                 if(data.status === "accepted") {
                     document.getElementById('dynamicBookingFormBox').classList.add('hidden');
                     document.getElementById('bigModeSelectionContainer').classList.add('hidden');
+                    document.getElementById('customerDriverOfferNotification').classList.add('hidden');
                     document.getElementById('customerActiveTripBox').classList.remove('hidden');
                     document.getElementById('acceptedTripDetailsContent').innerHTML = `
                         <p><strong>👨‍✈️ اسم السائق:</strong> ${data.driverName}</p>
                         <p><strong>📞 رقم الهاتف:</strong> <a href="tel:${data.driverPhone}" style="color:#00ff00;">${data.driverPhone}</a></p>
                         <p><strong>🚗 المركبة:</strong> ${data.vehicleType}</p>
+                        <p><strong>💵 السعر النهائي للرحلة:</strong> <span style="color:#ffcc00; font-weight:bold;">${data.driverProposedPrice || data.price} جنيه</span></p>
                         <p><strong>⏰ وقت الوصول المتوقع (ETA):</strong> <span style="color:#ffcc00; font-weight:bold;">${data.eta || 'جاري التحديد...'}</span></p>
                     `;
                 }
@@ -1254,8 +1278,17 @@
                         <div class="schedule-offer-box" id="trip-${tripId}">
                             <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">🔔 طلب توصيل جديد!</p>
                             <p style="margin-bottom: 5px;">${detailsText}</p>
-                            <p style="color: #ffcc00; margin: 8px 0; font-size: 17px;">السعر: <strong>${trip.price}</strong> جنيه</p>
-                            <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول الطلب وبدء التوصيل</button>
+                            <p style="color: #ffcc00; margin: 8px 0; font-size: 15px;">سعر الزبون المقترح: <strong>${trip.price}</strong> جنيه</p>
+                            
+                            <div class="form-group" style="margin-top: 10px;">
+                                <label style="color:#00f2fe;">اقتراح سعر جديد (اختياري):</label>
+                                <input type="number" id="proposedPrice-${tripId}" placeholder="اكتب سعرك لو حابب تغيره...">
+                            </div>
+
+                            <div style="display: flex; gap: 10px;">
+                                <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0; flex:1;" onclick="acceptTripWithOffer('${tripId}', '${trip.price}')">قبول بالسعر المقترح</button>
+                                <button class="action-btn" style="background: #00f2fe; color: #000; margin-top:0; flex:1;" onclick="proposeNewPrice('${tripId}')">إرسال سعر جديد للزبون</button>
+                            </div>
                         </div>
                     `;
                 }
@@ -1278,21 +1311,56 @@
             } catch(e) {}
         }
 
-        function acceptTrip(tripId) {
+        function proposeNewPrice(tripId) {
+            let newPrice = document.getElementById(`proposedPrice-${tripId}`).value;
+            if(!newPrice) { alert("أدخل السعر المقترح أولاً!"); return; }
+
+            currentTripKey = tripId;
+            db.ref('trips/' + tripId).once('value', (snapshot) => {
+                let tripData = snapshot.val();
+                tripData.driverName = registeredDriver.name;
+                tripData.driverPhone = registeredDriver.phone;
+                tripData.driverProposedPrice = newPrice;
+                tripData.status = "driver_proposed";
+
+                db.ref('trips/' + tripId).update(tripData);
+                alert("🚀 تم إرسال سعرك المقترح للزبون، بانتظار قراره (قبول أو رفض)!");
+                document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #00f2fe; text-align: center; padding: 10px;">⏳ في انتظار رد الزبون على السعر المقترح...</p>`;
+            });
+        }
+
+        function acceptTripWithOffer(tripId, originalPrice) {
             currentTripKey = tripId;
 
             db.ref('trips/' + tripId).once('value', (snapshot) => {
                 let tripData = snapshot.val();
                 tripData.driverName = registeredDriver.name;
                 tripData.driverPhone = registeredDriver.phone;
+                tripData.driverProposedPrice = originalPrice;
                 tripData.status = "accepted";
 
                 db.ref('trips/' + tripId).update(tripData);
 
-                document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ تم قبول الطلب بنجاح! حدد وقت الوصول أدناه.</p>`;
+                document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ تم قبول الطلب بالأساس! حدد وقت الوصول أدناه.</p>`;
                 document.getElementById('activeDriverTrip').classList.remove('hidden');
-                document.getElementById('activeTripDetails').innerHTML = `العميل: <strong>${tripData.childName || tripData.pickup}</strong> | السعر: <strong>${tripData.price} جنيه</strong>`;
+                document.getElementById('activeTripDetails').innerHTML = `العميل: <strong>${tripData.childName || tripData.pickup}</strong> | السعر: <strong>${originalPrice} جنيه</strong>`;
             });
+        }
+
+        function acceptDriverPriceOffer() {
+            if(currentTripKey) {
+                db.ref('trips/' + currentTripKey).update({ status: "accepted" });
+                document.getElementById('customerDriverOfferNotification').classList.add('hidden');
+                alert("🎉 تم قبول السعر بنجاح!");
+            }
+        }
+
+        function rejectDriverPriceOffer() {
+            if(currentTripKey) {
+                db.ref('trips/' + currentTripKey).update({ status: "rejected", driverProposedPrice: "" });
+                document.getElementById('customerDriverOfferNotification').classList.add('hidden');
+                alert("❌ تم رفض السعر المقترح من السائق.");
+            }
         }
 
         function saveDriverEta() {
