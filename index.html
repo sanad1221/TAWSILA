@@ -609,12 +609,13 @@
             </div>
         </div>
 
-        <!-- 6. لوحة خدمات الزبون -->
+        <!-- 6. لوحة خدمات الزبون (السلايدات وبداخلها نموذج ملء البيانات الديناميكي) -->
         <div id="bookingScreen" class="hidden">
             <div class="card" style="text-align: right;">
-                <h2>🎒 اختر نوع المركبة من السلايد لتسجيل رحلتك</h2>
-                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اضغط على الكارت بالأسفل ليفتح لك نموذج الحجز الخاص به مباشرة:</p>
+                <h2>🎒 اختر نوع المركبة من السلايد الفاخر</h2>
+                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اختر الكارت المناسب لفتح نموذج ملء البيانات تحته مباشرة:</p>
                 
+                <!-- السلايد الفاخر لاختيار المركبة -->
                 <div class="slider-container">
                     <div class="slider-track">
                         <div class="fleet-card customer-vehicle-card" id="cust-card-tuktuk" onclick="selectCustomerVehicle('توكتوك 🛺')">
@@ -649,7 +650,8 @@
                     </div>
                 </div>
 
-                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px;">
+                <!-- نموذج ملء البيانات الديناميكي يفتح جوه السلايد بعد الاختيار -->
+                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px; animation: fadeInTitle 0.4s ease;">
                     <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 12px; text-align: center;"></h3>
                     
                     <div class="btn-grid" style="margin-bottom: 15px;">
@@ -657,6 +659,7 @@
                         <button class="action-btn" style="background: rgba(0, 242, 254, 0.1); border-color: #00f2fe; color: #00f2fe; font-size: 13px; padding: 8px;" onclick="switchTripType('normal')">🚖 رحلة عادية مفردة</button>
                     </div>
 
+                    <!-- نموذج جدول المواعيد المنتظم -->
                     <div id="formScheduleSection">
                         <div class="form-group">
                             <label>اسم صاحب الموعد (طالب / موظف):</label>
@@ -687,6 +690,7 @@
                         <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="sendOfferToCloud('schedule')">إرسال جدول المواعيد للسواقين</button>
                     </div>
 
+                    <!-- نموذج الرحلة العادية المفردة -->
                     <div id="formNormalSection" class="hidden">
                         <div class="form-group">
                             <label>من (مكان الانطلاق):</label>
@@ -704,6 +708,7 @@
                     </div>
                 </div>
 
+                <!-- واجهة الزبون بعد قبول السائق -->
                 <div id="customerActiveTripBox" class="hidden" style="background: rgba(0, 255, 0, 0.05); border: 2px solid #00ff00; padding: 20px; border-radius: 16px; margin-top: 20px; text-align: right;">
                     <h3 style="color: #00ff00; font-size: 20px; margin-bottom: 12px;">✅ تم قبول طلبك بنجاح من قبل السائق!</h3>
                     <div id="acceptedTripDetailsContent" style="font-size: 15px; line-height: 1.8; color: #eee; margin-bottom: 15px;"></div>
@@ -719,11 +724,6 @@
                         </div>
                         <p id="ratingFeedback" style="font-size: 13px; color: #00f2fe; text-align: center; margin-top: 5px;"></p>
                     </div>
-                </div>
-                
-                <div id="negotiationBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 1px solid #ffcc00; padding: 15px; border-radius: 10px; margin-top: 15px;">
-                    <p style="color: #ffcc00;" id="negotiationText"></p>
-                    <button class="action-btn" style="background: #ffcc00; color: #000; padding: 8px; font-size: 14px;" onclick="acceptCounterOffer()">موافقة على السعر الجديد وحفظ الطلب</button>
                 </div>
 
                 <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
@@ -753,21 +753,16 @@
 
                 <div style="background: rgba(255, 204, 0, 0.08); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-bottom: 25px;">
                     <h3 style="color: #ffcc00; font-size: 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                        <span>📅 طلبات المواعيد المنتظمة الواردة</span>
+                        <span>📅 طلبات التوصيل الواردة</span>
                         <span style="font-size: 12px; background: #ffcc00; color: #000; padding: 2px 8px; border-radius: 10px;">إشعارات 🔔</span>
                     </h3>
                     <div id="driverScheduleFeed">
-                        <p style="color: #aaa; text-align: center; padding: 10px; font-size: 14px;">لا توجد طلبات مواعيد جديدة حتى الآن.</p>
+                        <p style="color: #aaa; text-align: center; padding: 10px; font-size: 14px;">لا توجد طلبات جديدة حتى الآن.</p>
                     </div>
                 </div>
 
-                <p>🚖 قسم طلبات الرحلات العادية:</p>
-                <div id="driverFeed">
-                    <p style="color: #777; text-align: center; padding: 15px;">جارٍ الاستماع للرحلات العادية...</p>
-                </div>
-
                 <div id="activeDriverTrip" class="hidden" style="background: rgba(0,255,0,0.05); border: 1px solid #00ff00; padding: 15px; border-radius: 10px; margin-top: 15px;">
-                    <h3 style="color: #00ff00; font-size: 18px;">🚖 رحلة عادية نشطة الآن</h3>
+                    <h3 style="color: #00ff00; font-size: 18px;">🚖 رحلة نشطة الآن</h3>
                     <p id="activeTripDetails" style="margin: 8px 0; font-size: 15px;"></p>
                     <div class="form-group" style="margin-top: 10px;">
                         <label style="color: #ffcc00;">حدد وقت الوصول المتوقع (ETA):</label>
@@ -863,7 +858,6 @@
         let currentTripTypeMode = 'schedule';
         let currentTripKey = null;
 
-        // 🌟 التحقق التلقائي من حالة الدخول المحفوظة عند فتح التطبيق
         window.onload = function() {
             let savedRole = localStorage.getItem('tawsila_active_role');
             let customerLoggedIn = localStorage.getItem('tawsila_customer_logged');
@@ -997,6 +991,7 @@
             alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل بالأسطول!");
         }
 
+        // اختيار الزبون للمركبة من السلايد وفتح نموذج البيانات تحته فوراً
         function selectCustomerVehicle(vehicleName) {
             selectedCustomerVehicle = vehicleName;
             document.querySelectorAll('.customer-vehicle-card').forEach(card => card.classList.remove('selected'));
@@ -1008,7 +1003,7 @@
             else if(vehicleName.includes('تويوتا')) document.getElementById('cust-card-toyota').classList.add('selected');
 
             document.getElementById('dynamicBookingFormBox').classList.remove('hidden');
-            document.getElementById('selectedVehicleFormTitle').innerText = `📝 تسجيل الطلب لـ: ${vehicleName}`;
+            document.getElementById('selectedVehicleFormTitle').innerText = `📝 ملء بيانات الطلب لـ: ${vehicleName}`;
         }
 
         function switchTripType(type) {
@@ -1051,7 +1046,7 @@
                 
                 if(!pickup || !dropoff || !price) { alert("أكمل بيانات الانطلاق والوجهة والسعر!"); return; }
 
-                tripData = { mode: 'normal', vehicleType: selectedCustomerVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", eta: "قيد التحديد...", counterPrice: "" };
+                tripData = { mode: 'normal', vehicleType: selectedCustomerVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", eta: "قيد التحديد..." };
             } else {
                 let personName = document.getElementById('schedulePersonName').value;
                 let schedulePickup = document.getElementById('schedulePickup').value;
@@ -1077,13 +1072,12 @@
                     status: "pending", 
                     driverName: "", 
                     driverPhone: "", 
-                    eta: "قيد التحديد...", 
-                    counterPrice: "" 
+                    eta: "قيد التحديد..." 
                 };
             }
 
             newTripRef.set(tripData);
-            alert("🚀 تم إرسال الطلب بنجاح لقسم السواقين في TAWSILA!");
+            alert("🚀 تم إرسال الطلب بنجاح لسواقين TAWSILA!");
 
             newTripRef.on('value', (snapshot) => {
                 let data = snapshot.val();
@@ -1096,7 +1090,7 @@
                         <p><strong>👨‍✈️ اسم السائق:</strong> ${data.driverName}</p>
                         <p><strong>📞 رقم الهاتف:</strong> <a href="tel:${data.driverPhone}" style="color:#00ff00;">${data.driverPhone}</a></p>
                         <p><strong>🚗 المركبة:</strong> ${data.vehicleType}</p>
-                        <p><strong>⏰ وقت الوصول المتوقع (ETA):</strong> <span id="displayCustomerEta" style="color:#ffcc00; font-weight:bold;">${data.eta || 'جاري التحديد بواسطة السائق...'}</span></p>
+                        <p><strong>⏰ وقت الوصول المتوقع (ETA):</strong> <span style="color:#ffcc00; font-weight:bold;">${data.eta || 'جاري التحديد...'}</span></p>
                     `;
                 }
             });
@@ -1110,12 +1104,16 @@
                 if(trip.status === "pending") {
                     playNewTripAlertSound();
 
+                    let detailsText = trip.mode === 'schedule' ? 
+                        `📅 جدول شهري (${trip.vehicleType})<br><strong>لصالح:</strong> ${trip.childName}<br><strong>من:</strong> ${trip.pickup} ➔ <strong>إلى:</strong> ${trip.dropoff}` :
+                        `🚖 رحلة عادية (${trip.vehicleType})<br><strong>من:</strong> ${trip.pickup} ➔ <strong>إلى:</strong> ${trip.dropoff}`;
+
                     document.getElementById('driverScheduleFeed').innerHTML = `
                         <div class="schedule-offer-box" id="trip-${tripId}">
-                            <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">🚖 طلب توصيلة جديد (${trip.vehicleType})!</p>
-                            <p><strong>الاسم / الوجهة:</strong> ${trip.childName || trip.pickup} ➔ ${trip.dropoff}</p>
+                            <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">🔔 طلب توصيل جديد!</p>
+                            <p style="margin-bottom: 5px;">${detailsText}</p>
                             <p style="color: #ffcc00; margin: 8px 0; font-size: 17px;">السعر: <strong>${trip.price}</strong> جنيه</p>
-                            <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول الطلب وبدء المتابعة</button>
+                            <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول الطلب وبدء التوصيل</button>
                         </div>
                     `;
                 }
@@ -1151,7 +1149,7 @@
 
                 document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ تم قبول الطلب بنجاح! حدد وقت الوصول أدناه.</p>`;
                 document.getElementById('activeDriverTrip').classList.remove('hidden');
-                document.getElementById('activeTripDetails').innerHTML = `العميل: <strong>${tripData.childName || 'رحلة عادية'}</strong> | السعر: <strong>${tripData.price} جنيه</strong>`;
+                document.getElementById('activeTripDetails').innerHTML = `العميل: <strong>${tripData.childName || tripData.pickup}</strong> | السعر: <strong>${tripData.price} جنيه</strong>`;
             });
         }
 
