@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAWSILA - Gasser Ultra Luxury Edition</title>
+    <title>TAWSILA - جاسر الفاخرة</title>
     
     <!-- استدعاء مكتبات Firebase السحابية -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -90,7 +90,7 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* مطر كلمة GASSER في الخلفية */
+        /* مطر كلمة جاسر في الخلفية */
         .gasser-rain {
             position: absolute;
             top: -30px;
@@ -337,7 +337,7 @@
             color: #a0a0b0;
         }
 
-        /* 🌟 السلايدين الكبار الفخمين (نوع الرحلة: شهري أو مفرد) */
+        /* السلايدين الكبار الفخمين (نوع الرحلة: شهري أو مفرد) */
         .big-mode-grid {
             display: flex;
             gap: 20px;
@@ -509,7 +509,7 @@
         <div class="intro-abstract-bg"></div>
         <div class="snapshot-overlay">
             <div class="snapshot-title">TAWSILA</div>
-            <div class="snapshot-subtitle">Gasser Luxury Edition</div>
+            <div class="snapshot-subtitle">جاسر Luxury Edition</div>
         </div>
     </div>
 
@@ -517,7 +517,7 @@
         for (let i = 0; i < 20; i++) {
             let drop = document.createElement('div');
             drop.className = 'gasser-rain';
-            drop.innerText = 'GASSER';
+            drop.innerText = 'جاسر';
             drop.style.left = Math.random() * 100 + 'vw';
             drop.style.animationDuration = (Math.random() * 6 + 4) + 's';
             drop.style.animationDelay = (Math.random() * 5) + 's';
@@ -544,7 +544,7 @@
             
             <div class="creator-box">
                 <span style="font-size: 11px; color: #8c8c9b; letter-spacing: 2px; text-transform: uppercase;">WEB DESIGNED & DEVELOPED BY</span>
-                <div class="creator-name">GASSER</div>
+                <div class="creator-name">جاسر</div>
                 
                 <div class="social-links">
                     <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn">📘 فيسبوك</a>
@@ -700,7 +700,7 @@
                     </div>
                 </div>
 
-                <!-- 🌟 الخطوة 2: السلايدين الكبار الفخمين لاختيار نوع الرحلة (مخفيين حتى يتم اختيار المركبة) -->
+                <!-- الخطوة 2: السلايدين الكبار الفخمين لاختيار نوع الرحلة -->
                 <div id="bigModeSelectionContainer" class="hidden" style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); pt: 15px;">
                     <h2 style="font-size: 20px; margin-top: 15px;">⚡ الخطوة 2: اختر نظام الحجز والرحلة</h2>
                     <p style="font-size: 13px; color: #aaa;">اختر أحد النظامين بالأسفل لتفتح لك واجهة ملء البيانات مباشرة:</p>
@@ -720,7 +720,7 @@
                     </div>
                 </div>
 
-                <!-- 🌟 واجهة ملء البيانات (مخفية ولا تظهر إلا عند اختيار السلايد الكبير المناسب) -->
+                <!-- واجهة ملء البيانات -->
                 <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px; animation: fadeInTitle 0.4s ease;">
                     <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 15px; text-align: center;"></h3>
 
@@ -812,7 +812,7 @@
                 <div class="wallet-box">
                     <h3 style="color: #ffcc00; margin-bottom: 8px; font-size: 17px;">💳 المحفظة الشخصية (خصم المنصة 10%)</h3>
                     <p>نوع مركبتك المسجلة: <strong id="driverVehicleDisplay" style="color: #00f2fe;">---</strong></p>
-                    <p>المديونية المستحقة للأستاذ غاسر: <strong id="driverDebt" style="font-size: 18px; color: #ff4d4d;">0 جنيه</strong></p>
+                    <p>المديونية المستحقة للأستاذ جاسر: <strong id="driverDebt" style="font-size: 18px; color: #ff4d4d;">0 جنيه</strong></p>
                     <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display: block; text-align: center; text-decoration: none; margin-top: 12px; background: #25d366; border-color: #25d366; color: #fff; font-size: 15px;">إرسال إيصال التحويل عبر واتساب (01008204580) 💬</a>
                 </div>
 
@@ -849,7 +849,7 @@
 
         <!-- 8. لوحة تحكم الأدمن -->
         <div id="adminPanel" class="card hidden" style="text-align: right;">
-            <h2 style="color: #ff4d4d;">🛡️ لوحة تحكم الأدمن وحماية الحقوق (Gasser)</h2>
+            <h2 style="color: #ff4d4d;">🛡️ لوحة تحكم الأدمن وحماية الحقوق (جاسر)</h2>
             <p>متابعة أرباح المنصة وإدارة جميع السواقين المسجلين وحظر المخالفين:</p>
             
             <div class="admin-stat-card">
@@ -868,7 +868,7 @@
     </div>
 
     <div class="creator-footer">
-        Web Designed & Developed By <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" style="color: #ffcc00; text-decoration: none; font-weight: bold;">GASSER</a> &copy; 2026
+        Web Designed & Developed By <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" style="color: #ffcc00; text-decoration: none; font-weight: bold;">جاسر</a> &copy; 2026
     </div>
 
     <script>
@@ -950,7 +950,7 @@
             db.ref('drivers/' + registeredDriver.phone.replace(/\D/g,'')).once('value', (snapshot) => {
                 let data = snapshot.val();
                 if(data && data.isBanned) {
-                    alert("🚫 عذراً، لقد تم حظر حسابك من قبل إدارة المنصة (Gasser) بسبب تجاوز المديونية!");
+                    alert("🚫 عذراً، لقد تم حظر حسابك من قبل إدارة المنصة (جاسر) بسبب تجاوز المديونية!");
                     logoutApp();
                     return;
                 }
@@ -1056,7 +1056,6 @@
             alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل بالأسطول!");
         }
 
-        // الخطوة 1: اختيار المركبة وإظهار سلايدين نوع الرحلة الكبار
         function selectCustomerVehicle(vehicleName) {
             selectedCustomerVehicle = vehicleName;
             document.querySelectorAll('.customer-vehicle-card').forEach(card => card.classList.remove('selected'));
@@ -1067,13 +1066,10 @@
             else if(vehicleName.includes('كاشف')) document.getElementById('cust-card-kashef').classList.add('selected');
             else if(vehicleName.includes('تويوتا')) document.getElementById('cust-card-toyota').classList.add('selected');
 
-            // إظهار سلايدين اختيار نظام الرحلة
             document.getElementById('bigModeSelectionContainer').classList.remove('hidden');
-            // إخفاء نموذج البيانات حتى يتم اختيار نوع الرحلة
             document.getElementById('dynamicBookingFormBox').classList.add('hidden');
         }
 
-        // الخطوة 2: اختيار نوع الرحلة (شهري أو مفرد) وإظهار نموذج ملء البيانات
         function selectTripMode(mode) {
             currentTripTypeMode = mode;
             document.getElementById('modeCardSchedule').classList.remove('selected');
@@ -1101,7 +1097,7 @@
                 db.ref('drivers/' + registeredDriver.phone.replace(/\D/g,'')).update({ debt: currentDriverDebt });
             }
 
-            let msg = encodeURIComponent("مرحباً أستاذ غاسر، أنا السائق " + registeredDriver.name + " (" + registeredDriver.vehicle + ") وقمت بتحويل مديونية بقيمة " + currentDriverDebt + " جنيه.");
+            let msg = encodeURIComponent("مرحباً أستاذ جاسر، أنا السائق " + registeredDriver.name + " (" + registeredDriver.vehicle + ") وقمت بتحويل مديونية بقيمة " + currentDriverDebt + " جنيه.");
             document.getElementById('whatsappPayBtn').href = `https://wa.me/201008204580?text=${msg}`;
         }
 
