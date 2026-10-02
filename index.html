@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAWSILA - Gasser Ultra Luxury Edition</title>
     
-    <!-- Firebase Cloud SDK -->
+    <!-- استدعاء مكتبات Firebase السحابية -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
@@ -28,7 +28,7 @@
             position: relative;
         }
 
-        /* Luxury Glowing Intro Screen */
+        /* شاشة الإنترو الفخمة */
         #introScreen {
             position: fixed;
             top: 0;
@@ -42,20 +42,20 @@
             align-items: center;
             z-index: 9999;
             overflow: hidden;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
         }
 
         .intro-abstract-bg {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(255,204,0,0.3) 0%, rgba(0,242,254,0.15) 40%, rgba(11,11,18,0.98) 80%);
-            animation: glowingPulse 2.5s ease-in-out infinite alternate;
+            background: radial-gradient(circle at center, rgba(255,204,0,0.2) 0%, rgba(11,11,18,0.98) 70%);
+            animation: abstractPulse 2s ease-in-out infinite alternate;
         }
 
-        @keyframes glowingPulse {
-            0% { transform: scale(1); opacity: 0.85; filter: brightness(1); }
-            100% { transform: scale(1.1); opacity: 1; filter: brightness(1.3); }
+        @keyframes abstractPulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.08); opacity: 1; }
         }
 
         .snapshot-overlay {
@@ -64,61 +64,58 @@
             flex-direction: column;
             align-items: center;
             z-index: 3;
-            animation: fadeInTitle 1s ease-in-out forwards;
+            animation: fadeInTitle 0.8s ease-in-out forwards;
         }
 
         .snapshot-title {
-            font-size: 54px;
+            font-size: 48px;
             font-weight: 900;
             background: linear-gradient(90deg, #ffcc00, #00f2fe, #ffcc00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 8px;
-            text-shadow: 0 0 40px rgba(255, 204, 0, 0.8), 0 0 80px rgba(0, 242, 254, 0.5);
-            margin-bottom: 8px;
+            letter-spacing: 6px;
+            text-shadow: 0 0 35px rgba(255, 204, 0, 0.6);
+            margin-bottom: 5px;
         }
 
         .snapshot-subtitle {
-            font-size: 15px;
-            color: #00f2fe;
-            letter-spacing: 8px;
+            font-size: 14px;
+            color: #a0a0a5;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            text-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
         }
 
         @keyframes fadeInTitle {
-            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Dynamic Glowing Rain */
+        /* مطر كلمة GASSER في الخلفية */
         .gasser-rain {
             position: absolute;
             top: -30px;
-            color: rgba(255, 204, 0, 0.18);
-            font-size: 13px;
+            color: rgba(255, 204, 0, 0.12);
+            font-size: 12px;
             font-weight: bold;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             user-select: none;
             pointer-events: none;
             animation: fallRain linear infinite;
             z-index: 1;
-            text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
         }
 
         @keyframes fallRain {
             0% { transform: translateY(-30px); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
+            20% { opacity: 0.4; }
+            80% { opacity: 0.4; }
             100% { transform: translateY(105vh); opacity: 0; }
         }
 
-        /* Interactive Touch Effects */
+        /* تأثير الفقاعات عند اللمس */
         .ripple {
             position: absolute;
             border-radius: 50%;
-            background: rgba(0, 242, 254, 0.5);
-            box-shadow: 0 0 20px #00f2fe;
+            background: rgba(255, 204, 0, 0.4);
             transform: scale(0);
             animation: rippleEffect 0.6s linear;
             pointer-events: none;
@@ -126,18 +123,17 @@
         }
 
         @keyframes rippleEffect {
-            to { transform: scale(5); opacity: 0; }
+            to { transform: scale(4); opacity: 0; }
         }
 
         .touch-tuktuk {
             position: absolute;
-            font-size: 32px;
+            font-size: 28px;
             pointer-events: none;
             z-index: 999;
             transition: all 0.8s ease-out;
             transform: translate(-50%, -50%) scale(0.5);
             opacity: 1;
-            filter: drop-shadow(0 0 15px #ffcc00);
         }
 
         nav {
@@ -145,42 +141,40 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            background: rgba(11, 11, 15, 0.9);
-            backdrop-filter: blur(15px);
+            background: rgba(11, 11, 15, 0.95);
+            backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(0, 242, 254, 0.3);
-            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.15);
+            border-bottom: 1px solid rgba(255, 204, 0, 0.2);
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
             background: linear-gradient(90deg, #ffcc00, #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
         }
 
         .top-logout-btn {
             background: rgba(255, 77, 77, 0.15);
             border: 1px solid #ff4d4d;
             color: #ff4d4d;
-            padding: 6px 16px;
+            padding: 6px 14px;
             font-size: 13px;
             font-weight: bold;
             border-radius: 20px;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 0 10px rgba(255, 77, 77, 0.2);
         }
         .top-logout-btn:hover {
             background: #ff4d4d;
             color: #fff;
-            box-shadow: 0 0 20px #ff4d4d;
+            box-shadow: 0 0 10px #ff4d4d;
         }
 
         .container {
@@ -193,96 +187,82 @@
         }
 
         .card {
-            background: rgba(18, 18, 28, 0.85);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(0, 242, 254, 0.3);
-            border-radius: 24px;
-            padding: 35px 25px;
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px 20px;
             margin-bottom: 25px;
-            box-shadow: 0 0 35px rgba(0, 242, 254, 0.15), inset 0 0 15px rgba(255, 204, 0, 0.05);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.1);
             text-align: center;
         }
 
         .card h1, .card h2 {
-            font-size: 30px;
+            font-size: 28px;
             margin-bottom: 15px;
             background: linear-gradient(90deg, #ffcc00, #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
         }
 
         .card p {
-            color: #b0b0c0;
+            color: #a0a0a5;
             font-size: 15px;
             margin-bottom: 15px;
         }
 
         .form-group {
-            margin-bottom: 18px;
-            text-align: left;
+            margin-bottom: 15px;
+            text-align: right;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: #00f2fe;
+            margin-bottom: 6px;
+            color: #a0a0a5;
             font-size: 14px;
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
         }
 
         .form-group input, .form-group select {
             width: 100%;
-            padding: 14px 18px;
-            background: #0b0b12;
-            border: 1px solid rgba(0, 242, 254, 0.4);
-            border-radius: 12px;
+            padding: 12px 15px;
+            background: #0b0b0f;
+            border: 1px solid #2a2a3a;
+            border-radius: 10px;
             color: #fff;
             font-size: 15px;
-            outline: none;
-            transition: 0.3s;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
-        }
-        .form-group input:focus {
-            border-color: #ffcc00;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.4), inset 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .form-group input[type="file"] {
-            padding: 10px;
-            background: rgba(0, 242, 254, 0.05);
-            border: 1px dashed rgba(0, 242, 254, 0.5);
+            padding: 8px;
+            background: rgba(255, 204, 0, 0.05);
+            border: 1px dashed rgba(255, 204, 0, 0.4);
             cursor: pointer;
         }
 
         .action-btn {
-            padding: 14px 24px;
+            padding: 12px 20px;
             font-size: 16px;
             font-weight: bold;
             border: 2px solid #ffcc00;
-            background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(0,242,254,0.1));
+            background: transparent;
             color: #ffcc00;
-            border-radius: 35px;
+            border-radius: 30px;
             cursor: pointer;
             transition: 0.4s;
             width: 100%;
-            margin-top: 12px;
+            margin-top: 10px;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
-            text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
         }
 
         .action-btn:hover {
-            background: linear-gradient(135deg, #ffcc00, #00f2fe);
+            background: #ffcc00;
             color: #0b0b0f;
-            box-shadow: 0 0 30px #ffcc00, 0 0 50px #00f2fe;
-            border-color: #fff;
-            transform: translateY(-2px);
+            box-shadow: 0 0 15px #ffcc00;
         }
 
-        /* Luxury Fleet Sliders */
+        /* السلايدات الفاخرة للسيارات */
         .slider-container {
             position: relative;
             width: 100%;
@@ -307,15 +287,14 @@
         .slider-track::-webkit-scrollbar-thumb {
             background: linear-gradient(90deg, #ffcc00, #00f2fe);
             border-radius: 10px;
-            box-shadow: 0 0 10px #00f2fe;
         }
 
         .fleet-card {
             min-width: 210px;
             flex: 0 0 auto;
-            background: linear-gradient(145deg, rgba(30, 30, 50, 0.75), rgba(15, 15, 25, 0.9));
+            background: linear-gradient(145deg, rgba(30, 30, 45, 0.7), rgba(15, 15, 25, 0.85));
             backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 204, 0, 0.3);
+            border: 2px solid rgba(255, 204, 0, 0.25);
             border-radius: 22px;
             padding: 25px 15px;
             text-align: center;
@@ -323,43 +302,42 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .fleet-card:hover {
-            transform: translateY(-8px) scale(1.04);
+            transform: translateY(-8px) scale(1.03);
             border-color: #ffcc00;
-            box-shadow: 0 15px 35px rgba(255, 204, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 204, 0, 0.3);
         }
 
         .fleet-card.selected {
             border-color: #00f2fe;
-            box-shadow: 0 0 35px rgba(0, 242, 254, 0.7), inset 0 0 15px rgba(0, 242, 254, 0.4);
-            background: linear-gradient(145deg, rgba(0, 242, 254, 0.2), rgba(18, 18, 28, 0.95));
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.5);
+            background: linear-gradient(145deg, rgba(0, 242, 254, 0.15), rgba(18, 18, 26, 0.95));
             transform: translateY(-5px);
         }
 
         .fleet-icon {
-            font-size: 54px;
+            font-size: 52px;
             margin-bottom: 12px;
             display: block;
-            filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.7));
+            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.5));
         }
 
         .fleet-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: bold;
             color: #fff;
             margin-bottom: 6px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.4);
         }
 
         .fleet-desc {
             font-size: 12px;
-            color: #b0b0c0;
+            color: #a0a0b0;
         }
 
-        /* Luxury Big Mode Cards (Monthly Schedule vs Single Trip) */
+        /* 🌟 السلايدين الكبار الفخمين (نوع الرحلة: شهري أو مفرد) */
         .big-mode-grid {
             display: flex;
             gap: 20px;
@@ -369,54 +347,52 @@
 
         .big-mode-card {
             flex: 1;
-            background: linear-gradient(145deg, rgba(25, 25, 45, 0.85), rgba(12, 12, 22, 0.95));
-            border: 2px solid rgba(255, 204, 0, 0.35);
+            background: linear-gradient(145deg, rgba(25, 25, 40, 0.8), rgba(12, 12, 20, 0.95));
+            border: 2px solid rgba(255, 204, 0, 0.3);
             border-radius: 24px;
             padding: 30px 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
 
         .big-mode-card:hover {
             transform: translateY(-6px);
             border-color: #ffcc00;
-            box-shadow: 0 15px 40px rgba(255, 204, 0, 0.35), 0 0 20px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 204, 0, 0.25);
         }
 
         .big-mode-card.selected {
             border-color: #00f2fe;
-            background: linear-gradient(145deg, rgba(0, 242, 254, 0.2), rgba(15, 15, 25, 0.98));
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.6), inset 0 0 15px rgba(0, 242, 254, 0.3);
+            background: linear-gradient(145deg, rgba(0, 242, 254, 0.15), rgba(15, 15, 25, 0.98));
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
         }
 
         .big-mode-icon {
-            font-size: 48px;
+            font-size: 44px;
             margin-bottom: 12px;
             display: block;
-            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.7));
         }
 
         .big-mode-title {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 8px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            margin-bottom: 6px;
         }
 
         .big-mode-desc {
             font-size: 13px;
-            color: #b0b0c0;
+            color: #aaa;
         }
 
-        /* Star Rating System */
+        /* نظام النجوم للتقييم */
         .star-rating {
             display: flex;
             gap: 8px;
             justify-content: center;
-            font-size: 30px;
+            font-size: 28px;
             cursor: pointer;
             margin: 10px 0;
         }
@@ -426,31 +402,30 @@
         }
         .star.rated {
             color: #ffcc00;
-            text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
         }
 
         .social-links {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
             margin-top: 15px;
         }
 
         .social-btn {
-            padding: 8px 18px;
+            padding: 8px 16px;
             font-size: 14px;
             border-radius: 20px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
-        .fb-btn { background: rgba(24, 119, 242, 0.2); border: 1px solid #1877f2; color: #1877f2; }
-        .fb-btn:hover { background: #1877f2; color: #fff; box-shadow: 0 0 20px #1877f2; }
+        .fb-btn { background: rgba(24, 119, 242, 0.15); border: 1px solid #1877f2; color: #1877f2; }
+        .fb-btn:hover { background: #1877f2; color: #fff; }
 
-        .ig-btn { background: rgba(225, 48, 108, 0.2); border: 1px solid #e1306c; color: #e1306c; }
-        .ig-btn:hover { background: #e1306c; color: #fff; box-shadow: 0 0 20px #e1306c; }
+        .ig-btn { background: rgba(225, 48, 108, 0.15); border: 1px solid #e1306c; color: #e1306c; }
+        .ig-btn:hover { background: #e1306c; color: #fff; }
 
         .btn-grid {
             display: flex;
@@ -460,73 +435,76 @@
 
         .creator-box {
             margin: 20px 0;
-            padding: 25px 15px;
-            background: linear-gradient(145deg, rgba(255, 204, 0, 0.05), rgba(0, 242, 254, 0.05));
-            border: 2px solid rgba(255, 204, 0, 0.5);
-            border-radius: 20px;
-            box-shadow: 0 0 25px rgba(255, 204, 0, 0.15);
+            padding: 20px 10px;
+            background: rgba(255, 204, 0, 0.03);
+            border: 2px solid rgba(255, 204, 0, 0.4);
+            border-radius: 16px;
         }
 
         .creator-name {
-            font-size: 46px;
+            font-size: 42px;
             font-weight: 900;
             background: linear-gradient(90deg, #ffcc00, #ffffff, #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             margin-top: 5px;
-            text-shadow: 0 0 25px rgba(255, 204, 0, 0.6);
         }
 
         .wallet-box {
             background: rgba(255, 204, 0, 0.08);
             border: 1px solid #ffcc00;
-            padding: 18px;
-            border-radius: 16px;
+            padding: 15px;
+            border-radius: 12px;
             margin-bottom: 15px;
-            text-align: left;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.1);
+            text-align: right;
         }
 
         .admin-stat-card {
-            background: rgba(255, 0, 0, 0.06);
-            border: 1px solid rgba(255, 0, 0, 0.35);
-            padding: 18px;
-            border-radius: 14px;
+            background: rgba(255, 0, 0, 0.05);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
             margin-bottom: 15px;
-            text-align: left;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.1);
+            text-align: right;
         }
 
         .hidden { display: none; }
         
-        .schedule-offer-box {
-            background: rgba(25, 25, 40, 0.85);
-            border-left: 5px solid #ffcc00;
-            padding: 18px;
+        .driver-offer-box {
+            background: rgba(25, 25, 35, 0.8);
+            border-left: 4px solid #ffcc00;
+            padding: 15px;
             margin-top: 15px;
-            border-radius: 12px;
-            text-align: left;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            border-radius: 8px;
+            text-align: right;
+        }
+
+        .schedule-offer-box {
+            background: rgba(255, 204, 0, 0.06);
+            border: 2px solid #ffcc00;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            text-align: right;
         }
 
         .creator-footer {
             text-align: center;
-            padding: 18px;
+            padding: 15px;
             font-size: 13px;
-            color: #888;
-            border-top: 1px solid rgba(0, 242, 254, 0.2);
+            color: #777;
+            border-top: 1px solid #1a1a22;
             position: relative;
             z-index: 2;
             background: rgba(11, 11, 15, 0.95);
-            letter-spacing: 1px;
         }
         .creator-footer span { color: #ffcc00; font-weight: bold; }
     </style>
 </head>
 <body onclick="handleScreenClick(event)">
 
-    <!-- Glowing Intro Screen -->
+    <!-- شاشة الإنترو -->
     <div id="introScreen">
         <div class="intro-abstract-bg"></div>
         <div class="snapshot-overlay">
@@ -536,12 +514,12 @@
     </div>
 
     <script>
-        for (let i = 0; i < 22; i++) {
+        for (let i = 0; i < 20; i++) {
             let drop = document.createElement('div');
             drop.className = 'gasser-rain';
             drop.innerText = 'GASSER';
             drop.style.left = Math.random() * 100 + 'vw';
-            drop.style.animationDuration = (Math.random() * 5 + 4) + 's';
+            drop.style.animationDuration = (Math.random() * 6 + 4) + 's';
             drop.style.animationDelay = (Math.random() * 5) + 's';
             document.body.appendChild(drop);
         }
@@ -549,259 +527,259 @@
         setTimeout(() => {
             let intro = document.getElementById('introScreen');
             intro.style.opacity = '0';
-            setTimeout(() => { intro.remove(); }, 800);
-        }, 2000);
+            setTimeout(() => { intro.remove(); }, 600);
+        }, 1800);
     </script>
 
     <nav>
         <div class="logo">TAWSILA 🚖</div>
-        <button class="top-logout-btn" onclick="logoutApp()">Logout 🚪</button>
+        <button class="top-logout-btn" onclick="logoutApp()">تسجيل خروج 🚪</button>
     </nav>
 
     <div class="container">
         
-        <!-- 1. Home Screen -->
+        <!-- 1. الشاشة الرئيسية -->
         <div id="homeScreen" class="card">
-            <h1>The Future of Smart Fleet Mobility</h1>
+            <h1>مستقبل المواصلات وخدمات الأسطول الذكي</h1>
             
             <div class="creator-box">
-                <span style="font-size: 11px; color: #00f2fe; letter-spacing: 3px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,242,254,0.6);">WEB DESIGNED & DEVELOPED BY</span>
+                <span style="font-size: 11px; color: #8c8c9b; letter-spacing: 2px; text-transform: uppercase;">WEB DESIGNED & DEVELOPED BY</span>
                 <div class="creator-name">GASSER</div>
                 
                 <div class="social-links">
-                    <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn">📘 Facebook</a>
-                    <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn ig-btn">📸 Instagram</a>
+                    <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn">📘 فيسبوك</a>
+                    <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn ig-btn">📸 انستجرام</a>
                 </div>
             </div>
 
-            <button class="action-btn" style="margin-top: 20px;" onclick="goToRoleSelection()">Get Started Now</button>
-            <button class="action-btn" style="background: rgba(255,0,0,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-top: 12px;" onclick="openAdminLogin()">🔐 Admin Dashboard</button>
+            <button class="action-btn" style="margin-top: 15px;" onclick="goToRoleSelection()">ابدأ الآن</button>
+            <button class="action-btn" style="background: rgba(255,0,0,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-top: 10px;" onclick="openAdminLogin()">🔐 لوحة تحكم الأدمن</button>
         </div>
 
-        <!-- 2. Role Selection -->
+        <!-- 2. اختيار الدور -->
         <div id="roleScreen" class="card hidden">
-            <h2>Select Your Account Type</h2>
+            <h2>اختر نوع الحساب</h2>
             <div class="btn-grid" style="flex-direction: column;">
-                <button class="action-btn" onclick="selectRole('customer')">I am a Customer (Looking for rides or regular schedule)</button>
-                <button class="action-btn" style="background: rgba(255, 204, 0, 0.1); color: #fff;" onclick="selectRole('driver')">I am a Fleet Driver (Want to select vehicle & work)</button>
+                <button class="action-btn" onclick="selectRole('customer')">أنا زبون (أبحث عن توصيلة أو جدول مواعيد منتظم)</button>
+                <button class="action-btn" style="background: rgba(255, 204, 0, 0.1); color: #fff;" onclick="selectRole('driver')">أنا سائق أسطول (أريد اختيار مركبتي والعمل)</button>
             </div>
         </div>
 
-        <!-- 3. Driver Vehicle Selection -->
-        <div id="driverVehicleScreen" class="card hidden" style="text-align: left;">
-            <h2>🚗 Select Your Fleet Vehicle</h2>
-            <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">Choose your vehicle from the luxury slider below:</p>
+        <!-- 3. شاشة اختيار المركبة للسائق -->
+        <div id="driverVehicleScreen" class="card hidden" style="text-align: right;">
+            <h2>🚗 اختر نوع مركبتك في الأسطول</h2>
+            <p style="color: #aaa; font-size: 13px; margin-bottom: 20px;">اختر مركبتك من السلايد الفاخر أدناه:</p>
             
             <div class="slider-container">
                 <div class="slider-track">
-                    <div class="fleet-card" id="driver-card-tuktuk" onclick="selectDriverVehicle('Tuktuk 🛺')">
+                    <div class="fleet-card" id="driver-card-tuktuk" onclick="selectDriverVehicle('توكتوك 🛺')">
                         <span class="fleet-icon">🛺</span>
-                        <div class="fleet-title">Tuktuk</div>
-                        <div class="fleet-desc">Fast inner city rides</div>
+                        <div class="fleet-title">توكتوك</div>
+                        <div class="fleet-desc">سريع للمشاوير الداخلية</div>
                     </div>
                     
-                    <div class="fleet-card" id="driver-card-bike" onclick="selectDriverVehicle('Motorcycle 🛵')">
+                    <div class="fleet-card" id="driver-card-bike" onclick="selectDriverVehicle('موتوسيكل 🛵')">
                         <span class="fleet-icon">🛵</span>
-                        <div class="fleet-title">Motorcycle</div>
-                        <div class="fleet-desc">Beat the traffic</div>
+                        <div class="fleet-title">موتوسيكل</div>
+                        <div class="fleet-desc">لتفادي الزحام</div>
                     </div>
 
-                    <div class="fleet-card" id="driver-card-car" onclick="selectDriverVehicle('Sedan Car 🚗')">
+                    <div class="fleet-card" id="driver-card-car" onclick="selectDriverVehicle('عربية ملاكي 🚗')">
                         <span class="fleet-icon">🚗</span>
-                        <div class="fleet-title">Sedan Car</div>
-                        <div class="fleet-desc">Comfortable trips</div>
+                        <div class="fleet-title">عربية ملاكي</div>
+                        <div class="fleet-desc">لرحلات مريحة</div>
                     </div>
 
-                    <div class="fleet-card" id="driver-card-kashef" onclick="selectDriverVehicle('Kashef Car 🚗')">
+                    <div class="fleet-card" id="driver-card-kashef" onclick="selectDriverVehicle('عربية كاشف 🚗')">
                         <span class="fleet-icon">🚙</span>
-                        <div class="fleet-title">Kashef Car</div>
-                        <div class="fleet-desc">Special rugged routes</div>
+                        <div class="fleet-title">عربية كاشف</div>
+                        <div class="fleet-desc">طرق خاصة ومميزة</div>
                     </div>
 
-                    <div class="fleet-card" id="driver-card-toyota" onclick="selectDriverVehicle('Toyota Van 🚐')">
+                    <div class="fleet-card" id="driver-card-toyota" onclick="selectDriverVehicle('عربية تويوتا 🚐')">
                         <span class="fleet-icon">🚐</span>
-                        <div class="fleet-title">Toyota Van</div>
-                        <div class="fleet-desc">Group & family trips</div>
+                        <div class="fleet-title">عربية تويوتا</div>
+                        <div class="fleet-desc">رحلات جماعية وفان</div>
                     </div>
                 </div>
             </div>
 
-            <button class="action-btn" style="margin-top: 20px; background: #ffcc00; color: #000;" onclick="confirmDriverVehicleSelection()">Confirm Vehicle & Open Driver Dashboard</button>
+            <button class="action-btn" style="margin-top: 20px; background: #ffcc00; color: #000;" onclick="confirmDriverVehicleSelection()">تأكيد المركبة والانتقال لوحة السائق</button>
         </div>
 
-        <!-- 4. Customer Login / Signup -->
-        <div id="authCustomerScreen" class="card hidden" style="text-align: left;">
-            <h2>🔒 Customer Secure Sign In</h2>
+        <!-- 4. تسجيل الزبون -->
+        <div id="authCustomerScreen" class="card hidden" style="text-align: right;">
+            <h2>🔒 تسجيل دخول الزبون</h2>
             <div class="form-group">
-                <label>Mobile Number:</label>
-                <input type="tel" id="customerPhone" placeholder="+201xxxxxxxx0">
+                <label>رقم الهاتف المحمول:</label>
+                <input type="tel" id="customerPhone" placeholder="01xxxxxxxx0">
             </div>
             <div class="form-group">
-                <label>Email Address:</label>
+                <label>البريد الإلكتروني:</label>
                 <input type="email" id="customerEmail" placeholder="name@example.com">
             </div>
-            <button class="action-btn" onclick="sendCustomerOTP()">Send Verification Code</button>
+            <button class="action-btn" onclick="sendCustomerOTP()">إرسال كود التحقق</button>
             
             <div id="customerOtpBox" class="hidden" style="margin-top: 15px;">
                 <div class="form-group">
-                    <label style="color: #ffcc00;">Enter Verification Code:</label>
-                    <input type="text" id="enteredCustomerOtp" placeholder="Example: 4580">
+                    <label style="color: #ffcc00;">أدخل كود التحقق:</label>
+                    <input type="text" id="enteredCustomerOtp" placeholder="مثال: 4580">
                 </div>
-                <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="verifyCustomerOTP()">Verify & Enter</button>
+                <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="verifyCustomerOTP()">تأكيد والدخول</button>
             </div>
         </div>
 
-        <!-- 5. Driver Registration -->
-        <div id="authDriverScreen" class="card hidden" style="text-align: left;">
-            <h2>🛵 Join TAWSILA Fleet Drivers</h2>
+        <!-- 5. تسجيل السائق -->
+        <div id="authDriverScreen" class="card hidden" style="text-align: right;">
+            <h2>🛵 انضم لأسطول سائقي TAWSILA</h2>
             <div class="form-group">
-                <label>Full Name:</label>
-                <input type="text" id="driverNameInput" placeholder="Enter your full name...">
+                <label>الاسم الكامل:</label>
+                <input type="text" id="driverNameInput" placeholder="اكتب اسمك الثلاثي...">
             </div>
             <div class="form-group">
-                <label>Mobile Number:</label>
-                <input type="tel" id="driverPhoneInput" placeholder="+201xxxxxxxx0">
+                <label>رقم الهاتف:</label>
+                <input type="tel" id="driverPhoneInput" placeholder="01xxxxxxxx0">
             </div>
             <div class="form-group">
-                <label>Email Address:</label>
+                <label>البريد الإلكتروني:</label>
                 <input type="email" id="driverEmailInput" placeholder="driver@example.com">
             </div>
             <div class="form-group">
-                <label>National ID Card Photo (Mandatory for Safety):</label>
+                <label>صورة البطاقة الشخصية (إجباري للأمان):</label>
                 <input type="file" id="driverIdCardInput" accept="image/*">
             </div>
-            <button class="action-btn" onclick="sendDriverOTP()">Send Verification Code & Continue</button>
+            <button class="action-btn" onclick="sendDriverOTP()">إرسال كود التحقق ومتابعة اختيار المركبة</button>
 
             <div id="driverOtpBox" class="hidden" style="margin-top: 15px;">
                 <div class="form-group">
-                    <label style="color: #ffcc00;">Enter Verification Code:</label>
-                    <input type="text" id="enteredDriverOtp" placeholder="Example: 4580">
+                    <label style="color: #ffcc00;">أدخل الكود المرسل:</label>
+                    <input type="text" id="enteredDriverOtp" placeholder="مثال: 4580">
                 </div>
-                <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="verifyDriverOTP()">Verify & Select Vehicle</button>
+                <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="verifyDriverOTP()">تحقق والانتقال لاختيار المركبة</button>
             </div>
         </div>
 
-        <!-- 6. Customer Booking Dashboard -->
+        <!-- 6. لوحة خدمات الزبون -->
         <div id="bookingScreen" class="hidden">
-            <div class="card" style="text-align: left;">
-                <h2>🎒 Step 1: Choose Your Vehicle Type</h2>
-                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Select your vehicle from the slider below:</p>
+            <div class="card" style="text-align: right;">
+                <h2>🎒 الخطوة 1: اختر نوع المركبة</h2>
+                <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">اختر مركبتك من السلايد أدناه:</p>
                 
-                <!-- Vehicle Slider -->
+                <!-- السلايد الأول للمركبات -->
                 <div class="slider-container">
                     <div class="slider-track">
-                        <div class="fleet-card customer-vehicle-card" id="cust-card-tuktuk" onclick="selectCustomerVehicle('Tuktuk 🛺')">
+                        <div class="fleet-card customer-vehicle-card" id="cust-card-tuktuk" onclick="selectCustomerVehicle('توكتوك 🛺')">
                             <span class="fleet-icon">🛺</span>
-                            <div class="fleet-title">Tuktuk</div>
-                            <div class="fleet-desc">Fast inner city</div>
+                            <div class="fleet-title">توكتوك</div>
+                            <div class="fleet-desc">للمشاوير السريعة</div>
                         </div>
                         
-                        <div class="fleet-card customer-vehicle-card" id="cust-card-bike" onclick="selectCustomerVehicle('Motorcycle 🛵')">
+                        <div class="fleet-card customer-vehicle-card" id="cust-card-bike" onclick="selectCustomerVehicle('موتوسيكل 🛵')">
                             <span class="fleet-icon">🛵</span>
-                            <div class="fleet-title">Motorcycle</div>
-                            <div class="fleet-desc">Beat traffic</div>
+                            <div class="fleet-title">موتوسيكل</div>
+                            <div class="fleet-desc">تفادي الزحام</div>
                         </div>
 
-                        <div class="fleet-card customer-vehicle-card" id="cust-card-malahi" onclick="selectCustomerVehicle('Sedan Car 🚗')">
+                        <div class="fleet-card customer-vehicle-card" id="cust-card-malahi" onclick="selectCustomerVehicle('عربية ملاكي 🚗')">
                             <span class="fleet-icon">🚗</span>
-                            <div class="fleet-title">Sedan Car</div>
-                            <div class="fleet-desc">Comfort & Family</div>
+                            <div class="fleet-title">عربية ملاكي</div>
+                            <div class="fleet-desc">راحة وعائلية</div>
                         </div>
 
-                        <div class="fleet-card customer-vehicle-card" id="cust-card-kashef" onclick="selectCustomerVehicle('Kashef Car 🚗')">
+                        <div class="fleet-card customer-vehicle-card" id="cust-card-kashef" onclick="selectCustomerVehicle('عربية كاشف 🚗')">
                             <span class="fleet-icon">🚙</span>
-                            <div class="fleet-title">Kashef Car</div>
-                            <div class="fleet-desc">Special routes</div>
+                            <div class="fleet-title">عربية كاشف</div>
+                            <div class="fleet-desc">طرق مخصصة</div>
                         </div>
 
-                        <div class="fleet-card customer-vehicle-card" id="cust-card-toyota" onclick="selectCustomerVehicle('Toyota Van 🚐')">
+                        <div class="fleet-card customer-vehicle-card" id="cust-card-toyota" onclick="selectCustomerVehicle('عربية تويوتا 🚐')">
                             <span class="fleet-icon">🚐</span>
-                            <div class="fleet-title">Toyota Van</div>
-                            <div class="fleet-desc">Group & Van</div>
+                            <div class="fleet-title">عربية تويوتا</div>
+                            <div class="fleet-desc">جماعي وفان</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 2: Big Mode Selection Cards -->
-                <div id="bigModeSelectionContainer" class="hidden" style="margin-top: 25px; border-top: 1px solid rgba(0,242,254,0.2); padding-top: 20px;">
-                    <h2 style="font-size: 20px; margin-bottom: 5px;">⚡ Step 2: Choose Trip Type</h2>
-                    <p style="font-size: 13px; color: #aaa;">Select one of the big luxury modes below to open booking details:</p>
+                <!-- 🌟 الخطوة 2: السلايدين الكبار الفخمين لاختيار نوع الرحلة (مخفيين حتى يتم اختيار المركبة) -->
+                <div id="bigModeSelectionContainer" class="hidden" style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); pt: 15px;">
+                    <h2 style="font-size: 20px; margin-top: 15px;">⚡ الخطوة 2: اختر نظام الحجز والرحلة</h2>
+                    <p style="font-size: 13px; color: #aaa;">اختر أحد النظامين بالأسفل لتفتح لك واجهة ملء البيانات مباشرة:</p>
                     
                     <div class="big-mode-grid">
                         <div class="big-mode-card" id="modeCardSchedule" onclick="selectTripMode('schedule')">
                             <span class="big-mode-icon">📅</span>
-                            <div class="big-mode-title">Monthly Regular Schedule</div>
-                            <div class="big-mode-desc">Fixed daily pickup & return times for work or university</div>
+                            <div class="big-mode-title">جدول مواعيد منتظم (شهري)</div>
+                            <div class="big-mode-desc">مواعيد ثابتة ذهاب وعودة شهرياً للعمل أو الدراسة</div>
                         </div>
 
                         <div class="big-mode-card" id="modeCardNormal" onclick="selectTripMode('normal')">
                             <span class="big-mode-icon">🚖</span>
-                            <div class="big-mode-title">Single Normal Trip</div>
-                            <div class="big-mode-desc">Instant direct ride from point A to point B right now</div>
+                            <div class="big-mode-title">رحلة عادية مفردة</div>
+                            <div class="big-mode-desc">مشوار سريع ومباشر من نقطة لأخرى الآن</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Dynamic Data Input Form Box -->
-                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(0, 242, 254, 0.04); border: 2px solid #00f2fe; padding: 22px; border-radius: 18px; margin-top: 20px; box-shadow: 0 0 25px rgba(0,242,254,0.15);">
-                    <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 15px; text-align: center; text-shadow: 0 0 10px rgba(255,204,0,0.4);"></h3>
+                <!-- 🌟 واجهة ملء البيانات (مخفية ولا تظهر إلا عند اختيار السلايد الكبير المناسب) -->
+                <div id="dynamicBookingFormBox" class="hidden" style="background: rgba(255, 204, 0, 0.05); border: 2px solid #ffcc00; padding: 20px; border-radius: 16px; margin-top: 20px; animation: fadeInTitle 0.4s ease;">
+                    <h3 id="selectedVehicleFormTitle" style="color: #ffcc00; font-size: 19px; margin-bottom: 15px; text-align: center;"></h3>
 
-                    <!-- Monthly Schedule Form -->
+                    <!-- نموذج جدول المواعيد المنتظم -->
                     <div id="formScheduleSection" class="hidden">
                         <div class="form-group">
-                            <label>Passenger Name (Student / Employee):</label>
-                            <input type="text" id="schedulePersonName" placeholder="Enter full name...">
+                            <label>اسم صاحب الموعد (طالب / موظف):</label>
+                            <input type="text" id="schedulePersonName" placeholder="اكتب الاسم...">
                         </div>
                         <div class="form-group">
-                            <label>Pickup Location (Home Address):</label>
-                            <input type="text" id="schedulePickup" placeholder="Home area and street...">
+                            <label>عنوان الانطلاق (المنزل):</label>
+                            <input type="text" id="schedulePickup" placeholder="عنوان البيت والمنطقة...">
                         </div>
                         <div class="form-group">
-                            <label>Destination (Work / Study):</label>
-                            <input type="text" id="scheduleDestination" placeholder="Destination name and place...">
+                            <label>الوجهة (العمل / الدراسة):</label>
+                            <input type="text" id="scheduleDestination" placeholder="اسم ومكان الوجهة...">
                         </div>
-                        <div style="display: flex; gap: 12px;">
+                        <div style="display: flex; gap: 10px;">
                             <div class="form-group" style="flex:1;">
-                                <label>⏰ Departure (Morning):</label>
+                                <label>⏰ وقت الذهاب (صباحاً):</label>
                                 <input type="time" id="morningTime" value="08:00">
                             </div>
                             <div class="form-group" style="flex:1;">
-                                <label>⏰ Return (Afternoon):</label>
+                                <label>⏰ وقت العودة (ظهراً):</label>
                                 <input type="time" id="returnTime" value="14:00">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Suggested Full Month Price (EGP):</label>
-                            <input type="number" id="scheduleMonthlyPrice" placeholder="Example: 1500...">
+                            <label>السعر المقترح للشهر كامل (جنيه):</label>
+                            <input type="number" id="scheduleMonthlyPrice" placeholder="مثال: 1500...">
                         </div>
-                        <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="sendOfferToCloud('schedule')">Send Schedule to Fleet Drivers</button>
+                        <button class="action-btn" style="background: #ffcc00; color: #000;" onclick="sendOfferToCloud('schedule')">إرسال جدول المواعيد للسواقين</button>
                     </div>
 
-                    <!-- Single Normal Trip Form -->
+                    <!-- نموذج الرحلة العادية المفردة -->
                     <div id="formNormalSection" class="hidden">
                         <div class="form-group">
-                            <label>From (Pickup Location):</label>
-                            <input type="text" id="pickupLocation" placeholder="Current pickup location...">
+                            <label>من (مكان الانطلاق):</label>
+                            <input type="text" id="pickupLocation" placeholder="موقع الانطلاق الحالي...">
                         </div>
                         <div class="form-group">
-                            <label>To (Destination):</label>
-                            <input type="text" id="dropoffLocation" placeholder="Final destination...">
+                            <label>إلى (الوجهة المطلوبة):</label>
+                            <input type="text" id="dropoffLocation" placeholder="الوجهة النهائية...">
                         </div>
                         <div class="form-group">
-                            <label>Your Suggested Price (EGP):</label>
-                            <input type="number" id="customerPrice" placeholder="Price...">
+                            <label>سعرك المقترح للرحلة (جنيه):</label>
+                            <input type="number" id="customerPrice" placeholder="السعر...">
                         </div>
-                        <button class="action-btn" onclick="sendOfferToCloud('normal')">Send Trip Offer to Drivers</button>
+                        <button class="action-btn" onclick="sendOfferToCloud('normal')">إرسال عرض الرحلة للسواقين</button>
                     </div>
                 </div>
 
-                <!-- Active Trip Accepted Box -->
-                <div id="customerActiveTripBox" class="hidden" style="background: rgba(0, 255, 0, 0.05); border: 2px solid #00ff00; padding: 20px; border-radius: 16px; margin-top: 20px; text-align: left; box-shadow: 0 0 25px rgba(0,255,0,0.2);">
-                    <h3 style="color: #00ff00; font-size: 20px; margin-bottom: 12px; text-shadow: 0 0 10px rgba(0,255,0,0.5);">✅ Your Trip Was Accepted by a Driver!</h3>
+                <!-- واجهة الزبون بعد قبول السائق -->
+                <div id="customerActiveTripBox" class="hidden" style="background: rgba(0, 255, 0, 0.05); border: 2px solid #00ff00; padding: 20px; border-radius: 16px; margin-top: 20px; text-align: right;">
+                    <h3 style="color: #00ff00; font-size: 20px; margin-bottom: 12px;">✅ تم قبول طلبك بنجاح من قبل السائق!</h3>
                     <div id="acceptedTripDetailsContent" style="font-size: 15px; line-height: 1.8; color: #eee; margin-bottom: 15px;"></div>
                     
-                    <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 12px; margin-top: 15px;">
-                        <h4 style="color: #ffcc00; margin-bottom: 8px; font-size: 16px;">⭐ Rate Your Driver:</h4>
+                    <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 12px; margin-top: 15px;">
+                        <h4 style="color: #ffcc00; margin-bottom: 8px; font-size: 16px;">⭐ تقييم السائق:</h4>
                         <div class="star-rating" id="starRatingContainer">
                             <span class="star" onclick="rateDriver(1)">★</span>
                             <span class="star" onclick="rateDriver(2)">★</span>
@@ -814,77 +792,77 @@
                 </div>
 
                 <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
-                    <p style="font-size: 12px; color: #888; margin-bottom: 8px;">Follow App Developer:</p>
+                    <p style="font-size: 12px; color: #888; margin-bottom: 8px;">تابع مطور التطبيق:</p>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn" style="padding: 6px 12px; font-size: 12px;">📘 Facebook</a>
-                        <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn ig-btn" style="padding: 6px 12px; font-size: 12px;">📸 Instagram</a>
+                        <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn" style="padding: 6px 12px; font-size: 12px;">📘 فيسبوك</a>
+                        <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn ig-btn" style="padding: 6px 12px; font-size: 12px;">📸 انستجرام</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 7. Driver Dashboard & Wallet -->
+        <!-- 7. لوحة السائق والمحفظة -->
         <div id="driverDashboard" class="hidden">
-            <div class="card" style="text-align: left;">
+            <div class="card" style="text-align: right;">
                 <h2 style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>🛵 Driver Dashboard & Wallet</span>
-                    <span id="driverStatusBadge" style="font-size: 13px; background: rgba(0,255,0,0.2); color: #00ff00; padding: 5px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(0,255,0,0.4);">Online 🟢</span>
+                    <span>🛵 لوحة السائق والمحفظة</span>
+                    <span id="driverStatusBadge" style="font-size: 13px; background: rgba(0,255,0,0.2); color: #00ff00; padding: 4px 8px; border-radius: 20px;">متصل 🟢</span>
                 </h2>
 
                 <div class="wallet-box">
-                    <h3 style="color: #ffcc00; margin-bottom: 8px; font-size: 17px;">💳 Personal Wallet (Platform Fee 10%)</h3>
-                    <p>Registered Vehicle: <strong id="driverVehicleDisplay" style="color: #00f2fe;">---</strong></p>
-                    <p>Due Balance to Gasser: <strong id="driverDebt" style="font-size: 18px; color: #ff4d4d; text-shadow: 0 0 10px rgba(255,77,77,0.5);">0 EGP</strong></p>
-                    <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display: block; text-align: center; text-decoration: none; margin-top: 12px; background: #25d366; border-color: #25d366; color: #fff; font-size: 15px; box-shadow: 0 0 15px rgba(37,211,102,0.4);">Send Transfer Receipt via WhatsApp (01008204580) 💬</a>
+                    <h3 style="color: #ffcc00; margin-bottom: 8px; font-size: 17px;">💳 المحفظة الشخصية (خصم المنصة 10%)</h3>
+                    <p>نوع مركبتك المسجلة: <strong id="driverVehicleDisplay" style="color: #00f2fe;">---</strong></p>
+                    <p>المديونية المستحقة للأستاذ غاسر: <strong id="driverDebt" style="font-size: 18px; color: #ff4d4d;">0 جنيه</strong></p>
+                    <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display: block; text-align: center; text-decoration: none; margin-top: 12px; background: #25d366; border-color: #25d366; color: #fff; font-size: 15px;">إرسال إيصال التحويل عبر واتساب (01008204580) 💬</a>
                 </div>
 
-                <div style="background: rgba(255, 204, 0, 0.06); border: 2px solid #ffcc00; padding: 18px; border-radius: 14px; margin-bottom: 25px; box-shadow: 0 0 20px rgba(255,204,0,0.15);">
+                <div style="background: rgba(255, 204, 0, 0.08); border: 2px solid #ffcc00; padding: 15px; border-radius: 12px; margin-bottom: 25px;">
                     <h3 style="color: #ffcc00; font-size: 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                        <span>📅 Incoming Ride Requests</span>
-                        <span style="font-size: 12px; background: #ffcc00; color: #000; padding: 2px 8px; border-radius: 10px; font-weight: bold;">Live 🔔</span>
+                        <span>📅 طلبات التوصيل الواردة</span>
+                        <span style="font-size: 12px; background: #ffcc00; color: #000; padding: 2px 8px; border-radius: 10px;">إشعارات 🔔</span>
                     </h3>
                     <div id="driverScheduleFeed">
-                        <p style="color: #aaa; text-align: center; padding: 10px; font-size: 14px;">No new requests at the moment.</p>
+                        <p style="color: #aaa; text-align: center; padding: 10px; font-size: 14px;">لا توجد طلبات جديدة حتى الآن.</p>
                     </div>
                 </div>
 
-                <div id="activeDriverTrip" class="hidden" style="background: rgba(0,255,0,0.06); border: 1px solid #00ff00; padding: 18px; border-radius: 12px; margin-top: 15px;">
-                    <h3 style="color: #00ff00; font-size: 18px;">🚖 Active Trip in Progress</h3>
+                <div id="activeDriverTrip" class="hidden" style="background: rgba(0,255,0,0.05); border: 1px solid #00ff00; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <h3 style="color: #00ff00; font-size: 18px;">🚖 رحلة نشطة الآن</h3>
                     <p id="activeTripDetails" style="margin: 8px 0; font-size: 15px;"></p>
                     <div class="form-group" style="margin-top: 10px;">
-                        <label style="color: #ffcc00;">Set Estimated Time of Arrival (ETA):</label>
-                        <input type="text" id="driverEtaInput" placeholder="Example: Within 10 minutes...">
-                        <button class="action-btn" style="background: #00f2fe; color: #000; margin-top: 8px;" onclick="saveDriverEta()">Send ETA to Customer</button>
+                        <label style="color: #ffcc00;">حدد وقت الوصول المتوقع (ETA):</label>
+                        <input type="text" id="driverEtaInput" placeholder="مثال: خلال 10 دقائق...">
+                        <button class="action-btn" style="background: #00f2fe; color: #000; margin-top: 8px;" onclick="saveDriverEta()">إرسال وقت الوصول للزبون</button>
                     </div>
-                    <button class="action-btn" style="background: #ff4d4d; border-color: #ff4d4d; color: #fff; margin-top: 12px;" onclick="driverCompleteTrip()">Complete Trip & Collect Commission</button>
+                    <button class="action-btn" style="background: #ff4d4d; border-color: #ff4d4d; color: #fff; margin-top: 10px;" onclick="driverCompleteTrip()">إنهاء الرحلة وتحصيل العمولة</button>
                 </div>
 
                 <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center;">
-                    <button class="action-btn" style="background: rgba(255,77,77,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-bottom: 15px;" onclick="logoutApp()">Driver Logout 🚪</button>
+                    <button class="action-btn" style="background: rgba(255,77,77,0.1); border-color: #ff4d4d; color: #ff4d4d; margin-bottom: 15px;" onclick="logoutApp()">تسجيل خروج السائق 🚪</button>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn" style="padding: 6px 12px; font-size: 12px;">📘 Facebook</a>
-                        <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn ig-btn" style="padding: 6px 12px; font-size: 12px;">📸 Instagram</a>
+                        <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn fb-btn" style="padding: 6px 12px; font-size: 12px;">📘 فيسبوك</a>
+                        <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn ig-btn" style="padding: 6px 12px; font-size: 12px;">📸 انستجرام</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 8. Admin Control Panel -->
-        <div id="adminPanel" class="card hidden" style="text-align: left;">
-            <h2 style="color: #ff4d4d; text-shadow: 0 0 15px rgba(255,77,77,0.5);">🛡️ Admin Control Panel (Gasser)</h2>
-            <p>Monitor platform revenues, manage registered drivers, and ban violators:</p>
+        <!-- 8. لوحة تحكم الأدمن -->
+        <div id="adminPanel" class="card hidden" style="text-align: right;">
+            <h2 style="color: #ff4d4d;">🛡️ لوحة تحكم الأدمن وحماية الحقوق (Gasser)</h2>
+            <p>متابعة أرباح المنصة وإدارة جميع السواقين المسجلين وحظر المخالفين:</p>
             
             <div class="admin-stat-card">
-                <p>💰 Total Platform Revenue Collected: <strong id="adminTotalRevenue" style="color: #00ff00; font-size: 18px; text-shadow: 0 0 10px rgba(0,255,0,0.5);">0 EGP</strong></p>
-                <p style="font-size: 13px; color: #aaa; margin-top: 5px;">Automatically accumulated from the 10% commission per completed trip.</p>
+                <p>💰 إجمالي أرباح المنصة المحصلة: <strong id="adminTotalRevenue" style="color: #00ff00; font-size: 18px;">0 جنيه</strong></p>
+                <p style="font-size: 13px; color: #aaa; margin-top: 5px;">تتجمع تلقائياً من نسبة الـ 10% لكل رحلة منتهية.</p>
             </div>
 
-            <h3 style="color: #ffcc00; margin-bottom: 10px; font-size: 16px;">📋 All Registered Fleet Drivers:</h3>
+            <h3 style="color: #ffcc00; margin-bottom: 10px; font-size: 16px;">📋 قائمة جميع السواقين المسجلين بالأسطول:</h3>
             <div id="adminDriversList">
-                <p style="color: #777;">Fetching drivers from cloud database...</p>
+                <p style="color: #777;">جاري جلب السواقين من السحابة...</p>
             </div>
 
-            <button class="action-btn" style="margin-top: 20px; background: rgba(255,77,77,0.2); border-color: #ff4d4d; color: #ff4d4d;" onclick="logoutApp()">Admin Logout 🚪</button>
+            <button class="action-btn" style="margin-top: 20px; background: rgba(255,77,77,0.2); border-color: #ff4d4d; color: #ff4d4d;" onclick="logoutApp()">تسجيل خروج الأدمن 🚪</button>
         </div>
 
     </div>
@@ -911,7 +889,7 @@
             document.body.appendChild(tuk);
 
             setTimeout(() => {
-                tuk.style.transform = 'translate(-50%, -80px) scale(1.5)';
+                tuk.style.transform = 'translate(-50%, -80px) scale(1.4)';
                 tuk.style.opacity = '0';
             }, 30);
 
@@ -972,13 +950,13 @@
             db.ref('drivers/' + registeredDriver.phone.replace(/\D/g,'')).once('value', (snapshot) => {
                 let data = snapshot.val();
                 if(data && data.isBanned) {
-                    alert("🚫 Sorry, your account has been banned by Gasser platform administration due to overdue debt!");
+                    alert("🚫 عذراً، لقد تم حظر حسابك من قبل إدارة المنصة (Gasser) بسبب تجاوز المديونية!");
                     logoutApp();
                     return;
                 }
                 document.getElementById('homeScreen').classList.add('hidden');
                 document.getElementById('driverDashboard').classList.remove('hidden');
-                document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle || "Not Specified";
+                document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle || "غير محدد";
                 updateWalletDisplay();
                 listenForTripsFromCloud();
             });
@@ -1003,19 +981,19 @@
         function sendCustomerOTP() {
             let phone = document.getElementById('customerPhone').value;
             let email = document.getElementById('customerEmail').value;
-            if(!phone || !email) { alert("Please fill in your details!"); return; }
+            if(!phone || !email) { alert("أدخل البيانات!"); return; }
             generatedCustomerOtp = Math.floor(1000 + Math.random() * 9000).toString();
-            alert("📩 Verification code for email " + email + "\n[Quick Code: " + generatedCustomerOtp + "]");
+            alert("📩 كود التحقق للإيميل: " + email + "\n[الكود السريع: " + generatedCustomerOtp + "]");
             document.getElementById('customerOtpBox').classList.remove('hidden');
         }
 
         function verifyCustomerOTP() {
             if(document.getElementById('enteredCustomerOtp').value === generatedCustomerOtp) {
                 localStorage.setItem('tawsila_customer_logged', 'true');
-                alert("Logged in successfully!");
+                alert("تم تسجيل الدخول بنجاح!");
                 document.getElementById('authCustomerScreen').classList.add('hidden');
                 document.getElementById('bookingScreen').classList.remove('hidden');
-            } else { alert("Incorrect verification code!"); }
+            } else { alert("الكود خطأ!"); }
         }
 
         function sendDriverOTP() {
@@ -1024,7 +1002,7 @@
             let email = document.getElementById('driverEmailInput').value;
             let idCard = document.getElementById('driverIdCardInput').files[0];
 
-            if(!name || !phone || !email || !idCard) { alert("Please complete all fields and upload your ID card!"); return; }
+            if(!name || !phone || !email || !idCard) { alert("أكمل البيانات وارفع البطاقة للأمان!"); return; }
 
             registeredDriver.name = name;
             registeredDriver.phone = phone;
@@ -1032,31 +1010,31 @@
             registeredDriver.idCardUrl = URL.createObjectURL(idCard);
 
             generatedDriverOtp = Math.floor(1000 + Math.random() * 9000).toString();
-            alert("📩 Verification code for email " + email + "\n[Quick Code: " + generatedDriverOtp + "]");
+            alert("📩 كود السائق للإيميل: " + email + "\n[الكود السريع: " + generatedDriverOtp + "]");
             document.getElementById('driverOtpBox').classList.remove('hidden');
         }
 
         function verifyDriverOTP() {
             if(document.getElementById('enteredDriverOtp').value === generatedDriverOtp) {
-                alert("Verified successfully! Now choose your vehicle.");
+                alert("تم التحقق بنجاح! اختر مركبتك الآن عبر السلايد الفاخر.");
                 document.getElementById('authDriverScreen').classList.add('hidden');
                 document.getElementById('driverVehicleScreen').classList.remove('hidden');
-            } else { alert("Incorrect verification code!"); }
+            } else { alert("الكود خطأ!"); }
         }
 
         function selectDriverVehicle(vehicleName) {
             selectedDriverVehicle = vehicleName;
             document.querySelectorAll('#driverVehicleScreen .fleet-card').forEach(card => card.classList.remove('selected'));
             
-            if(vehicleName.includes('Tuktuk')) document.getElementById('driver-card-tuktuk').classList.add('selected');
-            else if(vehicleName.includes('Motorcycle')) document.getElementById('driver-card-bike').classList.add('selected');
-            else if(vehicleName.includes('Sedan')) document.getElementById('driver-card-car').classList.add('selected');
-            else if(vehicleName.includes('Kashef')) document.getElementById('driver-card-kashef').classList.add('selected');
-            else if(vehicleName.includes('Toyota')) document.getElementById('driver-card-toyota').classList.add('selected');
+            if(vehicleName.includes('توكتوك')) document.getElementById('driver-card-tuktuk').classList.add('selected');
+            else if(vehicleName.includes('موتوسيكل')) document.getElementById('driver-card-bike').classList.add('selected');
+            else if(vehicleName.includes('ملاكي')) document.getElementById('driver-card-car').classList.add('selected');
+            else if(vehicleName.includes('كاشف')) document.getElementById('driver-card-kashef').classList.add('selected');
+            else if(vehicleName.includes('تويوتا')) document.getElementById('driver-card-toyota').classList.add('selected');
         }
 
         function confirmDriverVehicleSelection() {
-            if(!selectedDriverVehicle) { alert("Please select a vehicle from the slider!"); return; }
+            if(!selectedDriverVehicle) { alert("من فضلك اختر مركبة من السلايد!"); return; }
             
             registeredDriver.vehicle = selectedDriverVehicle;
             localStorage.setItem('gasser_driver_data', JSON.stringify(registeredDriver));
@@ -1075,23 +1053,27 @@
             document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle;
             updateWalletDisplay();
             listenForTripsFromCloud();
-            alert("🚀 Vehicle registered successfully and you are now online!");
+            alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل بالأسطول!");
         }
 
+        // الخطوة 1: اختيار المركبة وإظهار سلايدين نوع الرحلة الكبار
         function selectCustomerVehicle(vehicleName) {
             selectedCustomerVehicle = vehicleName;
             document.querySelectorAll('.customer-vehicle-card').forEach(card => card.classList.remove('selected'));
             
-            if(vehicleName.includes('Tuktuk')) document.getElementById('cust-card-tuktuk').classList.add('selected');
-            else if(vehicleName.includes('Motorcycle')) document.getElementById('cust-card-bike').classList.add('selected');
-            else if(vehicleName.includes('Sedan')) document.getElementById('cust-card-malahi').classList.add('selected');
-            else if(vehicleName.includes('Kashef')) document.getElementById('cust-card-kashef').classList.add('selected');
-            else if(vehicleName.includes('Toyota')) document.getElementById('cust-card-toyota').classList.add('selected');
+            if(vehicleName.includes('توكتوك')) document.getElementById('cust-card-tuktuk').classList.add('selected');
+            else if(vehicleName.includes('موتوسيكل')) document.getElementById('cust-card-bike').classList.add('selected');
+            else if(vehicleName.includes('ملاكي')) document.getElementById('cust-card-malahi').classList.add('selected');
+            else if(vehicleName.includes('كاشف')) document.getElementById('cust-card-kashef').classList.add('selected');
+            else if(vehicleName.includes('تويوتا')) document.getElementById('cust-card-toyota').classList.add('selected');
 
+            // إظهار سلايدين اختيار نظام الرحلة
             document.getElementById('bigModeSelectionContainer').classList.remove('hidden');
+            // إخفاء نموذج البيانات حتى يتم اختيار نوع الرحلة
             document.getElementById('dynamicBookingFormBox').classList.add('hidden');
         }
 
+        // الخطوة 2: اختيار نوع الرحلة (شهري أو مفرد) وإظهار نموذج ملء البيانات
         function selectTripMode(mode) {
             currentTripTypeMode = mode;
             document.getElementById('modeCardSchedule').classList.remove('selected');
@@ -1108,24 +1090,24 @@
             }
 
             document.getElementById('dynamicBookingFormBox').classList.remove('hidden');
-            document.getElementById('selectedVehicleFormTitle').innerText = `📝 Booking Details (${selectedCustomerVehicle}) - ${mode === 'schedule' ? 'Monthly Schedule' : 'Single Normal Trip'}`;
+            document.getElementById('selectedVehicleFormTitle').innerText = `📝 ملء بيانات (${selectedCustomerVehicle}) - ${mode === 'schedule' ? 'جدول مواعيد منتظم' : 'رحلة عادية مفردة'}`;
         }
 
         function updateWalletDisplay() {
-            document.getElementById('driverDebt').innerText = currentDriverDebt + " EGP";
+            document.getElementById('driverDebt').innerText = currentDriverDebt + " جنيه";
             localStorage.setItem('gasser_driver_debt', currentDriverDebt);
             
             if(registeredDriver.phone) {
                 db.ref('drivers/' + registeredDriver.phone.replace(/\D/g,'')).update({ debt: currentDriverDebt });
             }
 
-            let msg = encodeURIComponent("Hello Gasser, I am driver " + registeredDriver.name + " (" + registeredDriver.vehicle + ") and I transferred a due platform balance of " + currentDriverDebt + " EGP.");
+            let msg = encodeURIComponent("مرحباً أستاذ غاسر، أنا السائق " + registeredDriver.name + " (" + registeredDriver.vehicle + ") وقمت بتحويل مديونية بقيمة " + currentDriverDebt + " جنيه.");
             document.getElementById('whatsappPayBtn').href = `https://wa.me/201008204580?text=${msg}`;
         }
 
         function sendOfferToCloud(typeMode) {
             if(!selectedCustomerVehicle || !currentTripTypeMode) {
-                alert("Please select vehicle and trip type first!");
+                alert("برجاء اختيار المركبة ونظام الرحلة أولاً!");
                 return;
             }
 
@@ -1138,9 +1120,9 @@
                 let dropoff = document.getElementById('dropoffLocation').value;
                 let price = document.getElementById('customerPrice').value;
                 
-                if(!pickup || !dropoff || !price) { alert("Please complete pickup, destination and price!"); return; }
+                if(!pickup || !dropoff || !price) { alert("أكمل بيانات الانطلاق والوجهة والسعر!"); return; }
 
-                tripData = { mode: 'normal', vehicleType: selectedCustomerVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", eta: "Pending..." };
+                tripData = { mode: 'normal', vehicleType: selectedCustomerVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", eta: "قيد التحديد..." };
             } else {
                 let personName = document.getElementById('schedulePersonName').value;
                 let schedulePickup = document.getElementById('schedulePickup').value;
@@ -1150,7 +1132,7 @@
                 let monthlyPrice = document.getElementById('scheduleMonthlyPrice').value;
 
                 if(!personName || !schedulePickup || !destination || !morningTime || !returnTime || !monthlyPrice) { 
-                    alert("Please fill in all schedule details and monthly price!"); 
+                    alert("أكمل جميع بيانات الموعد والمكان والسعر الشهري!"); 
                     return; 
                 }
 
@@ -1166,12 +1148,12 @@
                     status: "pending", 
                     driverName: "", 
                     driverPhone: "", 
-                    eta: "Pending..." 
+                    eta: "قيد التحديد..." 
                 };
             }
 
             newTripRef.set(tripData);
-            alert("🚀 Trip request sent successfully to TAWSILA drivers!");
+            alert("🚀 تم إرسال الطلب بنجاح لسواقين TAWSILA!");
 
             newTripRef.on('value', (snapshot) => {
                 let data = snapshot.val();
@@ -1182,10 +1164,10 @@
                     document.getElementById('bigModeSelectionContainer').classList.add('hidden');
                     document.getElementById('customerActiveTripBox').classList.remove('hidden');
                     document.getElementById('acceptedTripDetailsContent').innerHTML = `
-                        <p><strong>👨‍✈️ Driver Name:</strong> ${data.driverName}</p>
-                        <p><strong>📞 Phone Number:</strong> <a href="tel:${data.driverPhone}" style="color:#00ff00;">${data.driverPhone}</a></p>
-                        <p><strong>🚗 Vehicle:</strong> ${data.vehicleType}</p>
-                        <p><strong>⏰ Estimated Arrival (ETA):</strong> <span style="color:#ffcc00; font-weight:bold;">${data.eta || 'Waiting for driver...'}</span></p>
+                        <p><strong>👨‍✈️ اسم السائق:</strong> ${data.driverName}</p>
+                        <p><strong>📞 رقم الهاتف:</strong> <a href="tel:${data.driverPhone}" style="color:#00ff00;">${data.driverPhone}</a></p>
+                        <p><strong>🚗 المركبة:</strong> ${data.vehicleType}</p>
+                        <p><strong>⏰ وقت الوصول المتوقع (ETA):</strong> <span style="color:#ffcc00; font-weight:bold;">${data.eta || 'جاري التحديد...'}</span></p>
                     `;
                 }
             });
@@ -1200,15 +1182,15 @@
                     playNewTripAlertSound();
 
                     let detailsText = trip.mode === 'schedule' ? 
-                        `📅 Monthly Schedule (${trip.vehicleType})<br><strong>Passenger:</strong> ${trip.childName}<br><strong>From:</strong> ${trip.pickup} ➔ <strong>To:</strong> ${trip.dropoff}` :
-                        `🚖 Normal Trip (${trip.vehicleType})<br><strong>From:</strong> ${trip.pickup} ➔ <strong>To:</strong> ${trip.dropoff}`;
+                        `📅 جدول شهري (${trip.vehicleType})<br><strong>لصالح:</strong> ${trip.childName}<br><strong>من:</strong> ${trip.pickup} ➔ <strong>إلى:</strong> ${trip.dropoff}` :
+                        `🚖 رحلة عادية (${trip.vehicleType})<br><strong>من:</strong> ${trip.pickup} ➔ <strong>إلى:</strong> ${trip.dropoff}`;
 
                     document.getElementById('driverScheduleFeed').innerHTML = `
                         <div class="schedule-offer-box" id="trip-${tripId}">
-                            <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">🔔 New Ride Request!</p>
+                            <p style="color: #ffcc00; font-weight: bold; margin-bottom: 5px;">🔔 طلب توصيل جديد!</p>
                             <p style="margin-bottom: 5px;">${detailsText}</p>
-                            <p style="color: #ffcc00; margin: 8px 0; font-size: 17px;">Price: <strong>${trip.price}</strong> EGP</p>
-                            <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">Accept Request & Start Ride</button>
+                            <p style="color: #ffcc00; margin: 8px 0; font-size: 17px;">السعر: <strong>${trip.price}</strong> جنيه</p>
+                            <button class="action-btn" style="background: #ffcc00; color: #000; margin-top:0;" onclick="acceptTrip('${tripId}')">قبول الطلب وبدء التوصيل</button>
                         </div>
                     `;
                 }
@@ -1242,19 +1224,19 @@
 
                 db.ref('trips/' + tripId).update(tripData);
 
-                document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ Request accepted successfully! Set ETA below.</p>`;
+                document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #ffcc00; text-align: center; padding: 10px;">✅ تم قبول الطلب بنجاح! حدد وقت الوصول أدناه.</p>`;
                 document.getElementById('activeDriverTrip').classList.remove('hidden');
-                document.getElementById('activeTripDetails').innerHTML = `Customer: <strong>${tripData.childName || tripData.pickup}</strong> | Price: <strong>${tripData.price} EGP</strong>`;
+                document.getElementById('activeTripDetails').innerHTML = `العميل: <strong>${tripData.childName || tripData.pickup}</strong> | السعر: <strong>${tripData.price} جنيه</strong>`;
             });
         }
 
         function saveDriverEta() {
             let etaVal = document.getElementById('driverEtaInput').value;
-            if(!etaVal) { alert("Please enter the ETA time!"); return; }
+            if(!etaVal) { alert("أدخل وقت الوصول!"); return; }
 
             if(currentTripKey) {
                 db.ref('trips/' + currentTripKey).update({ eta: etaVal });
-                alert("🚀 ETA sent to customer successfully!");
+                alert("🚀 تم إرسال وقت الوصول (ETA) للزبون بنجاح!");
             }
         }
 
@@ -1267,7 +1249,7 @@
                     star.classList.remove('rated');
                 }
             });
-            document.getElementById('ratingFeedback').innerText = `Thank you for rating! (${starsCount} / 5 stars) recorded.`;
+            document.getElementById('ratingFeedback').innerText = `شكراً لتقييمك! تم تسجيل (${starsCount} / 5 نجوم) بنجاح.`;
         }
 
         function driverCompleteTrip() {
@@ -1278,25 +1260,25 @@
             localStorage.setItem('gasser_total_revenue', totalPlatformRevenue);
             updateWalletDisplay();
 
-            alert("Trip completed! 10% platform commission added to your due balance.");
+            alert("تم إنهاء الرحلة! تم احتساب العمولة للمنصة (10%).");
             document.getElementById('activeDriverTrip').classList.add('hidden');
-            document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #777; text-align: center;">Listening for new requests...</p>`;
+            document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: #777; text-align: center;">بحث عن طلبات جديدة...</p>`;
             if(currentTripKey) db.ref('trips/' + currentTripKey).remove();
         }
 
         function openAdminLogin() {
-            let pass = prompt("Enter secret admin password:", "");
+            let pass = prompt("أدخل كلمة مرور الأدمن السرية:", "");
             if(pass === "212008") {
                 document.getElementById('homeScreen').classList.add('hidden');
                 document.getElementById('adminPanel').classList.remove('hidden');
                 loadAdminData();
             } else if(pass !== null) {
-                alert("Incorrect password!");
+                alert("كلمة المرور خطأ!");
             }
         }
 
         function loadAdminData() {
-            document.getElementById('adminTotalRevenue').innerText = totalPlatformRevenue + " EGP";
+            document.getElementById('adminTotalRevenue').innerText = totalPlatformRevenue + " جنيه";
 
             db.ref('drivers').on('value', (snapshot) => {
                 let drivers = snapshot.val();
@@ -1304,25 +1286,25 @@
                 listContainer.innerHTML = "";
 
                 if(!drivers) {
-                    listContainer.innerHTML = "<p style='color:#777;'>No registered drivers found.</p>";
+                    listContainer.innerHTML = "<p style='color:#777;'>لا يوجد سواقين مسجلين حتى الآن.</p>";
                     return;
                 }
 
                 Object.keys(drivers).forEach(phoneKey => {
                     let d = drivers[phoneKey];
-                    let banStatusText = d.isBanned ? "Banned 🚫" : "Active ✅";
-                    let banBtnText = d.isBanned ? "Unban Driver" : "Ban Driver ⛔";
+                    let banStatusText = d.isBanned ? "محظور 🚫" : "نشط ✅";
+                    let banBtnText = d.isBanned ? "رفع الحظر" : "حظر السائق ⛔";
                     let banBtnColor = d.isBanned ? "green" : "red";
 
                     listContainer.innerHTML += `
-                        <div class="admin-stat-card" style="background: rgba(0,0,0,0.35);">
-                            <p><strong>Driver:</strong> ${d.name} (${d.phone})</p>
-                            <p><strong>Vehicle:</strong> ${d.vehicle || 'Not specified'}</p>
-                            <p><strong>Email:</strong> ${d.email}</p>
-                            <p><strong>Current Due Debt:</strong> <span style="color: #ff4d4d; font-size:16px;">${d.debt || 0} EGP</span></p>
-                            <p><strong>Status:</strong> ${banStatusText}</p>
+                        <div class="admin-stat-card" style="background: rgba(0,0,0,0.3);">
+                            <p><strong>السائق:</strong> ${d.name} (${d.phone})</p>
+                            <p><strong>المركبة:</strong> ${d.vehicle || 'غير محدد'}</p>
+                            <p><strong>الإيميل:</strong> ${d.email}</p>
+                            <p><strong>المديونية الحالية:</strong> <span style="color: #ff4d4d; font-size:16px;">${d.debt || 0} جنيه</span></p>
+                            <p><strong>الحالة:</strong> ${banStatusText}</p>
                             <div style="display: flex; gap: 10px; margin-top: 10px;">
-                                <button class="action-btn" style="padding: 6px; font-size: 13px; margin:0; background: #ffcc00; color: #000;" onclick="adminResetDebt('${phoneKey}')">Reset Debt 💰</button>
+                                <button class="action-btn" style="padding: 6px; font-size: 13px; margin:0; background: #ffcc00; color: #000;" onclick="adminResetDebt('${phoneKey}')">تصفير المديونية 💰</button>
                                 <button class="action-btn" style="padding: 6px; font-size: 13px; margin:0; background: rgba(255,0,0,0.1); border-color: ${banBtnColor}; color: ${banBtnColor};" onclick="adminToggleBan('${phoneKey}', ${d.isBanned})">${banBtnText}</button>
                             </div>
                         </div>
@@ -1333,13 +1315,13 @@
 
         function adminResetDebt(phoneKey) {
             db.ref('drivers/' + phoneKey).update({ debt: 0 });
-            alert("Driver debt reset successfully!");
+            alert("تم تصفير مديونية السائق بنجاح!");
         }
 
         function adminToggleBan(phoneKey, currentStatus) {
             let newStatus = !currentStatus;
             db.ref('drivers/' + phoneKey).update({ isBanned: newStatus });
-            alert(newStatus ? "Driver banned successfully!" : "Driver unbanned successfully!");
+            alert(newStatus ? "تم حظر السائق بنجاح!" : "تم رفع الحظر عن السائق!");
         }
     </script>
 
