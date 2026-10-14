@@ -1,4 +1,3 @@
-slides:TAWSILA Gasser Ultra Luxury Edition:tawsila_luxury.html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -228,7 +227,6 @@ slides:TAWSILA Gasser Ultra Luxury Edition:tawsila_luxury.html
         .screen-box h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 10px; padding-top: 15px; }
         .screen-box p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
 
-        /* زر الرجوع المحسن بعيداً عن العنوان لمنع التداخل */
         .back-nav-btn {
             display: inline-block;
             background: var(--input-bg);
@@ -300,12 +298,13 @@ slides:TAWSILA Gasser Ultra Luxury Edition:tawsila_luxury.html
             box-shadow: none;
         }
 
-        /* تعديل شبكة الكروت لتكون عمودية أو متناسقة (Grid System) بدلاً من Slider مبعثر */
+        /* شبكة أسطول السيارات */
         .fleet-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 16px;
             margin: 20px 0;
+            text-align: right;
         }
 
         .fleet-card {
@@ -322,19 +321,8 @@ slides:TAWSILA Gasser Ultra Luxury Edition:tawsila_luxury.html
             padding: 24px 16px;
             text-align: center;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            background-size: cover;
-            background-position: center;
             min-height: 180px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .fleet-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(10,10,12,0.82);
-            z-index: 1;
-            transition: 0.3s;
         }
 
         .fleet-card:hover {
@@ -350,7 +338,7 @@ slides:TAWSILA Gasser Ultra Luxury Edition:tawsila_luxury.html
         }
 
         .fleet-card-content { position: relative; z-index: 2; width: 100%; }
-        .fleet-title { font-family: var(--serif); font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .fleet-title { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
         .fleet-desc { font-size: 12px; color: var(--muted); }
         .fleet-icon { font-size: 42px; margin-bottom: 8px; display: inline-block; }
 
@@ -521,8 +509,8 @@ slides:TAWSILA Gasser Ultra Luxury Edition:tawsila_luxury.html
             
             <div id="customerOtpBox" class="hidden" style="margin-top: 15px;">
                 <div class="form-group">
-                    <label style="color: var(--gold);">أدخل كود التحقق المرسل:</label>
-                    <input type="text" id="enteredCustomerOtp" placeholder="مثال: 4580">
+                    <label style="color: var(--gold);">أدخل كود التحقق المرسل (تجريبي: 1234):</label>
+                    <input type="text" id="enteredCustomerOtp" placeholder="مثال: 1234">
                 </div>
                 <button class="action-btn" onclick="verifyCustomerOTP()">تأكيد والدخول</button>
             </div>
@@ -539,4 +527,14 @@ slides:TAWSILA Gasser Ultra Luxury Edition:tawsila_luxury.html
             </div>
             <div class="form-group">
                 <label>رقم الهاتف:</label>
-                <input type="tel" id="driverPhoneInput" p
+                <input type="tel" id="driverPhoneInput" placeholder="01xxxxxxxx0">
+            </div>
+            <div class="form-group">
+                <label>صورة رخصة القيادة / بطاقة الرقم القومي:</label>
+                <input type="file" id="driverIdProof">
+            </div>
+            <button class="action-btn" onclick="submitDriverApplication()">تقديم طلب الانضمام</button>
+        </div>
+
+        <!-- 5. شاشة لوحة الزبون الرئيسية -->
+        <div id="screenCustomerDas
