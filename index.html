@@ -158,12 +158,9 @@
             opacity: 1;
         }
 
-        /* الناف بار الفاخر المتناسق */
+        /* الناف بار الفاخر غير المتداخل */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            position: relative;
             z-index: 50;
             display: flex;
             justify-content: space-between;
@@ -172,6 +169,7 @@
             backdrop-filter: blur(14px);
             background: rgba(10, 10, 12, 0.85);
             border-bottom: 1px solid var(--line);
+            width: 100%;
         }
 
         body.light-mode nav { background: rgba(244, 244, 246, 0.9); }
@@ -197,14 +195,15 @@
         .nav-btn.danger { border-color: rgba(255, 77, 77, 0.3); color: #ff5f57; }
         .nav-btn.danger:hover { background: #ff5f57; color: #fff; }
 
-        /* الحاوية والشاشات المتتالية المحسنة */
+        /* الحاوية والشاشات بمساحة علوية نظيفة 100% لمنع التعليق وتداخل الأزرار */
         .container {
             max-width: 650px;
-            margin: 110px auto 40px auto;
+            margin: 40px auto;
             padding: 0 16px;
             width: 100%;
             position: relative;
             z-index: 2;
+            flex: 1;
         }
 
         .screen-box {
@@ -224,20 +223,28 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .screen-box h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 10px; padding-top: 15px; }
+        .screen-box h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 10px; }
         .screen-box p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+        /* سطر زر الرجوع المستقل تماماً في أعلى الكارت وبدون أي تداخل مطلقاً */
+        .top-back-row {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+            width: 100%;
+        }
 
         .back-nav-btn {
             display: inline-block;
             background: var(--input-bg);
             border: 1px solid var(--line);
             color: var(--text);
-            padding: 6px 14px;
+            padding: 8px 16px;
             font-size: 12px;
             border-radius: 99px;
             cursor: pointer;
             transition: 0.3s;
-            margin-bottom: 15px;
+            z-index: 10;
         }
         .back-nav-btn:hover { border-color: var(--gold); color: var(--gold); }
 
@@ -298,13 +305,12 @@
             box-shadow: none;
         }
 
-        /* شبكة أسطول السيارات */
+        /* شبكة الكروت للسيارات والتوكتوك */
         .fleet-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 16px;
             margin: 20px 0;
-            text-align: right;
         }
 
         .fleet-card {
@@ -320,15 +326,24 @@
             justify-content: center;
             padding: 24px 16px;
             text-align: center;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.35s ease;
+            background-size: cover;
+            background-position: center;
             min-height: 180px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .fleet-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10,10,12,0.82);
+            z-index: 1;
         }
 
         .fleet-card:hover {
             transform: translateY(-6px);
             border-color: var(--gold);
-            box-shadow: 0 12px 30px rgba(240, 180, 41, 0.25);
         }
 
         .fleet-card.selected {
@@ -338,7 +353,7 @@
         }
 
         .fleet-card-content { position: relative; z-index: 2; width: 100%; }
-        .fleet-title { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+        .fleet-title { font-family: var(--serif); font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
         .fleet-desc { font-size: 12px; color: var(--muted); }
         .fleet-icon { font-size: 42px; margin-bottom: 8px; display: inline-block; }
 
@@ -465,7 +480,7 @@
         <!-- 1. الشاشة الرئيسية -->
         <div id="screenHome" class="screen-box">
             <h1>مستقبل المواصلات وخدمات <em>الأسطول الذكي</em></h1>
-            <p>منصة ذكية متكاملة لإدارة الرحلات ومواعيد الانتقال المنتظمة بأعلى معايير الأناقة.</p>
+            <p>منصة ذكية متكاملة لإدارة الرحلات ومواعيد الانتقال بأعلى معايير الأناقة.</p>
             
             <div class="creator-box">
                 <span style="font-size: 10px; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase;">DESIGNED & DEVELOPED BY</span>
@@ -483,7 +498,7 @@
 
         <!-- 2. شاشة اختيار نوع الحساب -->
         <div id="screenRole" class="screen-box hidden">
-            <div style="text-align: right;"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
+            <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
             <h2>اختر نوع <em>الحساب</em></h2>
             <p>حدد طبيعة استخدامك للمنصة لنبدأ التجربة.</p>
             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
@@ -494,7 +509,7 @@
 
         <!-- 3. شاشة تسجيل الزبون -->
         <div id="screenCustomerAuth" class="screen-box hidden" style="text-align: right;">
-            <div><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
+            <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
             <h2 style="text-align: center;">تسجيل دخول <em>الزبون</em></h2>
             <p style="text-align: center;">أدخل بيانات الاتصال للمتابعة الفورية.</p>
             <div class="form-group">
@@ -509,8 +524,8 @@
             
             <div id="customerOtpBox" class="hidden" style="margin-top: 15px;">
                 <div class="form-group">
-                    <label style="color: var(--gold);">أدخل كود التحقق المرسل (تجريبي: 1234):</label>
-                    <input type="text" id="enteredCustomerOtp" placeholder="مثال: 1234">
+                    <label style="color: var(--gold);">أدخل كود التحقق المرسل:</label>
+                    <input type="text" id="enteredCustomerOtp" placeholder="مثال: 4580">
                 </div>
                 <button class="action-btn" onclick="verifyCustomerOTP()">تأكيد والدخول</button>
             </div>
@@ -518,7 +533,7 @@
 
         <!-- 4. شاشة تسجيل السائق -->
         <div id="screenDriverAuth" class="screen-box hidden" style="text-align: right;">
-            <div><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
+            <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
             <h2 style="text-align: center;">انضم لأسطول <em>السائقين</em></h2>
             <p style="text-align: center;">سجل بياناتك ومستندات التحقق لضمان الأمان.</p>
             <div class="form-group">
@@ -530,11 +545,772 @@
                 <input type="tel" id="driverPhoneInput" placeholder="01xxxxxxxx0">
             </div>
             <div class="form-group">
-                <label>صورة رخصة القيادة / بطاقة الرقم القومي:</label>
-                <input type="file" id="driverIdProof">
+                <label>البريد الإلكتروني:</label>
+                <input type="email" id="driverEmailInput" placeholder="driver@example.com">
             </div>
-            <button class="action-btn" onclick="submitDriverApplication()">تقديم طلب الانضمام</button>
+            <div class="form-group">
+                <label>صورة البطاقة الشخصية:</label>
+                <input type="file" id="driverIdCardInput" accept="image/*">
+            </div>
+            <button class="action-btn" onclick="sendDriverOTP()">إرسال كود التحقق</button>
+
+            <div id="driverOtpBox" class="hidden" style="margin-top: 15px;">
+                <div class="form-group">
+                    <label style="color: var(--gold);">أدخل الكود المرسل:</label>
+                    <input type="text" id="enteredDriverOtp" placeholder="مثال: 4580">
+                </div>
+                <button class="action-btn" onclick="verifyDriverOTP()">تحقق واختار المركبة</button>
+            </div>
         </div>
 
-        <!-- 5. شاشة لوحة الزبون الرئيسية -->
-        <div id="screenCustomerDas
+        <!-- 5. شاشة اختيار المركبة -->
+        <div id="screenVehicleSelect" class="screen-box hidden" style="text-align: right;">
+            <div class="top-back-row"><button class="back-nav-btn" onclick="goBackFromVehicleSelect()">← رجوع</button></div>
+            <h2 id="vehicleSelectTitle" style="text-align: center;">اختر مركبتك في <em>الأسطول</em></h2>
+            <p style="text-align: center;">اختر وسيلة النقل المفضلة لديك:</p>
+            
+            <div class="fleet-grid">
+                <div class="fleet-card" id="card-tuktuk" onclick="pickVehicle('توكتوك 🛺')">
+                    <div class="fleet-card-content">
+                        <span class="fleet-icon">🛺</span>
+                        <div class="fleet-title">توكتوك</div>
+                        <div class="fleet-desc">للمشاوير السريعة والداخلية</div>
+                    </div>
+                </div>
+                
+                <div class="fleet-card" id="card-bike" style="background-image: url('https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=400&q=80');" onclick="pickVehicle('موتوسيكل 🛵')">
+                    <div class="fleet-card-content">
+                        <div class="fleet-title">موتوسيكل</div>
+                        <div class="fleet-desc">لتفادي زحام الطرق</div>
+                    </div>
+                </div>
+
+                <div class="fleet-card" id="card-car" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=400&q=80');" onclick="pickVehicle('عربية ملاكي 🚗')">
+                    <div class="fleet-card-content">
+                        <div class="fleet-title">عربية ملاكي</div>
+                        <div class="fleet-desc">لرحلات مريحة وعائلية</div>
+                    </div>
+                </div>
+
+                <div class="fleet-card" id="card-kashef" style="background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=400&q=80');" onclick="pickVehicle('عربية كاشف 🚙')">
+                    <div class="fleet-card-content">
+                        <div class="fleet-title">عربية كاشف</div>
+                        <div class="fleet-desc">للطرق الخاصة والخدمات</div>
+                    </div>
+                </div>
+
+                <div class="fleet-card" id="card-toyota" onclick="pickVehicle('تويوتا / فان 🚐')">
+                    <div class="fleet-card-content">
+                        <span class="fleet-icon">🚐</span>
+                        <div class="fleet-title" style="color: var(--gold);">تويوتا / فان</div>
+                        <div class="fleet-desc">للرحلات الجماعية</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="action-btn hidden" id="confirmVehicleBtn" style="margin-top: 20px;" onclick="confirmVehicleAction()">تأكيد المتابعة</button>
+        </div>
+
+        <!-- 6. شاشة اختيار نظام الرحلة للزبون -->
+        <div id="screenTripMode" class="screen-box hidden" style="text-align: right;">
+            <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenVehicleSelect')">← رجوع</button></div>
+            <h2 style="text-align: center;">اختر <em>نظام الرحلة</em></h2>
+            <p style="text-align: center;">اختر النظام المناسب لتنقلاتك:</p>
+            
+            <div class="big-mode-grid">
+                <div class="big-mode-card" id="modeCardSchedule" onclick="selectTripMode('schedule')">
+                    <span class="big-mode-icon">📅</span>
+                    <div class="big-mode-title">جدول مواعيد منتظم (شهري)</div>
+                    <div class="big-mode-desc">مواعيد ثابتة ذهاب وعودة للعمل أو الدراسة</div>
+                </div>
+
+                <div class="big-mode-card" id="modeCardNormal" onclick="selectTripMode('normal')">
+                    <span class="big-mode-icon">🚖</span>
+                    <div class="big-mode-title">رحلة عادية مفردة</div>
+                    <div class="big-mode-desc">مشوار سريع ومباشر الآن</div>
+                </div>
+            </div>
+            <button class="action-btn" style="margin-top: 10px;" onclick="goToTripFormScreen()">متابعة ملء البيانات ➔</button>
+        </div>
+
+        <!-- 7. شاشة ملء تفاصيل الرحلة -->
+        <div id="screenTripForm" class="screen-box hidden" style="text-align: right;">
+            <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenTripMode')">← رجوع</button></div>
+            <h2 id="formScreenHeading" style="color: var(--gold); font-family: var(--serif); font-size: 20px; margin-bottom: 15px; text-align: center;"></h2>
+
+            <div id="formScheduleSection" class="hidden">
+                <div class="form-group">
+                    <label>اسم صاحب الموعد:</label>
+                    <input type="text" id="schedulePersonName" placeholder="اكتب الاسم...">
+                </div>
+                <div class="form-group">
+                    <label>عنوان الانطلاق (المنزل):</label>
+                    <input type="text" id="schedulePickup" placeholder="عنوان البيت والمنطقة...">
+                </div>
+                <div class="form-group">
+                    <label>الوجهة (العمل / الدراسة):</label>
+                    <input type="text" id="scheduleDestination" placeholder="اسم ومكان الوجهة...">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>وقت الذهاب:</label>
+                        <input type="time" id="morningTime" value="08:00">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>وقت العودة:</label>
+                        <input type="time" id="returnTime" value="14:00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>السعر المقترح للشهر كامل (جنيه):</label>
+                    <input type="number" id="scheduleMonthlyPrice" placeholder="مثال: 1500...">
+                </div>
+                <button class="action-btn" onclick="sendOfferToCloud('schedule')">إرسال جدول المواعيد للسواقين</button>
+            </div>
+
+            <div id="formNormalSection" class="hidden">
+                <div class="form-group">
+                    <label>من (مكان الانطلاق):</label>
+                    <input type="text" id="pickupLocation" placeholder="موقع الانطلاق الحالي...">
+                </div>
+                <div class="form-group">
+                    <label>إلى (الوجهة المطلوبة):</label>
+                    <input type="text" id="dropoffLocation" placeholder="الوجهة النهائية...">
+                </div>
+                <div class="form-group">
+                    <label>سعرك المقترح للرحلة (جنيه):</label>
+                    <input type="number" id="customerPrice" placeholder="السعر...">
+                </div>
+                <button class="action-btn" onclick="sendOfferToCloud('normal')">إرسال عرض الرحلة للسواقين</button>
+            </div>
+        </div>
+
+        <!-- 8. شاشة تتبع حالة الرحلة للزبون -->
+        <div id="screenCustomerTracking" class="screen-box hidden" style="text-align: right;">
+            <h2>حالة <em>الرحلة والطلبات</em></h2>
+            
+            <div id="customerDriverOfferNotification" class="hidden" style="background: var(--input-bg); border: 1px solid var(--gold); padding: 16px; border-radius: 16px; margin-top: 15px;">
+                <h3 style="color: var(--gold); font-family: var(--serif); font-size: 17px; margin-bottom: 8px;">🚖 وصلك عرض سعر جديد!</h3>
+                <div id="customerDriverOfferDetails" style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;"></div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="action-btn" style="background: var(--text); color: var(--bg); margin-top: 0;" onclick="acceptDriverPriceOffer()">قبول ✅</button>
+                    <button class="action-btn ghost" style="margin-top: 0; color: #ff5f57; border-color: rgba(255,95,87,0.3);" onclick="rejectDriverPriceOffer()">رفض ❌</button>
+                </div>
+            </div>
+
+            <div id="customerActiveTripBox" class="hidden" style="background: var(--input-bg); border: 1px solid var(--gold); padding: 20px; border-radius: 16px; margin-top: 15px;">
+                <h3 style="color: var(--gold); font-family: var(--serif); font-size: 18px; margin-bottom: 10px;">✅ تم تأكيد الرحلة بنجاح!</h3>
+                <div id="acceptedTripDetailsContent" style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;"></div>
+                
+                <div style="background: var(--bg); padding: 12px; border-radius: 12px; margin-top: 12px;">
+                    <h4 style="font-family: var(--serif); color: var(--gold); margin-bottom: 6px; font-size: 14px;">تقييم السائق:</h4>
+                    <div class="star-rating" id="starRatingContainer">
+                        <span class="star" onclick="rateDriver(1)">★</span>
+                        <span class="star" onclick="rateDriver(2)">★</span>
+                        <span class="star" onclick="rateDriver(3)">★</span>
+                        <span class="star" onclick="rateDriver(4)">★</span>
+                        <span class="star" onclick="rateDriver(5)">★</span>
+                    </div>
+                    <p id="ratingFeedback" style="font-size: 12px; color: var(--gold); text-align: center; margin-top: 4px;"></p>
+                </div>
+            </div>
+
+            <p id="waitingDriverStatusMsg" style="color: var(--muted); text-align: center; margin-top: 25px;">⏳ جارِ البحث عن سائق متاح...</p>
+        </div>
+
+        <!-- 9. لوحة السائق والمحفظة -->
+        <div id="screenDriverDashboard" class="screen-box hidden" style="text-align: right;">
+            
+            <!-- واجهة القفل الثابتة عند استحقاق الشهر أو المديونية -->
+            <div id="driverLockedOverlay" class="hidden" style="background: rgba(10,10,12,0.98); border: 2px solid #ff5f57; padding: 25px 16px; border-radius: 18px; margin-bottom: 15px; text-align: center;">
+                <span style="font-size: 44px;">🔒</span>
+                <h3 style="color: #ff5f57; font-family: var(--serif); font-size: 20px; margin: 12px 0 8px 0;">انتهت فترة الاشتراك أو توجد مديونية معلقة</h3>
+                <p style="color: var(--text); font-size: 13px; margin-bottom: 16px;">عذراً يا بطل، لقد مر شهر على حسابك أو بلغت العمولات الحد الأقصى. سدد المستحقات لاستعادة العمل.</p>
+                <a id="driverPayLockBtn" href="#" target="_blank" class="action-btn" style="background: #25d366; color: #fff; display: block; text-decoration: none;">💬 ادفع عبر واتساب (01008204580)</a>
+            </div>
+
+            <div id="driverNormalDashboardContent">
+                <h2 style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <span>لوحة السائق <em>والمحفظة</em></span>
+                    <span id="driverStatusBadge" style="font-size: 12px; background: rgba(40,200,64,0.15); color: #28c840; padding: 3px 10px; border-radius: 20px;">متصل 🟢</span>
+                </h2>
+
+                <div class="wallet-box">
+                    <h3 style="color: var(--gold); font-family: var(--serif); margin-bottom: 6px; font-size: 16px;">💳 المحفظة (نسبة المنصة 10%)</h3>
+                    <p>المركبة: <strong id="driverVehicleDisplay" style="color: var(--text);">---</strong></p>
+                    <p>المديونية لصالح Gasser: <strong id="driverDebt" style="font-size: 16px; color: #ff5f57;">0 جنيه</strong></p>
+                    <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display: block; text-align: center; text-decoration: none; margin-top: 12px; background: #25d366; color: #fff; font-size: 13px;">إرسال إيصال التحويل عبر واتساب 💬</a>
+                </div>
+
+                <div style="background: var(--input-bg); border: 1px solid var(--line); padding: 16px; border-radius: 14px; margin-bottom: 20px;">
+                    <h3 style="color: var(--gold); font-family: var(--serif); font-size: 16px; margin-bottom: 10px;">📅 طلبات التوصيل الواردة</h3>
+                    <div id="driverScheduleFeed">
+                        <p style="color: var(--muted); text-align: center; padding: 8px; font-size: 13px;">لا توجد طلبات جديدة.</p>
+                    </div>
+                </div>
+
+                <div id="activeDriverTrip" class="hidden" style="background: var(--input-bg); border: 1px solid var(--gold); padding: 16px; border-radius: 14px; margin-top: 12px;">
+                    <h3 style="color: var(--gold); font-family: var(--serif); font-size: 16px;">🚖 رحلة نشطة الآن</h3>
+                    <p id="activeTripDetails" style="margin: 6px 0; font-size: 14px;"></p>
+                    <div class="form-group" style="margin-top: 8px;">
+                        <label>وقت الوصول المتوقع (ETA):</label>
+                        <input type="text" id="driverEtaInput" placeholder="خلال 10 دقائق...">
+                        <button class="action-btn" style="margin-top: 6px;" onclick="saveDriverEta()">إرسال وقت الوصول</button>
+                    </div>
+                    <button class="action-btn danger" style="background: #ff5f57; color: #fff; margin-top: 8px; border: none;" onclick="driverCompleteTrip()">إنهاء الرحلة</button>
+                </div>
+            </div>
+
+            <button class="action-btn ghost" style="margin-top: 15px; border-color: rgba(255,95,87,0.3); color: #ff5f57;" onclick="logoutApp()">تسجيل خروج 🚪</button>
+        </div>
+
+        <!-- 10. لوحة تحكم الأدمن -->
+        <div id="screenAdmin" class="screen-box hidden" style="text-align: right;">
+            <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
+            <h2 style="color: var(--gold); text-align: center;">لوحة تحكم <em>الأدمن</em></h2>
+            <p style="text-align: center;">متابعة الأرباح وإدارة السواقين:</p>
+            
+            <div class="admin-stat-card">
+                <p>💰 إجمالي أرباح المنصة: <strong id="adminTotalRevenue" style="color: var(--gold); font-size: 16px;">0 جنيه</strong></p>
+            </div>
+
+            <h3 style="color: var(--gold); font-family: var(--serif); margin-bottom: 10px; font-size: 16px;">📋 السواقين المسجلين:</h3>
+            <div id="adminDriversList">
+                <p style="color: var(--muted); text-align: center;">جاري الجلب...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <span>© <span id="yr"></span> Gasser Takadom Saleh</span>
+        <span>Alexandria, Egypt</span>
+    </footer>
+
+    <script>
+        document.getElementById('yr').textContent = new Date().getFullYear();
+
+        function toggleTheme() {
+            let body = document.body;
+            let btn = document.getElementById('themeBtn');
+            if(body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                btn.innerText = "فاتح ☀️";
+                localStorage.setItem('tawsila_theme', 'dark');
+            } else {
+                body.classList.add('light-mode');
+                btn.innerText = "ليلي 🌙";
+                localStorage.setItem('tawsila_theme', 'light');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if(localStorage.getItem('tawsila_theme') === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeBtn').innerText = "ليلي 🌙";
+            }
+        });
+
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen-box').forEach(el => el.classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleScreenClick(event) {
+            if(['BUTTON', 'INPUT', 'SELECT', 'A', 'SPAN'].includes(event.target.tagName)) return;
+
+            let ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = (event.pageX - 20) + 'px';
+            ripple.style.top = (event.pageY - 20) + 'px';
+            document.body.appendChild(ripple);
+
+            let tuk = document.createElement('div');
+            tuk.className = 'touch-tuktuk';
+            tuk.innerText = '🚖';
+            tuk.style.left = event.pageX + 'px';
+            tuk.style.top = event.pageY + 'px';
+            document.body.appendChild(tuk);
+
+            setTimeout(() => {
+                tuk.style.transform = 'translate(-50%, -70px) scale(1.3)';
+                tuk.style.opacity = '0';
+            }, 30);
+
+            setTimeout(() => {
+                ripple.remove();
+                tuk.remove();
+            }, 800);
+        }
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUx7dd0-NsnSTao3k7Q9n_0d7po69Pjxk",
+            authDomain: "tuktuk-app-c452d.firebaseapp.com",
+            databaseURL: "https://tuktuk-app-c452d-default-rtdb.firebaseio.com",
+            projectId: "tuktuk-app-c452d",
+            storageBucket: "tuktuk-app-c452d.firebasestorage.app",
+            messagingSenderId: "1006074741794",
+            appId: "1:1006074741794:web:6eab54f1265b170672b67b",
+            measurementId: "G-R475LPN1G4"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        let currentDriverDebt = parseFloat(localStorage.getItem('gasser_driver_debt')) || 0;
+        let totalPlatformRevenue = parseFloat(localStorage.getItem('gasser_total_revenue')) || 0;
+        let generatedCustomerOtp = "";
+        let generatedDriverOtp = "";
+        let registeredDriver = JSON.parse(localStorage.getItem('gasser_driver_data')) || { name: "", phone: "", email: "", vehicle: "", idCardUrl: "", isBanned: false, registerTimestamp: Date.now() };
+        let activeRole = "";
+        let selectedVehicle = "";
+        let currentTripTypeMode = '';
+        let currentTripKey = null;
+
+        window.onload = function() {
+            let savedRole = localStorage.getItem('tawsila_active_role');
+            let customerLoggedIn = localStorage.getItem('tawsila_customer_logged');
+
+            if(savedRole === 'driver' && registeredDriver.name) {
+                if(!registeredDriver.vehicle) {
+                    activeRole = 'driver';
+                    document.getElementById('vehicleSelectTitle').innerHTML = "اختر مركبتك في <em>الأسطول</em>";
+                    document.getElementById('confirmVehicleBtn').classList.remove('hidden');
+                    switchScreen('screenVehicleSelect');
+                } else {
+                    checkBanStatusAndLoad();
+                }
+            } else if(savedRole === 'customer' && customerLoggedIn === 'true') {
+                activeRole = 'customer';
+                document.getElementById('vehicleSelectTitle').innerHTML = "اختر مركبة <em>الرحلة</em>";
+                document.getElementById('confirmVehicleBtn').classList.add('hidden');
+                switchScreen('screenVehicleSelect');
+            }
+        };
+
+        function logoutApp() {
+            localStorage.removeItem('tawsila_active_role');
+            localStorage.removeItem('tawsila_customer_logged');
+            location.reload();
+        }
+
+        function checkBanStatusAndLoad() {
+            let driverPhoneClean = registeredDriver.phone.replace(/\D/g,'');
+            db.ref('drivers/' + driverPhoneClean).once('value', (snapshot) => {
+                let data = snapshot.val();
+                if(data && data.isBanned) {
+                    alert("🚫 عذراً، تم حظر حسابك من قبل إدارة المنصة بسبب المديونية!");
+                    logoutApp();
+                    return;
+                }
+
+                switchScreen('screenDriverDashboard');
+                document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle || "غير محدد";
+                
+                let registerTime = data && data.registerTimestamp ? data.registerTimestamp : (registeredDriver.registerTimestamp || Date.now());
+                let oneMonthPassed = (Date.now() - registerTime) > (30 * 24 * 60 * 60 * 1000);
+                let currentDebt = data && data.debt !== undefined ? data.debt : currentDriverDebt;
+
+                if (oneMonthPassed || currentDebt >= 200) {
+                    document.getElementById('driverLockedOverlay').classList.remove('hidden');
+                    document.getElementById('driverNormalDashboardContent').classList.add('hidden');
+                    
+                    let msg = encodeURIComponent("مرحباً Gasser، أنا السائق " + registeredDriver.name + " وانتهت فترة الشهر لدي وأرغب في دفع المستحقات.");
+                    document.getElementById('driverPayLockBtn').href = `https://wa.me/201008204580?text=${msg}`;
+                } else {
+                    document.getElementById('driverLockedOverlay').classList.add('hidden');
+                    document.getElementById('driverNormalDashboardContent').classList.remove('hidden');
+                    updateWalletDisplay();
+                    listenForTripsFromCloud();
+                }
+            });
+        }
+
+        function selectRole(role) {
+            activeRole = role;
+            if(role === 'customer') {
+                localStorage.setItem('tawsila_active_role', 'customer');
+                switchScreen('screenCustomerAuth');
+            } else {
+                localStorage.setItem('tawsila_active_role', 'driver');
+                switchScreen('screenDriverAuth');
+            }
+        }
+
+        function sendCustomerOTP() {
+            let phone = document.getElementById('customerPhone').value;
+            let email = document.getElementById('customerEmail').value;
+            if(!phone || !email) { alert("أدخل البيانات!"); return; }
+            generatedCustomerOtp = Math.floor(1000 + Math.random() * 9000).toString();
+            alert("📩 كود التحقق للإيميل: " + email + "\n[الكود السريع: " + generatedCustomerOtp + "]");
+            document.getElementById('customerOtpBox').classList.remove('hidden');
+        }
+
+        function verifyCustomerOTP() {
+            if(document.getElementById('enteredCustomerOtp').value === generatedCustomerOtp) {
+                localStorage.setItem('tawsila_customer_logged', 'true');
+                alert("تم تسجيل الدخول بنجاح!");
+                document.getElementById('vehicleSelectTitle').innerHTML = "اختر مركبة <em>الرحلة</em>";
+                document.getElementById('confirmVehicleBtn').classList.add('hidden');
+                switchScreen('screenVehicleSelect');
+            } else { alert("الكود خطأ!"); }
+        }
+
+        function sendDriverOTP() {
+            let name = document.getElementById('driverNameInput').value;
+            let phone = document.getElementById('driverPhoneInput').value;
+            let email = document.getElementById('driverEmailInput').value;
+            let idCard = document.getElementById('driverIdCardInput').files[0];
+
+            if(!name || !phone || !email || !idCard) { alert("أكمل البيانات وارفع البطاقة!"); return; }
+
+            registeredDriver.name = name;
+            registeredDriver.phone = phone;
+            registeredDriver.email = email;
+            registeredDriver.idCardUrl = URL.createObjectURL(idCard);
+            registeredDriver.registerTimestamp = Date.now();
+
+            generatedDriverOtp = Math.floor(1000 + Math.random() * 9000).toString();
+            alert("📩 كود السائق للإيميل: " + email + "\n[الكود السريع: " + generatedDriverOtp + "]");
+            document.getElementById('driverOtpBox').classList.remove('hidden');
+        }
+
+        function verifyDriverOTP() {
+            if(document.getElementById('enteredDriverOtp').value === generatedDriverOtp) {
+                alert("تم التحقق بنجاح! اختر مركبتك.");
+                document.getElementById('vehicleSelectTitle').innerHTML = "اختر مركبتك في <em>الأسطول</em>";
+                document.getElementById('confirmVehicleBtn').classList.remove('hidden');
+                switchScreen('screenVehicleSelect');
+            } else { alert("الكود خطأ!"); }
+        }
+
+        function pickVehicle(vehicleName) {
+            selectedVehicle = vehicleName;
+            document.querySelectorAll('#screenVehicleSelect .fleet-card').forEach(card => card.classList.remove('selected'));
+            
+            if(vehicleName.includes('توكتوك')) document.getElementById('card-tuktuk').classList.add('selected');
+            else if(vehicleName.includes('موتوسيكل')) document.getElementById('card-bike').classList.add('selected');
+            else if(vehicleName.includes('ملاكي')) document.getElementById('card-car').classList.add('selected');
+            else if(vehicleName.includes('كاشف')) document.getElementById('card-kashef').classList.add('selected');
+            else if(vehicleName.includes('تويوتا')) document.getElementById('card-toyota').classList.add('selected');
+
+            if(activeRole === 'customer') {
+                setTimeout(() => { switchScreen('screenTripMode'); }, 300);
+            }
+        }
+
+        function confirmVehicleAction() {
+            if(!selectedVehicle) { alert("اختر مركبة أولاً!"); return; }
+            
+            if(activeRole === 'driver') {
+                registeredDriver.vehicle = selectedVehicle;
+                localStorage.setItem('gasser_driver_data', JSON.stringify(registeredDriver));
+
+                db.ref('drivers/' + registeredDriver.phone.replace(/\D/g,'')).set({
+                    name: registeredDriver.name,
+                    phone: registeredDriver.phone,
+                    email: registeredDriver.email,
+                    vehicle: registeredDriver.vehicle,
+                    debt: 0,
+                    isBanned: false,
+                    registerTimestamp: registeredDriver.registerTimestamp
+                });
+
+                switchScreen('screenDriverDashboard');
+                document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle;
+                updateWalletDisplay();
+                listenForTripsFromCloud();
+                alert("🚀 تم تسجيل مركبتك بنجاح وأنت الآن متصل!");
+            }
+        }
+
+        function goBackFromVehicleSelect() {
+            if(activeRole === 'customer') switchScreen('screenCustomerAuth');
+            else switchScreen('screenDriverAuth');
+        }
+
+        function selectTripMode(mode) {
+            currentTripTypeMode = mode;
+            document.getElementById('modeCardSchedule').classList.remove('selected');
+            document.getElementById('modeCardNormal').classList.remove('selected');
+
+            if(mode === 'schedule') document.getElementById('modeCardSchedule').classList.add('selected');
+            else document.getElementById('modeCardNormal').classList.add('selected');
+        }
+
+        function goToTripFormScreen() {
+            if(!currentTripTypeMode) { alert("اختر نظام الرحلة أولاً!"); return; }
+            switchScreen('screenTripForm');
+            document.getElementById('formScreenHeading').innerText = `بيانات (${selectedVehicle}) - ${currentTripTypeMode === 'schedule' ? 'جدول شهري' : 'رحلة مفردة'}`;
+            
+            if(currentTripTypeMode === 'schedule') {
+                document.getElementById('formScheduleSection').classList.remove('hidden');
+                document.getElementById('formNormalSection').classList.add('hidden');
+            } else {
+                document.getElementById('formScheduleSection').classList.add('hidden');
+                document.getElementById('formNormalSection').classList.remove('hidden');
+            }
+        }
+
+        function updateWalletDisplay() {
+            document.getElementById('driverDebt').innerText = currentDriverDebt + " جنيه";
+            localStorage.setItem('gasser_driver_debt', currentDriverDebt);
+            
+            if(registeredDriver.phone) {
+                db.ref('drivers/' + registeredDriver.phone.replace(/\D/g,'')).update({ debt: currentDriverDebt });
+            }
+
+            let msg = encodeURIComponent("مرحباً Gasser، أنا السائق " + registeredDriver.name + " (" + registeredDriver.vehicle + ") وقمت بتحويل مديونية بقيمة " + currentDriverDebt + " جنيه.");
+            document.getElementById('whatsappPayBtn').href = `https://wa.me/201008204580?text=${msg}`;
+        }
+
+        function sendOfferToCloud(typeMode) {
+            let tripData = {};
+            let newTripRef = db.ref('trips').push();
+            currentTripKey = newTripRef.key;
+
+            if(typeMode === 'normal') {
+                let pickup = document.getElementById('pickupLocation').value;
+                let dropoff = document.getElementById('dropoffLocation').value;
+                let price = document.getElementById('customerPrice').value;
+                
+                if(!pickup || !dropoff || !price) { alert("أكمل البيانات!"); return; }
+
+                tripData = { mode: 'normal', vehicleType: selectedVehicle, pickup, dropoff, price, status: "pending", driverName: "", driverPhone: "", driverProposedPrice: "", eta: "قيد التحديد..." };
+            } else {
+                let personName = document.getElementById('schedulePersonName').value;
+                let schedulePickup = document.getElementById('schedulePickup').value;
+                let destination = document.getElementById('scheduleDestination').value;
+                let morningTime = document.getElementById('morningTime').value;
+                let returnTime = document.getElementById('returnTime').value;
+                let monthlyPrice = document.getElementById('scheduleMonthlyPrice').value;
+
+                if(!personName || !schedulePickup || !destination || !morningTime || !returnTime || !monthlyPrice) { 
+                    alert("أكمل جميع البيانات!"); 
+                    return; 
+                }
+
+                tripData = { 
+                    mode: 'schedule', 
+                    vehicleType: selectedVehicle,
+                    childName: personName, 
+                    pickup: schedulePickup, 
+                    dropoff: destination, 
+                    morningTime, 
+                    returnTime, 
+                    price: monthlyPrice, 
+                    status: "pending", 
+                    driverName: "", 
+                    driverPhone: "", 
+                    driverProposedPrice: "", 
+                    eta: "قيد التحديد..." 
+                };
+            }
+
+            newTripRef.set(tripData);
+            alert("🚀 تم إرسال الطلب بنجاح!");
+            switchScreen('screenCustomerTracking');
+
+            newTripRef.on('value', (snapshot) => {
+                let data = snapshot.val();
+                if(!data) return;
+
+                if(data.status === "driver_proposed" && data.driverProposedPrice) {
+                    document.getElementById('waitingDriverStatusMsg').classList.add('hidden');
+                    document.getElementById('customerDriverOfferNotification').classList.remove('hidden');
+                    document.getElementById('customerDriverOfferDetails').innerHTML = `
+                        <p><strong>👨‍✈️ السائق:</strong> ${data.driverName}</p>
+                        <p><strong>🚗 المركبة:</strong> ${data.vehicleType}</p>
+                        <p><strong>💰 السعر المقترح:</strong> <span style="color:var(--gold); font-weight:bold;">${data.driverProposedPrice} جنيه</span></p>
+                    `;
+                }
+
+                if(data.status === "accepted") {
+                    document.getElementById('waitingDriverStatusMsg').classList.add('hidden');
+                    document.getElementById('customerDriverOfferNotification').classList.add('hidden');
+                    document.getElementById('customerActiveTripBox').classList.remove('hidden');
+                    document.getElementById('acceptedTripDetailsContent').innerHTML = `
+                        <p><strong>👨‍✈️ السائق:</strong> ${data.driverName}</p>
+                        <p><strong>📞 الهاتف:</strong> <a href="tel:${data.driverPhone}" style="color:var(--gold);">${data.driverPhone}</a></p>
+                        <p><strong>🚗 المركبة:</strong> ${data.vehicleType}</p>
+                        <p><strong>💵 السعر النهائي:</strong> <span style="color:var(--gold); font-weight:bold;">${data.driverProposedPrice || data.price} جنيه</span></p>
+                        <p><strong>⏰ وقت الوصول (ETA):</strong> <span style="color:var(--gold); font-weight:bold;">${data.eta || 'جاري التحديد...'}</span></p>
+                    `;
+                }
+            });
+        }
+
+        function listenForTripsFromCloud() {
+            db.ref('trips').on('child_added', (snapshot) => {
+                let trip = snapshot.val();
+                let tripId = snapshot.key;
+
+                if(trip.status === "pending") {
+                    let detailsText = trip.mode === 'schedule' ? 
+                        `📅 جدول شهري (${trip.vehicleType})<br><strong>لصالح:</strong> ${trip.childName}<br><strong>من:</strong> ${trip.pickup} ➔ <strong>إلى:</strong> ${trip.dropoff}` :
+                        `🚖 رحلة عادية (${trip.vehicleType})<br><strong>من:</strong> ${trip.pickup} ➔ <strong>إلى:</strong> ${trip.dropoff}`;
+
+                    document.getElementById('driverScheduleFeed').innerHTML = `
+                        <div class="schedule-offer-box" id="trip-${tripId}">
+                            <p style="color: var(--gold); font-weight: bold; margin-bottom: 4px;">🔔 طلب توصيل جديد!</p>
+                            <p style="margin-bottom: 4px; font-size: 13px;">${detailsText}</p>
+                            <p style="color: var(--gold); margin: 6px 0; font-size: 14px;">سعر الزبون: <strong>${trip.price}</strong> جنيه</p>
+                            
+                            <div class="form-group" style="margin-top: 8px;">
+                                <label>اقتراح سعر جديد:</label>
+                                <input type="number" id="proposedPrice-${tripId}" placeholder="اكتب سعرك...">
+                            </div>
+
+                            <div style="display: flex; gap: 8px;">
+                                <button class="action-btn" style="margin-top:0; flex:1; font-size:12px;" onclick="acceptTripWithOffer('${tripId}', '${trip.price}')">قبول السعر</button>
+                                <button class="action-btn ghost" style="margin-top:0; flex:1; font-size:12px;" onclick="proposeNewPrice('${tripId}')">إرسال سعر</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function proposeNewPrice(tripId) {
+            let newPrice = document.getElementById(`proposedPrice-${tripId}`).value;
+            if(!newPrice) { alert("أدخل السعر المقترح!"); return; }
+
+            currentTripKey = tripId;
+            db.ref('trips/' + tripId).once('value', (snapshot) => {
+                let tripData = snapshot.val();
+                tripData.driverName = registeredDriver.name;
+                tripData.driverPhone = registeredDriver.phone;
+                tripData.driverProposedPrice = newPrice;
+                tripData.status = "driver_proposed";
+
+                db.ref('trips/' + tripId).update(tripData);
+                alert("🚀 تم إرسال سعرك للزبون!");
+                document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: var(--gold); text-align: center; padding: 8px;">⏳ في انتظار رد الزبون...</p>`;
+            });
+        }
+
+        function acceptTripWithOffer(tripId, originalPrice) {
+            currentTripKey = tripId;
+
+            db.ref('trips/' + tripId).once('value', (snapshot) => {
+                let tripData = snapshot.val();
+                tripData.driverName = registeredDriver.name;
+                tripData.driverPhone = registeredDriver.phone;
+                tripData.driverProposedPrice = originalPrice;
+                tripData.status = "accepted";
+
+                db.ref('trips/' + tripId).update(tripData);
+
+                document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: var(--gold); text-align: center; padding: 8px;">✅ تم قبول الطلب! حدد وقت الوصول أدناه.</p>`;
+                document.getElementById('activeDriverTrip').classList.remove('hidden');
+                document.getElementById('activeTripDetails').innerHTML = `العميل: <strong>${tripData.childName || tripData.pickup}</strong> | السعر: <strong>${originalPrice} جنيه</strong>`;
+            });
+        }
+
+        function acceptDriverPriceOffer() {
+            if(currentTripKey) {
+                db.ref('trips/' + currentTripKey).update({ status: "accepted" });
+                document.getElementById('customerDriverOfferNotification').classList.add('hidden');
+                alert("🎉 تم قبول السعر!");
+            }
+        }
+
+        function rejectDriverPriceOffer() {
+            if(currentTripKey) {
+                db.ref('trips/' + currentTripKey).update({ status: "rejected", driverProposedPrice: "" });
+                document.getElementById('customerDriverOfferNotification').classList.add('hidden');
+                alert("❌ تم رفض السعر.");
+            }
+        }
+
+        function saveDriverEta() {
+            let etaVal = document.getElementById('driverEtaInput').value;
+            if(!etaVal) { alert("أدخل وقت الوصول!"); return; }
+
+            if(currentTripKey) {
+                db.ref('trips/' + currentTripKey).update({ eta: etaVal });
+                alert("🚀 تم إرسال الوقت للزبون!");
+            }
+        }
+
+        function rateDriver(starsCount) {
+            let stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if(index < starsCount) star.classList.add('rated');
+                else star.classList.remove('rated');
+            });
+            document.getElementById('ratingFeedback').innerText = `شكراً لتقييمك (${starsCount} / 5 نجوم)!`;
+        }
+
+        function driverCompleteTrip() {
+            let price = 50;
+            let commission = price * 0.10;
+            currentDriverDebt += commission;
+            totalPlatformRevenue += commission;
+            localStorage.setItem('gasser_total_revenue', totalPlatformRevenue);
+            updateWalletDisplay();
+
+            alert("تم إنهاء الرحلة! تم احتساب عمولة المنصة (10%).");
+            document.getElementById('activeDriverTrip').classList.add('hidden');
+            document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: var(--muted); text-align: center;">بحث عن طلبات جديدة...</p>`;
+            if(currentTripKey) db.ref('trips/' + currentTripKey).remove();
+        }
+
+        function openAdminLogin() {
+            let pass = prompt("كلمة مرور الأدمن:", "");
+            if(pass === "212008") {
+                switchScreen('screenAdmin');
+                loadAdminData();
+            } else if(pass !== null) {
+                alert("كلمة المرور خطأ!");
+            }
+        }
+
+        function loadAdminData() {
+            document.getElementById('adminTotalRevenue').innerText = totalPlatformRevenue + " جنيه";
+
+            db.ref('drivers').on('value', (snapshot) => {
+                let drivers = snapshot.val();
+                let listContainer = document.getElementById('adminDriversList');
+                listContainer.innerHTML = "";
+
+                if(!drivers) {
+                    listContainer.innerHTML = "<p style='color:var(--muted);'>لا يوجد سواقين.</p>";
+                    return;
+                }
+
+                Object.keys(drivers).forEach(phoneKey => {
+                    let d = drivers[phoneKey];
+                    let banStatusText = d.isBanned ? "محظور 🚫" : "نشط ✅";
+                    let banBtnText = d.isBanned ? "رفع الحظر" : "حظر ⛔";
+
+                    listContainer.innerHTML += `
+                        <div class="admin-stat-card">
+                            <p><strong>السائق:</strong> ${d.name} (${d.phone})</p>
+                            <p><strong>المركبة:</strong> ${d.vehicle || 'غير محدد'}</p>
+                            <p><strong>المديونية:</strong> <span style="color: #ff5f57;">${d.debt || 0} جنيه</span></p>
+                            <p style="margin-top: 4px;"><strong>الحالة:</strong> ${banStatusText}</p>
+                            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                                <button class="action-btn" style="padding: 6px; font-size: 12px; margin:0;" onclick="adminResetDebt('${phoneKey}')">تصفير المديونية</button>
+                                <button class="action-btn ghost" style="padding: 6px; font-size: 12px; margin:0; color:#ff5f57; border-color:rgba(255,95,87,0.3);" onclick="adminToggleBan('${phoneKey}', ${d.isBanned})">${banBtnText}</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+        }
+
+        function adminResetDebt(phoneKey) {
+            db.ref('drivers/' + phoneKey).update({ debt: 0 });
+            alert("تم التصفير بنجاح!");
+        }
+
+        function adminToggleBan(phoneKey, currentStatus) {
+            let newStatus = !currentStatus;
+            db.ref('drivers/' + phoneKey).update({ isBanned: newStatus });
+            alert("تم التحديث بنجاح!");
+        }
+    </script>
+</body>
+</html>
