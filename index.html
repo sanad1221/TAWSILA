@@ -42,7 +42,6 @@ body::before{content:"";position:fixed;z-index:0;pointer-events:none;width:80vma
 ::-webkit-scrollbar-thumb{background:var(--gold-grad);border-radius:99px}
 ::selection{background:var(--gold);color:#111}
 
-/* شاشة الانترو السينمائية مع اسم Gasser بشكل شيك تحت TAWSILA */
 #introScreen{position:fixed;inset:0;background:var(--royal-dark);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;overflow:hidden;transition:opacity 1.2s cubic-bezier(.4,0,.2,1),visibility 1.2s;}
 .intro-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.4) contrast(1.25);animation:introZoom 4s ease-out forwards;}
 @keyframes introZoom{0%{transform:scale(1.1)}100%{transform:scale(1.0)}}
@@ -69,7 +68,6 @@ body::before{content:"";position:fixed;z-index:0;pointer-events:none;width:80vma
 @keyframes rippleEffect{to{transform:scale(4);opacity:0}}
 .touch-tuktuk{position:absolute;font-size:26px;pointer-events:none;z-index:999;transition:all .8s ease-out;transform:translate(-50%,-50%) scale(.5);opacity:1}
 
-/* الناف بار */
 nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 6vw;
   backdrop-filter:blur(26px) saturate(190%);background:var(--glass);border-bottom:1px solid var(--line);width:100%;box-shadow:0 12px 35px rgba(0,0,0,.25)}
 .logo{font-family:var(--serif);font-weight:700;font-size:23px;letter-spacing:1px;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -193,7 +191,6 @@ footer{border-top:1px solid var(--line);padding:22px 6vw;display:flex;justify-co
 </head>
 <body onclick="handleScreenClick(event)">
 
-<!-- شاشة الانترو السينمائية (تتضمن TAWSILA وتحتها اسم Gasser بشكل شيك وفخم) -->
 <div id="introScreen">
   <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1400&q=90" class="intro-bg-img" alt="Car on Road">
   <div class="headlight-glow"></div>
@@ -243,7 +240,6 @@ setTimeout(dismissIntro, 3800);
 
 <div class="container">
 
-  <!-- 1. الرئيسية -->
   <div id="screenHome" class="screen-box">
     <div class="hero-showcase">
       <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=80" alt="Car on Road">
@@ -267,7 +263,6 @@ setTimeout(dismissIntro, 3800);
     <button class="action-btn ghost" style="margin-top:8px;" onclick="openAdminLogin()">🔐 لوحة تحكم الأدمن</button>
   </div>
 
-  <!-- 2. نوع الحساب -->
   <div id="screenRole" class="screen-box hidden">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
     <h2>اختر نوع <em>الحساب</em></h2>
@@ -278,7 +273,6 @@ setTimeout(dismissIntro, 3800);
     </div>
   </div>
 
-  <!-- 3. تسجيل الزبون -->
   <div id="screenCustomerAuth" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
     <h2 style="text-align:center;">تسجيل دخول <em>الزبون</em></h2>
@@ -292,7 +286,6 @@ setTimeout(dismissIntro, 3800);
     </div>
   </div>
 
-  <!-- 4. تسجيل السائق -->
   <div id="screenDriverAuth" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
     <h2 style="text-align:center;">انضم لأسطول <em>السائقين</em></h2>
@@ -312,7 +305,6 @@ setTimeout(dismissIntro, 3800);
     </div>
   </div>
 
-  <!-- 5. اختيار المركبة -->
   <div id="screenVehicleSelect" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="goBackFromVehicleSelect()">← رجوع</button></div>
     <h2 id="vehicleSelectTitle" style="text-align:center;">اختر مركبتك في <em>הأسطول</em></h2>
@@ -335,7 +327,6 @@ setTimeout(dismissIntro, 3800);
       </div>
     </div>
 
-    <!-- نوع التوكتوك -->
     <div id="tuktukTypeBox" class="tuktuk-type-box hidden">
       <h4>🛺 اختر نوع التوكتوك</h4>
       <div class="tuktuk-type-row">
@@ -347,7 +338,6 @@ setTimeout(dismissIntro, 3800);
     <button class="action-btn hidden" id="confirmVehicleBtn" style="margin-top:18px;" onclick="confirmVehicleAction()">تأكيد المتابعة</button>
   </div>
 
-  <!-- 6. نظام الرحلة -->
   <div id="screenTripMode" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenVehicleSelect')">← رجوع</button></div>
     <h2 style="text-align:center;">اختر <em>نظام الرحلة</em></h2>
@@ -363,7 +353,6 @@ setTimeout(dismissIntro, 3800);
     <button class="action-btn" style="margin-top:10px;" onclick="goToTripFormScreen()">متابعة ملء البيانات ➔</button>
   </div>
 
-  <!-- 7. تفاصيل الرحلة -->
   <div id="screenTripForm" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenTripMode')">← رجوع</button></div>
     <h2 id="formScreenHeading" style="color:var(--gold);font-family:var(--serif);font-size:20px;margin-bottom:15px;text-align:center;"></h2>
@@ -396,7 +385,6 @@ setTimeout(dismissIntro, 3800);
     </div>
   </div>
 
-  <!-- 8. تتبع الرحلة -->
   <div id="screenCustomerTracking" class="screen-box hidden" style="text-align:right;">
     <h2>حالة <em>الرحلة والطلبات</em></h2>
 
@@ -428,7 +416,6 @@ setTimeout(dismissIntro, 3800);
     <p id="waitingDriverStatusMsg" style="color:var(--muted);text-align:center;margin-top:20px;">⏳ جارِ البحث عن سائق في منطقتك بأسوان...</p>
   </div>
 
-  <!-- 9. لوحة السائق -->
   <div id="screenDriverDashboard" class="screen-box hidden" style="text-align:right;">
     <div id="driverLockedOverlay" class="hidden" style="background:rgba(3,3,5,.98);border:2px solid #ff5f57;padding:24px 16px;border-radius:20px;margin-bottom:15px;text-align:center;">
       <span style="font-size:42px;">🔒</span>
@@ -471,7 +458,6 @@ setTimeout(dismissIntro, 3800);
     <button class="action-btn ghost" style="margin-top:14px;border-color:rgba(255,95,87,.3);color:#ff5f57;" onclick="logoutApp()">تسجيل خروج 🚪</button>
   </div>
 
-  <!-- 10. الأدمن -->
   <div id="screenAdmin" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
     <h2 style="color:var(--gold);text-align:center;">لوحة تحكم <em>الأدمن</em></h2>
@@ -924,20 +910,22 @@ function sendOfferToCloud(typeMode) {
 }
 
 function listenForTripsFromCloud() {
+  // مراقبة إضافة الطلبات الجديدة
   db.ref('trips').on('child_added', (snapshot) => {
     let trip = snapshot.val();
     let tripId = snapshot.key;
 
     if(trip.status === "pending") {
-      if(trip.area !== registeredDriver.workingArea) {
-        return; 
-      }
+      if(trip.area !== registeredDriver.workingArea) { return; }
 
       let detailsText = trip.mode === 'schedule' ?
         `📅 جدول شهري (${trip.vehicleType})<br><strong>لصالح:</strong> ${trip.childName}<br><strong>من:</strong> ${trip.pickup}<br><strong>إلى:</strong> ${trip.dropoff}` :
         `🚖 رحلة عادية (${trip.vehicleType})<br><strong>من:</strong> ${trip.pickup}<br><strong>إلى:</strong> ${trip.dropoff}`;
 
-      document.getElementById('driverScheduleFeed').innerHTML = `
+      let feedDiv = document.getElementById('driverScheduleFeed');
+      if(feedDiv.innerHTML.includes('لا توجد طلبات')) feedDiv.innerHTML = '';
+
+      feedDiv.innerHTML += `
         <div class="schedule-offer-box" id="trip-${tripId}">
           <p style="color: var(--gold); font-weight: bold; margin-bottom: 4px;">🔔 طلب جديد في منطقتك (${registeredDriver.workingArea})!</p>
           <p style="margin-bottom: 6px; font-size: 13.5px; line-height: 1.5;">${detailsText}</p>
@@ -956,6 +944,19 @@ function listenForTripsFromCloud() {
       `;
     }
   });
+
+  // مراقبة حذف أو انتهاء الرحلات (لتختفي فورا من عند باقي السواقين)
+  db.ref('trips').on('child_removed', (snapshot) => {
+    let tripId = snapshot.key;
+    let cardElement = document.getElementById(`trip-${tripId}`);
+    if(cardElement) {
+      cardElement.remove();
+    }
+    let feedDiv = document.getElementById('driverScheduleFeed');
+    if(feedDiv && feedDiv.children.length === 0) {
+      feedDiv.innerHTML = `<p style="color:var(--muted);text-align:center;padding:8px;font-size:13px;">لا توجد طلبات جديدة في منطقتك حالياً.</p>`;
+    }
+  });
 }
 
 function proposeNewPrice(tripId) {
@@ -965,6 +966,7 @@ function proposeNewPrice(tripId) {
   currentTripKey = tripId;
   db.ref('trips/' + tripId).once('value', (snapshot) => {
     let tripData = snapshot.val();
+    if(!tripData) return;
     tripData.driverName = registeredDriver.name;
     tripData.driverPhone = registeredDriver.phone;
     tripData.driverProposedPrice = newPrice;
@@ -972,7 +974,8 @@ function proposeNewPrice(tripId) {
 
     db.ref('trips/' + tripId).update(tripData);
     alert("🚀 تم إرسال سعرك للزبون!");
-    document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: var(--gold); text-align: center; padding: 10px;">⏳ في انتظار رد الزبون...</p>`;
+    let cardElem = document.getElementById(`trip-${tripId}`);
+    if(cardElem) cardElem.innerHTML = `<p style="color: var(--gold); text-align: center; padding: 10px;">⏳ في انتظار رد الزبون...</p>`;
   });
 }
 
@@ -981,12 +984,16 @@ function acceptTripWithOffer(tripId, originalPrice) {
 
   db.ref('trips/' + tripId).once('value', (snapshot) => {
     let tripData = snapshot.val();
+    if(!tripData) return;
     tripData.driverName = registeredDriver.name;
     tripData.driverPhone = registeredDriver.phone;
     tripData.driverProposedPrice = originalPrice;
     tripData.status = "accepted";
 
     db.ref('trips/' + tripId).update(tripData);
+
+    let cardElem = document.getElementById(`trip-${tripId}`);
+    if(cardElem) cardElem.remove();
 
     document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: var(--gold); text-align: center; padding: 10px;">✅ تم قبول الطلب! حدد وقت الوصول أدناه.</p>`;
     document.getElementById('activeDriverTrip').classList.remove('hidden');
@@ -1040,7 +1047,11 @@ function driverCompleteTrip() {
   alert("تم إنهاء الرحلة بأسوان! تم احتساب عمولة المنصة (10%).");
   document.getElementById('activeDriverTrip').classList.add('hidden');
   document.getElementById('driverScheduleFeed').innerHTML = `<p style="color: var(--muted); text-align: center;">بحث عن طلبات جديدة في منطقتك...</p>`;
-  if(currentTripKey) db.ref('trips/' + currentTripKey).remove();
+  
+  if(currentTripKey) {
+    db.ref('trips/' + currentTripKey).remove();
+    currentTripKey = null;
+  }
 }
 
 function openAdminLogin() {
