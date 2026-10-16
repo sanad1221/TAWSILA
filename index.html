@@ -42,9 +42,9 @@ body::before{content:"";position:fixed;z-index:0;pointer-events:none;width:80vma
 ::-webkit-scrollbar-thumb{background:var(--gold-grad);border-radius:99px}
 ::selection{background:var(--gold);color:#111}
 
+/* شاشة الانترو - تم تعديل عرض الصورة لكي لا تحدث زووم على الموبايل */
 #introScreen{position:fixed;inset:0;background:var(--royal-dark);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;overflow:hidden;transition:opacity 1.2s cubic-bezier(.4,0,.2,1),visibility 1.2s;}
-.intro-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.4) contrast(1.25);animation:introZoom 4s ease-out forwards;}
-@keyframes introZoom{0%{transform:scale(1.1)}100%{transform:scale(1.0)}}
+.intro-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.45) contrast(1.15);}
 
 .headlight-glow{position:absolute;width:240px;height:130px;background:radial-gradient(ellipse,rgba(255,235,130,.9) 0%,rgba(243,184,37,.45) 40%,transparent 75%);filter:blur(16px);top:45%;left:35%;transform:translate(-50%,-50%);animation:flashHeadlight 3.5s ease-in-out infinite;pointer-events:none;z-index:2;}
 .headlight-glow.right{left:65%;}
@@ -55,13 +55,13 @@ body::before{content:"";position:fixed;z-index:0;pointer-events:none;width:80vma
 @keyframes introSmokeRise{0%{transform:translateY(0) scale(.4);opacity:0;}40%{opacity:.6;}100%{transform:translateY(-160px) scale(3.2);opacity:0;}}
 
 .intro-content{position:absolute;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;animation:fadeInIntro 1.5s ease-out forwards;}
-.intro-brand{font-family:var(--serif);font-size:clamp(40px,8vw,78px);font-weight:700;letter-spacing:5px;color:#fff;text-shadow:0 0 40px rgba(243,184,37,.7);margin-bottom:4px;opacity:0;animation:revealText 1.2s .6s cubic-bezier(.16,1,.3,1) forwards;}
+.intro-brand{font-family:var(--serif);font-size:clamp(38px,7.5vw,72px);font-weight:700;letter-spacing:4px;color:#fff;text-shadow:0 0 40px rgba(243,184,37,.7);margin-bottom:2px;opacity:0;animation:revealText 1.2s .6s cubic-bezier(.16,1,.3,1) forwards;}
 .intro-brand em{-webkit-text-fill-color:var(--gold);}
-.intro-creator-badge{font-family:var(--serif);font-style:italic;font-size:clamp(16px,3vw,22px);color:var(--gold2);letter-spacing:3px;margin-bottom:8px;opacity:0;animation:revealText 1.2s .8s cubic-bezier(.16,1,.3,1) forwards;text-shadow:0 0 15px rgba(243,184,37,.5);}
-.intro-sub{font-size:12px;color:var(--muted);letter-spacing:.3em;text-transform:uppercase;opacity:0;animation:revealText 1.2s 1s cubic-bezier(.16,1,.3,1) forwards;}
+.intro-creator-badge{font-family:var(--serif);font-style:italic;font-size:clamp(15px,2.8vw,21px);color:var(--gold2);letter-spacing:2.5px;margin-bottom:6px;opacity:0;animation:revealText 1.2s .8s cubic-bezier(.16,1,.3,1) forwards;text-shadow:0 0 15px rgba(243,184,37,.5);}
+.intro-sub{font-size:11.5px;color:var(--muted);letter-spacing:.25em;text-transform:uppercase;opacity:0;animation:revealText 1.2s 1s cubic-bezier(.16,1,.3,1) forwards;}
 @keyframes revealText{0%{opacity:0;transform:translateY(25px);filter:blur(8px);}100%{opacity:1;transform:translateY(0);filter:blur(0);}}
 
-.skip-intro-btn{position:absolute;bottom:35px;right:40px;background:none;border:1px solid rgba(243,184,37,.4);color:#f8f6f0;padding:10px 22px;font-size:12px;border-radius:99px;cursor:pointer;z-index:10;transition:.3s;backdrop-filter:blur(8px);}
+.skip-intro-btn{position:absolute;bottom:30px;right:30px;background:none;border:1px solid rgba(243,184,37,.4);color:#f8f6f0;padding:8px 18px;font-size:11.5px;border-radius:99px;cursor:pointer;z-index:10;transition:.3s;backdrop-filter:blur(8px);}
 .skip-intro-btn:hover{background:var(--gold);color:#030305;border-color:var(--gold);box-shadow:0 0 25px rgba(243,184,37,.5);}
 
 .ripple{position:absolute;border-radius:50%;background:rgba(243,184,37,.35);transform:scale(0);animation:rippleEffect .6s linear;pointer-events:none;z-index:998}
@@ -85,8 +85,8 @@ nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;
   background:linear-gradient(165deg,rgba(243,184,37,.65),transparent 35%,transparent 65%,rgba(243,184,37,.4));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 @keyframes fadeInScreen{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.screen-box h1{font-size:clamp(25px,6vw,36px);margin-bottom:10px}
-.screen-box h2{font-size:clamp(22px,5vw,30px);margin-bottom:8px}
+.screen-box h1{font-size:clamp(24px,5.5vw,34px);margin-bottom:10px}
+.screen-box h2{font-size:clamp(21px,4.8vw,28px);margin-bottom:8px}
 .screen-box h2 em,.screen-box h1 em{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .screen-box h2::after{content:"";display:block;width:50px;height:3px;margin:10px auto 0;border-radius:99px;background:var(--gold-grad)}
 .screen-box p{color:var(--muted);font-size:14px;margin-bottom:18px}
@@ -123,13 +123,13 @@ body.light-mode .form-group input,body.light-mode .form-group select{background-
 .action-btn.ghost{background:transparent;color:var(--text);box-shadow:none;border:1px solid var(--line)}
 .action-btn.ghost:hover{background:rgba(243,184,37,.08);color:var(--gold);border-color:var(--gold);box-shadow:none}
 
-.hero-showcase{position:relative;width:100%;height:210px;border-radius:22px;overflow:hidden;margin-bottom:18px;box-shadow:0 20px 50px rgba(0,0,0,.65);border:1px solid rgba(243,184,37,.3)}
-.hero-showcase img{width:100%;height:100%;object-fit:cover;filter:brightness(.82) contrast(1.15);animation:kenBurns 10s ease-in-out infinite alternate}
-@keyframes kenBurns{0%{transform:scale(1)}100%{transform:scale(1.08)}}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,3,5,.9) 0%,rgba(3,3,5,.2) 60%,transparent 100%);display:flex;align-items:flex-end;padding:18px}
-.hero-title-badge{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--gold2);text-shadow:0 2px 10px rgba(0,0,0,.9)}
+/* هيرو الشاشة الرئيسية - تم ضبط المقاس لمنع الزووم المزعج */
+.hero-showcase{position:relative;width:100%;height:190px;border-radius:20px;overflow:hidden;margin-bottom:18px;box-shadow:0 15px 35px rgba(0,0,0,.6);border:1px solid rgba(243,184,37,.3);background:#050508;}
+.hero-showcase img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.85) contrast(1.1);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,3,5,.9) 0%,rgba(3,3,5,.2) 60%,transparent 100%);display:flex;align-items:flex-end;padding:16px}
+.hero-title-badge{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--gold2);text-shadow:0 2px 10px rgba(0,0,0,.9)}
 
-.smoke-container{position:absolute;bottom:0;left:0;width:100%;height:100px;pointer-events:none;overflow:hidden;z-index:2}
+.smoke-container{position:absolute;bottom:0;left:0;width:100%;height:90px;pointer-events:none;overflow:hidden;z-index:2}
 .smoke-puff{position:absolute;bottom:-20px;background:radial-gradient(circle,rgba(255,255,255,.28) 0%,rgba(243,184,37,.12) 40%,transparent 70%);border-radius:50%;filter:blur(8px);animation:smokeRise 4s ease-in infinite}
 @keyframes smokeRise{0%{transform:translateY(0) scale(.5);opacity:0}50%{opacity:.5}100%{transform:translateY(-110px) scale(2.6);opacity:0}}
 
@@ -173,7 +173,7 @@ body.light-mode .form-group input,body.light-mode .form-group select{background-
 .social-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);background:rgba(243,184,37,.12)}
 
 .creator-box{margin:14px 0;padding:18px;background:linear-gradient(145deg,rgba(243,184,37,.12),rgba(0,0,0,.28));border:1px solid rgba(243,184,37,.35);border-radius:22px}
-.creator-name{font-family:var(--serif);font-size:28px;font-weight:700;margin-top:2px;font-style:italic;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.creator-name{font-family:var(--serif);font-size:26px;font-weight:700;margin-top:2px;font-style:italic;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 .wallet-box,.admin-stat-card,.schedule-offer-box,.driver-offer-box{background:rgba(0,0,0,.28);border:1px solid var(--line);padding:18px;border-radius:20px;margin-bottom:12px;text-align:right;box-shadow:0 10px 25px rgba(0,0,0,.22)}
 .wallet-box{border-right:3px solid var(--gold)}
@@ -182,7 +182,7 @@ body.light-mode .form-group input,body.light-mode .form-group select{background-
 
 .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 16px}
 .stat-card{padding:16px 8px;border-radius:20px;text-align:center;background:linear-gradient(145deg,rgba(243,184,37,.14),rgba(0,0,0,.28));border:1px solid rgba(243,184,37,.35);box-shadow:0 10px 25px rgba(0,0,0,.22)}
-.stat-card .num{font-family:var(--serif);font-size:28px;font-weight:700;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.stat-card .num{font-family:var(--serif);font-size:26px;font-weight:700;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
 .stat-card .lbl{font-size:11.5px;color:var(--muted);margin-top:4px}
 .stat-card .ico{font-size:22px;display:block;margin-bottom:4px}
 
@@ -192,7 +192,7 @@ footer{border-top:1px solid var(--line);padding:22px 6vw;display:flex;justify-co
 <body onclick="handleScreenClick(event)">
 
 <div id="introScreen">
-  <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1400&q=90" class="intro-bg-img" alt="Car on Road">
+  <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1200&q=80" class="intro-bg-img" alt="Car on Road">
   <div class="headlight-glow"></div>
   <div class="headlight-glow right"></div>
   <div class="intro-smoke" id="introSmokeBox"></div>
@@ -488,8 +488,7 @@ setTimeout(dismissIntro, 3800);
 </div>
 
 <footer>
-  <span>© <span id="yr"></span> Gasser Takadom Saleh — Aswan Edition</span>
-  <span>Aswan, Egypt</span>
+  © <span id="yr"></span> Gasser Takadom Saleh — Aswan Edition
 </footer>
 
 <script>
@@ -888,7 +887,6 @@ function sendOfferToCloud(typeMode) {
   newTripRef.set(tripData);
   alert("🚀 تم إرسال الطلب بنجاح لسواقين منطقتك!");
   
-  // الانتقال لشاشة تتبع الطلب الخاصة بالزبون
   switchScreen('screenCustomerTracking');
   document.getElementById('waitingDriverStatusMsg').classList.remove('hidden');
   document.getElementById('customerDriverOfferNotification').classList.add('hidden');
