@@ -42,7 +42,6 @@ body::before{content:"";position:fixed;z-index:0;pointer-events:none;width:80vma
 ::-webkit-scrollbar-thumb{background:var(--gold-grad);border-radius:99px}
 ::selection{background:var(--gold);color:#111}
 
-/* شاشة الانترو - صورة بحجم أصغر وموزونة */
 #introScreen{position:fixed;inset:0;background:var(--royal-dark);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;overflow:hidden;transition:opacity 1.2s cubic-bezier(.4,0,.2,1),visibility 1.2s;}
 .intro-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.4) contrast(1.25);animation:introZoom 4s ease-out forwards;}
 @keyframes introZoom{0%{transform:scale(1.05)}100%{transform:scale(1.0)}}
@@ -124,7 +123,6 @@ body.light-mode .form-group input,body.light-mode .form-group select{background-
 .action-btn.ghost{background:transparent;color:var(--text);box-shadow:none;border:1px solid var(--line)}
 .action-btn.ghost:hover{background:rgba(243,184,37,.08);color:var(--gold);border-color:var(--gold);box-shadow:none}
 
-/* تصميم الكارد الرئيسي بالصورة المصغرة والمتناسقة فوق السلايدات */
 .hero-showcase{position:relative;width:100%;height:175px;border-radius:20px;overflow:hidden;margin-bottom:18px;box-shadow:0 15px 35px rgba(0,0,0,.6);border:1px solid rgba(243,184,37,.3)}
 .hero-showcase img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.82) contrast(1.15);animation:kenBurns 10s ease-in-out infinite alternate}
 @keyframes kenBurns{0%{transform:scale(1)}100%{transform:scale(1.05)}}
@@ -941,23 +939,25 @@ function listenForTripsFromCloud() {
       let feedDiv = document.getElementById('driverScheduleFeed');
       if(feedDiv.innerHTML.includes('لا توجد طلبات')) feedDiv.innerHTML = '';
 
-      feedDiv.innerHTML += `
-        <div class="schedule-offer-box" id="trip-${tripId}">
-          <p style="color: var(--gold); font-weight: bold; margin-bottom: 4px;">🔔 طلب جديد في منطقتك (${registeredDriver.workingArea})!</p>
-          <p style="margin-bottom: 6px; font-size: 13.5px; line-height: 1.5;">${detailsText}</p>
-          <p style="color: var(--gold); margin: 6px 0; font-size: 14.5px;">سعر الزبون: <strong>${trip.price}</strong> جنيه</p>
+      if(!document.getElementById(`trip-${tripId}`)) {
+        feedDiv.innerHTML += `
+          <div class="schedule-offer-box" id="trip-${tripId}">
+            <p style="color: var(--gold); font-weight: bold; margin-bottom: 4px;">🔔 طلب جديد في منطقتك (${registeredDriver.workingArea})!</p>
+            <p style="margin-bottom: 6px; font-size: 13.5px; line-height: 1.5;">${detailsText}</p>
+            <p style="color: var(--gold); margin: 6px 0; font-size: 14.5px;">سعر الزبون: <strong>${trip.price}</strong> جنيه</p>
 
-          <div class="form-group" style="margin-top: 10px;">
-            <label>اقتراح سعر جديد:</label>
-            <input type="number" id="proposedPrice-${tripId}" placeholder="اكتب سعرك...">
-          </div>
+            <div class="form-group" style="margin-top: 10px;">
+              <label>اقتراح سعر جديد:</label>
+              <input type="number" id="proposedPrice-${tripId}" placeholder="اكتب سعرك...">
+            </div>
 
-          <div style="display: flex; gap: 10px;">
-            <button class="action-btn" style="margin-top:0; flex:1; font-size:12.5px;" onclick="acceptTripWithOffer('${tripId}', '${trip.price}')">قبول السعر</button>
-            <button class="action-btn ghost" style="margin-top:0; flex:1; font-size:12.5px;" onclick="proposeNewPrice('${tripId}')">إرسال سعر</button>
+            <div style="display: flex; gap: 10px;">
+              <button class="action-btn" style="margin-top:0; flex:1; font-size:12.5px;" onclick="acceptTripWithOffer('${tripId}', '${trip.price}')">قبول السعر</button>
+              <button class="action-btn ghost" style="margin-top:0; flex:1; font-size:12.5px;" onclick="proposeNewPrice('${tripId}')">إرسال سعر</button>
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      }
     }
   });
 
