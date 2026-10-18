@@ -280,6 +280,7 @@ setTimeout(dismissIntro, 3800);
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
     <h2 style="text-align:center;">تسجيل دخول <em>الزبون</em></h2>
     <p style="text-align:center;">أدخل بيانات الاتصال للمتابعة الفورية.</p>
+    <div class="form-group"><label>اسم الزبون الكامل:</label><input type="text" id="customerName" placeholder="اكتب اسمك..."></div>
     <div class="form-group"><label>رقم الهاتف المحمول:</label><input type="tel" id="customerPhone" placeholder="01xxxxxxxx0"></div>
     <div class="form-group"><label>البريد الإلكتروني:</label><input type="email" id="customerEmail" placeholder="name@example.com"></div>
     <button class="action-btn" onclick="sendCustomerOTP()">إرسال كود التحقق</button>
@@ -472,7 +473,7 @@ setTimeout(dismissIntro, 3800);
   <div id="screenAdmin" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
     <h2 style="color:var(--gold);text-align:center;">لوحة تحكم <em>الأدمن</em></h2>
-    <p style="text-align:center;">متابعة الأرباح والمسجلين وإدارة السواقين بأسوان:</p>
+    <p style="text-align:center;">متابعة الأرباح والمسجلين وإدارة السواقين والزبائن بأسوان:</p>
 
     <div class="stat-grid">
       <div class="stat-card"><span class="ico">👨‍✈️</span><div class="num" id="statDrivers">0</div><div class="lbl">سائقين مسجلين</div></div>
@@ -481,7 +482,11 @@ setTimeout(dismissIntro, 3800);
     </div>
 
     <div class="admin-stat-card"><p>💰 إجمالي أرباح المنصة: <strong id="adminTotalRevenue" style="color:var(--gold);font-size:16px;">0 جنيه</strong></p></div>
-    <h3 style="color:var(--gold);font-family:var(--serif);margin-bottom:8px;font-size:16px;">📋 السواقين المسجلين:</h3>
+    
+    <h3 style="color:var(--gold);font-family:var(--serif);margin:16px 0 8px;font-size:17px;">🙋 قائمة الزبائن بالتفصيل:</h3>
+    <div id="adminCustomersList"><p style="color:var(--muted);text-align:center;">جاري الجلب...</p></div>
+
+    <h3 style="color:var(--gold);font-family:var(--serif);margin:24px 0 8px;font-size:17px;">📋 قائمة السواقين (مع البطاقة وبيانات التحكم):</h3>
     <div id="adminDriversList"><p style="color:var(--muted);text-align:center;">جاري الجلب...</p></div>
   </div>
 
@@ -621,7 +626,11 @@ function checkBanStatusAndLoad() {
   let driverPhoneClean = registeredDriver.phone.replace(/\D/g,'');
   db.ref('drivers/' + driverPhoneClean).once('value', (snapshot) => {
     let data = snapshot.val();
-    if(data && data.isBanned) {
+    if(!data) {
+      logoutApp();
+      return;
+    }
+    if(data.isBanned) {
       alert("🚫 عذراً، تم حظر حسابك من قبل إدارة المنصة بسبب المديونية!");
       logoutApp();
       return;
@@ -631,9 +640,9 @@ function checkBanStatusAndLoad() {
     document.getElementById('driverVehicleDisplay').innerText = registeredDriver.vehicle || "غير محدد";
     document.getElementById('driverAreaDisplay').innerText = registeredDriver.workingArea || "جميع المناطق";
 
-    let registerTime = data && data.registerTimestamp ? data.registerTimestamp : (registeredDriver.registerTimestamp || Date.now());
+    let registerTime = data.registerTimestamp || registeredDriver.registerTimestamp || Date.now();
     let oneMonthPassed = (Date.now() - registerTime) > (30 * 24 * 60 * 60 * 1000);
-    let currentDebt = data && data.debt !== undefined ? data.debt : currentDriverDebt;
+    let currentDebt = data.debt !== undefined ? data.debt : currentDriverDebt;
 
     if (oneMonthPassed || currentDebt >= 200) {
       document.getElementById('driverLockedOverlay').classList.remove('hidden');
@@ -661,9 +670,10 @@ function selectRole(role) {
 }
 
 function sendCustomerOTP() {
+  let name = document.getElementById('customerName').value;
   let phone = document.getElementById('customerPhone').value;
   let email = document.getElementById('customerEmail').value;
-  if(!phone || !email) { alert("أدخل البيانات!"); return; }
+  if(!name || !phone || !email) { alert("أكمل جميع بيانات الزبون!"); return; }
   generatedCustomerOtp = Math.floor(1000 + Math.random() * 9000).toString();
   alert("📩 كود التحقق للإيميل: " + email + "\n[الكود السريع: " + generatedCustomerOtp + "]");
   document.getElementById('customerOtpBox').classList.remove('hidden');
@@ -673,14 +683,17 @@ function verifyCustomerOTP() {
   if(document.getElementById('enteredCustomerOtp').value === generatedCustomerOtp) {
     localStorage.setItem('tawsila_customer_logged', 'true');
 
+    let name = document.getElementById('customerName').value;
     let phone = document.getElementById('customerPhone').value;
     let email = document.getElementById('customerEmail').value;
     let key = phone.replace(/\D/g,'');
     if(key) {
-      let ref = db.ref('customers/' + key);
-      ref.once('value', (snap) => {
-        if(snap.exists()) ref.update({ lastLogin: Date.now() });
-        else ref.set({ phone: phone, email: email, registeredAt: Date.now(), lastLogin: Date.now() });
+      db.ref('customers/' + key).set({
+        name: name,
+        phone: phone,
+        email: email,
+        registeredAt: Date.now(),
+        lastLogin: Date.now()
       });
     }
 
@@ -698,18 +711,22 @@ function sendDriverOTP() {
   let workingArea = document.getElementById('driverWorkingArea').value;
   let idCard = document.getElementById('driverIdCardInput').files[0];
 
-  if(!name || !phone || !email || !workingArea || !idCard) { alert("أكمل جميع بيانات السائق ومنطقة العمل!"); return; }
+  if(!name || !phone || !email || !workingArea || !idCard) { alert("أكمل جميع بيانات السائق ومنطقة العمل مع رفع البطاقة!"); return; }
 
-  registeredDriver.name = name;
-  registeredDriver.phone = phone;
-  registeredDriver.email = email;
-  registeredDriver.workingArea = workingArea;
-  registeredDriver.idCardUrl = URL.createObjectURL(idCard);
-  registeredDriver.registerTimestamp = Date.now();
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    registeredDriver.name = name;
+    registeredDriver.phone = phone;
+    registeredDriver.email = email;
+    registeredDriver.workingArea = workingArea;
+    registeredDriver.idCardUrl = e.target.result; // تخزين صورة البطاقة كـ Base64 لتعمل فورا في لوحة الأدمن
+    registeredDriver.registerTimestamp = Date.now();
 
-  generatedDriverOtp = Math.floor(1000 + Math.random() * 9000).toString();
-  alert("📩 كود السائق للإيميل: " + email + "\n[الكود السريع: " + generatedDriverOtp + "]");
-  document.getElementById('driverOtpBox').classList.remove('hidden');
+    generatedDriverOtp = Math.floor(1000 + Math.random() * 9000).toString();
+    alert("📩 كود السائق للإيميل: " + email + "\n[الكود السريع: " + generatedDriverOtp + "]");
+    document.getElementById('driverOtpBox').classList.remove('hidden');
+  };
+  reader.readAsDataURL(idCard);
 }
 
 function verifyDriverOTP() {
@@ -774,6 +791,7 @@ function confirmVehicleAction() {
       email: registeredDriver.email,
       workingArea: registeredDriver.workingArea,
       vehicle: registeredDriver.vehicle,
+      idCardUrl: registeredDriver.idCardUrl || "",
       debt: 0,
       isBanned: false,
       registerTimestamp: registeredDriver.registerTimestamp
@@ -1089,11 +1107,33 @@ function refreshStats() {
 function loadAdminData() {
   document.getElementById('adminTotalRevenue').innerText = totalPlatformRevenue + " جنيه";
 
-  db.ref('customers').on('value', (snap) => {
-    customersCount = snap.numChildren();
+  // جلب الزبائن بالتفصيل
+  db.ref('customers').on('value', (snapshot) => {
+    let customers = snapshot.val();
+    let custContainer = document.getElementById('adminCustomersList');
+    custContainer.innerHTML = "";
+    customersCount = customers ? Object.keys(customers).length : 0;
     refreshStats();
+
+    if(!customers) {
+      custContainer.innerHTML = "<p style='color:var(--muted); text-align:center;'>لا توجد زبائن مسجلة بعد.</p>";
+      return;
+    }
+
+    Object.keys(customers).forEach(phoneKey => {
+      let c = customers[phoneKey];
+      custContainer.innerHTML += `
+        <div class="admin-stat-card">
+          <p><strong>الاسم:</strong> ${c.name || 'بدون اسم'}</p>
+          <p><strong>الهاتف:</strong> <a href="tel:${c.phone}" style="color:var(--gold);">${c.phone}</a></p>
+          <p><strong>الإيميل:</strong> ${c.email || 'غير متوفر'}</p>
+          <button class="action-btn danger" style="padding:6px; font-size:12px; margin-top:8px; background:#ff5f57; color:#fff; border:none;" onclick="adminDeleteCustomer('${phoneKey}')">حذف الزبون 🗑️</button>
+        </div>
+      `;
+    });
   });
 
+  // جلب السواقين بالتفصيل مع البطاقة وزر الحذف والتحكم
   db.ref('drivers').on('value', (snapshot) => {
     let drivers = snapshot.val();
     let listContainer = document.getElementById('adminDriversList');
@@ -1103,7 +1143,7 @@ function loadAdminData() {
     refreshStats();
 
     if(!drivers) {
-      listContainer.innerHTML = "<p style='color:var(--muted);'>لا يوجد سواقين مسجلين بعد.</p>";
+      listContainer.innerHTML = "<p style='color:var(--muted); text-align:center;'>لا يوجد سواقين مسجلين بعد.</p>";
       return;
     }
 
@@ -1111,17 +1151,26 @@ function loadAdminData() {
       let d = drivers[phoneKey];
       let banStatusText = d.isBanned ? "محظور 🚫" : "نشط ✅";
       let banBtnText = d.isBanned ? "رفع الحظر" : "حظر ⛔";
+      let idCardImg = d.idCardUrl ? `<div style="margin-top:8px;"><a href="${d.idCardUrl}" target="_blank"><img src="${d.idCardUrl}" style="width:100px; height:60px; object-fit:cover; border-radius:8px; border:1px solid var(--gold);" alt="صورة البطاقة"></a><br><small style="color:var(--gold);">اضغط على البطاقة لتكبيرها</small></div>` : `<p style="color:var(--muted); font-size:12px;">لم يتم رفع صورة البطاقة</p>`;
 
       listContainer.innerHTML += `
         <div class="admin-stat-card">
           <p><strong>السائق:</strong> ${d.name} (${d.phone})</p>
+          <p><strong>الإيميل:</strong> ${d.email || 'غير متوفر'}</p>
           <p><strong>منطقة العمل:</strong> <span style="color:var(--gold);">${d.workingArea || 'غير محدد'}</span></p>
           <p><strong>المركبة:</strong> ${d.vehicle || 'غير محدد'}</p>
           <p><strong>المديونية:</strong> <span style="color: #ff5f57;">${d.debt || 0} جنيه</span></p>
           <p style="margin-top: 4px;"><strong>الحالة:</strong> ${banStatusText}</p>
-          <div style="display: flex; gap: 8px; margin-top: 10px;">
-            <button class="action-btn" style="padding: 6px; font-size: 12px; margin:0;" onclick="adminResetDebt('${phoneKey}')">تصفير المديونية</button>
-            <button class="action-btn ghost" style="padding: 6px; font-size: 12px; margin:0; color:#ff5f57; border-color:rgba(255,95,87,0.3);" onclick="adminToggleBan('${phoneKey}', ${d.isBanned})">${banBtnText}</button>
+          
+          <div style="margin: 8px 0;">
+            <strong>صورة البطاقة الشخصية:</strong>
+            ${idCardImg}
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-top: 12px; flex-wrap:wrap;">
+            <button class="action-btn" style="padding: 6px; font-size: 12px; margin:0; flex:1;" onclick="adminResetDebt('${phoneKey}')">تصفير المديونية</button>
+            <button class="action-btn ghost" style="padding: 6px; font-size: 12px; margin:0; color:#ff5f57; border-color:rgba(255,95,87,0.3); flex:1;" onclick="adminToggleBan('${phoneKey}', ${d.isBanned})">${banBtnText}</button>
+            <button class="action-btn danger" style="padding: 6px; font-size: 12px; margin:0; background:#ff5f57; color:#fff; border:none; flex:1;" onclick="adminDeleteDriver('${phoneKey}')">حذف نهائي 🗑️</button>
           </div>
         </div>
       `;
@@ -1138,6 +1187,20 @@ function adminToggleBan(phoneKey, currentStatus) {
   let newStatus = !currentStatus;
   db.ref('drivers/' + phoneKey).update({ isBanned: newStatus });
   alert("تم التحديث بنجاح!");
+}
+
+function adminDeleteCustomer(phoneKey) {
+  if(confirm("هل أنت متأكد من حذف هذا الزبون نهائياً من السجل؟")) {
+    db.ref('customers/' + phoneKey).remove();
+    alert("تم حذف الزبون بنجاح.");
+  }
+}
+
+function adminDeleteDriver(phoneKey) {
+  if(confirm("تحذير: هل أنت متأكد من حذف هذا السائق نهائياً من سجل التطبيق؟")) {
+    db.ref('drivers/' + phoneKey).remove();
+    alert("تم حذف السائق نهائياً من قاعدة البيانات.");
+  }
 }
 </script>
 </body>
