@@ -240,7 +240,7 @@ setTimeout(dismissIntro, 3800);
 
 <div class="container">
 
-  <!-- 1. الرئيسية -->
+  <!-- الرئيسية -->
   <div id="screenHome" class="screen-box">
     <div class="hero-showcase">
       <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=800&q=80" alt="Car on Road">
@@ -264,7 +264,7 @@ setTimeout(dismissIntro, 3800);
     <button class="action-btn ghost" style="margin-top:8px;" onclick="openAdminLogin()">🔐 لوحة تحكم الأدمن</button>
   </div>
 
-  <!-- 2. نوع الحساب -->
+  <!-- نوع الحساب -->
   <div id="screenRole" class="screen-box hidden">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
     <h2>اختر نوع <em>الحساب</em></h2>
@@ -275,7 +275,7 @@ setTimeout(dismissIntro, 3800);
     </div>
   </div>
 
-  <!-- 3. تسجيل الزبون -->
+  <!-- تسجيل الزبون -->
   <div id="screenCustomerAuth" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
     <h2 style="text-align:center;">تسجيل دخول <em>الزبون</em></h2>
@@ -290,16 +290,16 @@ setTimeout(dismissIntro, 3800);
     </div>
   </div>
 
-  <!-- 4. تسجيل السائق -->
+  <!-- تسجيل السائق -->
   <div id="screenDriverAuth" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
-    <h2 style="text-align:center;">انضم لأسطول <em>السائقين</em></h2>
-    <p style="text-align:center;">اختر قريتك أو مركزك لكي تستقبل طلبات منطقتك فقط بدون تلخبطة.</p>
+    <h2 style="text-align:center;">انضم لأسطول <em>السواقين</em></h2>
+    <p style="text-align:center;">اختر قريتك أو مركزك لكي تستقبل طلبات منطقتك فقط.</p>
     <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="driverNameInput" placeholder="اكتب اسمك الثلاثي..."></div>
     <div class="form-group"><label>رقم الهاتف:</label><input type="tel" id="driverPhoneInput" placeholder="01xxxxxxxx0"></div>
     <div class="form-group"><label>البريد الإلكتروني:</label><input type="email" id="driverEmailInput" placeholder="driver@example.com"></div>
     <div class="form-group">
-      <label>📍 قريتك أو مركزك الأساسي (لفلترة الطلبات):</label>
+      <label>📍 قريتك أو مركزك الأساسي:</label>
       <select id="driverWorkingArea" class="area-select"></select>
     </div>
     <div class="form-group"><label>صورة البطاقة الشخصية:</label><input type="file" id="driverIdCardInput" accept="image/*"></div>
@@ -310,58 +310,57 @@ setTimeout(dismissIntro, 3800);
     </div>
   </div>
 
-  <!-- 5. اختيار المركبة -->
+  <!-- اختيار المركبة -->
   <div id="screenVehicleSelect" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="goBackFromVehicleSelect()">← رجوع</button></div>
     <h2 id="vehicleSelectTitle" style="text-align:center;">اختر مركبتك في <em>الأسطول</em></h2>
     <p style="text-align:center;">اختر وسيلة النقل المفضلة لديك:</p>
     <div class="fleet-grid">
       <div class="fleet-card" id="card-tuktuk" style="background-image:url('https://images.unsplash.com/photo-1598528738936-c508247f6be4?auto=format&fit=crop&w=500&q=80');" onclick="pickVehicle('توكتوك 🛺')">
-        <div class="fleet-card-content"><span class="fleet-icon">🛺</span><div class="fleet-title">توكتوك</div><div class="fleet-desc">كاشف أو مغطى — للمشاوير السريعة</div></div>
+        <div class="fleet-card-content"><span class="fleet-icon">🛺</span><div class="fleet-title">توكتوك</div><div class="fleet-desc">كاشف أو مغطى</div></div>
       </div>
       <div class="fleet-card" id="card-bike" style="background-image:url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=500&q=80');" onclick="pickVehicle('موتوسيكل 🛵')">
-        <div class="fleet-card-content"><span class="fleet-icon">🛵</span><div class="fleet-title">موتوسيكل</div><div class="fleet-desc">لتفادي زحام الطرق</div></div>
+        <div class="fleet-card-content"><span class="fleet-icon">🛵</span><div class="fleet-title">موتوسيكل</div><div class="fleet-desc">لتفادي الزحام</div></div>
       </div>
       <div class="fleet-card" id="card-car" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=500&q=80');" onclick="pickVehicle('عربية ملاكي 🚗')">
         <div class="fleet-card-content"><span class="fleet-icon">🚗</span><div class="fleet-title">عربية ملاكي</div><div class="fleet-desc">لرحلات مريحة وعائلية</div></div>
       </div>
       <div class="fleet-card" id="card-kashef" style="background-image:url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=500&q=80');" onclick="pickVehicle('عربية كاشف 🚙')">
-        <div class="fleet-card-content"><span class="fleet-icon">🚙</span><div class="fleet-title">عربية كاشف</div><div class="fleet-desc">للطرق الخاصة والخدمات</div></div>
+        <div class="fleet-card-content"><span class="fleet-icon">🚙</span><div class="fleet-title">عربية كاشف</div><div class="fleet-desc">للطرق الخاصة</div></div>
       </div>
       <div class="fleet-card" id="card-toyota" style="background-image:url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=500&q=80');" onclick="pickVehicle('تويوتا / فان 🚐')">
         <div class="fleet-card-content"><span class="fleet-icon">🚐</span><div class="fleet-title" style="color:var(--gold);">تويوتا / فان</div><div class="fleet-desc">للرحلات الجماعية</div></div>
       </div>
     </div>
 
-    <!-- نوع التوكتوك -->
     <div id="tuktukTypeBox" class="tuktuk-type-box hidden">
       <h4>🛺 اختر نوع التوكتوك</h4>
       <div class="tuktuk-type-row">
         <button class="tuktuk-type-btn" id="ttOpen" onclick="pickTuktukType('كاشف')"><span class="em">🌬️</span>كاشف<small>مفتوح من الجوانب</small></button>
-        <button class="tuktuk-type-btn" id="ttCovered" onclick="pickTuktukType('مغطى')"><span class="em">☂️</span>مغطى<small>محمي من الشمس والمطر</small></button>
+        <button class="tuktuk-type-btn" id="ttCovered" onclick="pickTuktukType('مغطى')"><span class="em">☂️</span>مغطى<small>محمي من الشمس</small></button>
       </div>
     </div>
 
     <button class="action-btn hidden" id="confirmVehicleBtn" style="margin-top:18px;" onclick="confirmVehicleAction()">تأكيد المتابعة</button>
   </div>
 
-  <!-- 6. نظام الرحلة -->
+  <!-- نظام الرحلة -->
   <div id="screenTripMode" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenVehicleSelect')">← رجوع</button></div>
     <h2 style="text-align:center;">اختر <em>نظام الرحلة</em></h2>
-    <p style="text-align:center;">اختر النظام المناسب لتنقلاتك بأسوان:</p>
+    <p style="text-align:center;">اختر النظام المناسب لتنقلاتك:</p>
     <div class="big-mode-grid">
       <div class="big-mode-card" id="modeCardSchedule" onclick="selectTripMode('schedule')">
-        <span class="big-mode-icon">📅</span><div class="big-mode-title">جدول مواعيد منتظم (شهري)</div><div class="big-mode-desc">مواعيد ثابتة ذهاب وعودة للعمل أو الدراسة بين القرى والمراكز</div>
+        <span class="big-mode-icon">📅</span><div class="big-mode-title">جدول مواعيد منتظم (شهري)</div><div class="big-mode-desc">مواعيد ثابتة ذهاب وعودة</div>
       </div>
       <div class="big-mode-card" id="modeCardNormal" onclick="selectTripMode('normal')">
-        <span class="big-mode-icon">🚖</span><div class="big-mode-title">رحلة عادية مفردة</div><div class="big-mode-desc">مشوار سريع ومباشر الآن داخل أسوان</div>
+        <span class="big-mode-icon">🚖</span><div class="big-mode-title">رحلة عادية مفردة</div><div class="big-mode-desc">مشوار سريع ومباشر الآن</div>
       </div>
     </div>
     <button class="action-btn" style="margin-top:10px;" onclick="goToTripFormScreen()">متابعة ملء البيانات ➔</button>
   </div>
 
-  <!-- 7. تفاصيل الرحلة -->
+  <!-- تفاصيل الرحلة -->
   <div id="screenTripForm" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenTripMode')">← رجوع</button></div>
     <h2 id="formScreenHeading" style="color:var(--gold);font-family:var(--serif);font-size:20px;margin-bottom:15px;text-align:center;"></h2>
@@ -369,11 +368,11 @@ setTimeout(dismissIntro, 3800);
     <div id="formScheduleSection" class="hidden">
       <div class="form-group"><label>اسم صاحب الموعد:</label><input type="text" id="schedulePersonName" placeholder="اكتب الاسم..."></div>
       <div class="form-group">
-        <label>📍 اختر منطقة عمل الطلب (لتوجيهه للسواقين في نفس المنطقة):</label>
+        <label>📍 اختر منطقة عمل الطلب:</label>
         <select class="area-select" id="scheduleAreaSelect"></select>
       </div>
-      <div class="form-group"><label>📍 عنوان الانطلاق بالتفصيل:</label><input type="text" id="schedulePickup" placeholder="اكتب من أين (مثال: الشارع الرئيسي، بجوار الموقف)..."></div>
-      <div class="form-group"><label>🏁 عنوان الوجهة بالتفصيل:</label><input type="text" id="scheduleDestination" placeholder="اكتب إلى أين (مثال: المستشفى، المدرسة)..."></div>
+      <div class="form-group"><label>📍 عنوان الانطلاق بالتفصيل:</label><input type="text" id="schedulePickup" placeholder="من أين..."></div>
+      <div class="form-group"><label>🏁 عنوان الوجهة بالتفصيل:</label><input type="text" id="scheduleDestination" placeholder="إلى أين..."></div>
       <div style="display:flex;gap:10px;">
         <div class="form-group" style="flex:1;"><label>وقت الذهاب:</label><input type="time" id="morningTime" value="08:00"></div>
         <div class="form-group" style="flex:1;"><label>وقت العودة:</label><input type="time" id="returnTime" value="14:00"></div>
@@ -384,17 +383,17 @@ setTimeout(dismissIntro, 3800);
 
     <div id="formNormalSection" class="hidden">
       <div class="form-group">
-        <label>📍 اختر منطقة الطلب الأساسية (لتوجيهه للسواقين بنفس المنطقة):</label>
+        <label>📍 اختر منطقة الطلب الأساسية:</label>
         <select class="area-select" id="normalAreaSelect"></select>
       </div>
-      <div class="form-group"><label>📍 من (عنوان ركوب الراكب بالتفصيل):</label><input type="text" id="pickupLocation" placeholder="اكتب مكانك الحالي بالتفصيل..."></div>
-      <div class="form-group"><label>🏁 إلى (عنوان النزول بالتفصيل):</label><input type="text" id="dropoffLocation" placeholder="اكتب وجهتك بالتفصيل..."></div>
+      <div class="form-group"><label>📍 من:</label><input type="text" id="pickupLocation" placeholder="موقع الانطلاق..."></div>
+      <div class="form-group"><label>🏁 إلى:</label><input type="text" id="dropoffLocation" placeholder="الوجهة..."></div>
       <div class="form-group"><label>سعرك المقترح للرحلة (جنيه):</label><input type="number" id="customerPrice" placeholder="السعر..."></div>
       <button class="action-btn" onclick="sendOfferToCloud('normal')">إرسال عرض الرحلة لسواقين المنطقة</button>
     </div>
   </div>
 
-  <!-- 8. تتبع الرحلة (شاشة الانتظار للزبون) -->
+  <!-- تتبع الرحلة للزبون -->
   <div id="screenCustomerTracking" class="screen-box hidden" style="text-align:right;">
     <h2>حالة <em>الرحلة والطلبات</em></h2>
 
@@ -426,12 +425,12 @@ setTimeout(dismissIntro, 3800);
     <p id="waitingDriverStatusMsg" style="color:var(--muted);text-align:center;margin-top:20px;">⏳ جارِ البحث عن سائق في منطقتك بأسوان...</p>
   </div>
 
-  <!-- 9. لوحة السائق -->
+  <!-- لوحة السائق -->
   <div id="screenDriverDashboard" class="screen-box hidden" style="text-align:right;">
     <div id="driverLockedOverlay" class="hidden" style="background:rgba(3,3,5,.98);border:2px solid #ff5f57;padding:24px 16px;border-radius:20px;margin-bottom:15px;text-align:center;">
       <span style="font-size:42px;">🔒</span>
       <h3 style="color:#ff5f57;font-family:var(--serif);font-size:19px;margin:10px 0 6px 0;">انتهت فترة الاشتراك أو توجد مديونية معلقة</h3>
-      <p style="color:var(--text);font-size:13px;margin-bottom:15px;">عذراً يا بطل، لقد مر شهر على حسابك أو بلغت العمولات الحد الأقصى. سدد المستحقات لاستعادة العمل.</p>
+      <p style="color:var(--text);font-size:13px;margin-bottom:15px;">عذراً يا بطل، لقد مر شهر على حسابك أو بلغت العمولات الحد الأقصى.</p>
       <a id="driverPayLockBtn" href="#" target="_blank" class="action-btn" style="background:#25d366;color:#fff;display:block;text-decoration:none;">💬 ادفع عبر واتساب (01008204580)</a>
     </div>
 
@@ -469,7 +468,7 @@ setTimeout(dismissIntro, 3800);
     <button class="action-btn ghost" style="margin-top:14px;border-color:rgba(255,95,87,.3);color:#ff5f57;" onclick="logoutApp()">تسجيل خروج 🚪</button>
   </div>
 
-  <!-- 10. الأدمن -->
+  <!-- لوحة الأدمن -->
   <div id="screenAdmin" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
     <h2 style="color:var(--gold);text-align:center;">لوحة تحكم <em>الأدمن</em></h2>
@@ -486,7 +485,7 @@ setTimeout(dismissIntro, 3800);
     <h3 style="color:var(--gold);font-family:var(--serif);margin:16px 0 8px;font-size:17px;">🙋 قائمة الزبائن بالتفصيل:</h3>
     <div id="adminCustomersList"><p style="color:var(--muted);text-align:center;">جاري الجلب...</p></div>
 
-    <h3 style="color:var(--gold);font-family:var(--serif);margin:24px 0 8px;font-size:17px;">📋 قائمة السواقين (مع البطاقة وبيانات التحكم):</h3>
+    <h3 style="color:var(--gold);font-family:var(--serif);margin:24px 0 8px;font-size:17px;">📋 قائمة السواقين:</h3>
     <div id="adminDriversList"><p style="color:var(--muted);text-align:center;">جاري الجلب...</p></div>
   </div>
 
@@ -572,14 +571,14 @@ function handleScreenClick(event) {
 }
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCUx7dd0-NsnSTao3k7Q9n_0d7po69Pjxk",
-  authDomain: "tuktuk-app-c452d.firebaseapp.com",
-  databaseURL: "https://tuktuk-app-c452d-default-rtdb.firebaseio.com",
-  projectId: "tuktuk-app-c452d",
-  storageBucket: "tuktuk-app-c452d.firebasestorage.app",
-  messagingSenderId: "1006074741794",
-  appId: "1:1006074741794:web:6eab54f1265b170672b67b",
-  measurementId: "G-R475LPN1G4"
+  apiKey: "AIzaSyD98O2Zucs4NtM-8nGPmyVYBdNiaf4Puy8",
+  authDomain: "tawsila-307a2.firebaseapp.com",
+  databaseURL: "https://tawsila-307a2-default-rtdb.firebaseio.com",
+  projectId: "tawsila-307a2",
+  storageBucket: "tawsila-307a2.firebasestorage.app",
+  messagingSenderId: "1097827685844",
+  appId: "1:1097827685844:web:69eb846d20411bd98df241",
+  measurementId: "G-BS2GXMLYZB"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -719,7 +718,7 @@ function sendDriverOTP() {
     registeredDriver.phone = phone;
     registeredDriver.email = email;
     registeredDriver.workingArea = workingArea;
-    registeredDriver.idCardUrl = e.target.result; // تخزين صورة البطاقة كـ Base64 لتعمل فورا في لوحة الأدمن
+    registeredDriver.idCardUrl = e.target.result;
     registeredDriver.registerTimestamp = Date.now();
 
     generatedDriverOtp = Math.floor(1000 + Math.random() * 9000).toString();
@@ -779,7 +778,7 @@ function pickTuktukType(type) {
 }
 
 function confirmVehicleAction() {
-  if(!selectedVehicle) { alert("اختر مركبة أولاً! (ولو توكتوك اختار كاشف أو مغطى)"); return; }
+  if(!selectedVehicle) { alert("اختر مركبة أولاً!"); return; }
 
   if(activeRole === 'driver') {
     registeredDriver.vehicle = selectedVehicle;
@@ -982,9 +981,7 @@ function listenForTripsFromCloud() {
   db.ref('trips').on('child_removed', (snapshot) => {
     let tripId = snapshot.key;
     let cardElement = document.getElementById(`trip-${tripId}`);
-    if(cardElement) {
-      cardElement.remove();
-    }
+    if(cardElement) { cardElement.remove(); }
     let feedDiv = document.getElementById('driverScheduleFeed');
     if(feedDiv && feedDiv.children.length === 0) {
       feedDiv.innerHTML = `<p style="color:var(--muted);text-align:center;padding:8px;font-size:13px;">لا توجد طلبات جديدة في منطقتك حالياً.</p>`;
@@ -1107,7 +1104,6 @@ function refreshStats() {
 function loadAdminData() {
   document.getElementById('adminTotalRevenue').innerText = totalPlatformRevenue + " جنيه";
 
-  // جلب الزبائن بالتفصيل
   db.ref('customers').on('value', (snapshot) => {
     let customers = snapshot.val();
     let custContainer = document.getElementById('adminCustomersList');
@@ -1133,7 +1129,6 @@ function loadAdminData() {
     });
   });
 
-  // جلب السواقين بالتفصيل مع البطاقة وزر الحذف والتحكم
   db.ref('drivers').on('value', (snapshot) => {
     let drivers = snapshot.val();
     let listContainer = document.getElementById('adminDriversList');
@@ -1151,7 +1146,7 @@ function loadAdminData() {
       let d = drivers[phoneKey];
       let banStatusText = d.isBanned ? "محظور 🚫" : "نشط ✅";
       let banBtnText = d.isBanned ? "رفع الحظر" : "حظر ⛔";
-      let idCardImg = d.idCardUrl ? `<div style="margin-top:8px;"><a href="${d.idCardUrl}" target="_blank"><img src="${d.idCardUrl}" style="width:100px; height:60px; object-fit:cover; border-radius:8px; border:1px solid var(--gold);" alt="صورة البطاقة"></a><br><small style="color:var(--gold);">اضغط على البطاقة لتكبيرها</small></div>` : `<p style="color:var(--muted); font-size:12px;">لم يتم رفع صورة البطاقة</p>`;
+      let idCardImg = d.idCardUrl ? `<div style="margin-top:8px;"><a href="${d.idCardUrl}" target="_blank"><img src="${d.idCardUrl}" style="width:100px; height:60px; object-fit:cover; border-radius:8px; border:1px solid var(--gold);" alt="صورة البطاقة"></a></div>` : `<p style="color:var(--muted); font-size:12px;">لم يتم رفع صورة البطاقة</p>`;
 
       listContainer.innerHTML += `
         <div class="admin-stat-card">
@@ -1162,10 +1157,7 @@ function loadAdminData() {
           <p><strong>المديونية:</strong> <span style="color: #ff5f57;">${d.debt || 0} جنيه</span></p>
           <p style="margin-top: 4px;"><strong>الحالة:</strong> ${banStatusText}</p>
           
-          <div style="margin: 8px 0;">
-            <strong>صورة البطاقة الشخصية:</strong>
-            ${idCardImg}
-          </div>
+          <div style="margin: 8px 0;"><strong>صورة البطاقة:</strong> ${idCardImg}</div>
 
           <div style="display: flex; gap: 8px; margin-top: 12px; flex-wrap:wrap;">
             <button class="action-btn" style="padding: 6px; font-size: 12px; margin:0; flex:1;" onclick="adminResetDebt('${phoneKey}')">تصفير المديونية</button>
@@ -1190,16 +1182,16 @@ function adminToggleBan(phoneKey, currentStatus) {
 }
 
 function adminDeleteCustomer(phoneKey) {
-  if(confirm("هل أنت متأكد من حذف هذا الزبون نهائياً من السجل؟")) {
+  if(confirm("هل أنت متأكد من حذف هذا الزبون نهائياً؟")) {
     db.ref('customers/' + phoneKey).remove();
     alert("تم حذف الزبون بنجاح.");
   }
 }
 
 function adminDeleteDriver(phoneKey) {
-  if(confirm("تحذير: هل أنت متأكد من حذف هذا السائق نهائياً من سجل التطبيق؟")) {
+  if(confirm("هل أنت متأكد من حذف هذا السائق نهائياً؟")) {
     db.ref('drivers/' + phoneKey).remove();
-    alert("تم حذف السائق نهائياً من قاعدة البيانات.");
+    alert("تم حذف السائق نهائياً.");
   }
 }
 </script>
