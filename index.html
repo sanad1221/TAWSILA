@@ -68,39 +68,41 @@ body::before{content:"";position:fixed;z-index:0;pointer-events:none;width:80vma
 @keyframes rippleEffect{to{transform:scale(4);opacity:0}}
 .touch-tuktuk{position:absolute;font-size:26px;pointer-events:none;z-index:999;transition:all .8s ease-out;transform:translate(-50%,-50%) scale(.5);opacity:1}
 
-nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 6vw;
+nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 5vw;
   backdrop-filter:blur(26px) saturate(190%);background:var(--glass);border-bottom:1px solid var(--line);width:100%;box-shadow:0 12px 35px rgba(0,0,0,.25)}
-.logo{font-family:var(--serif);font-weight:700;font-size:23px;letter-spacing:1px;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:1px;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .logo em{-webkit-text-fill-color:var(--gold)}
-.nav-buttons-group{display:flex;gap:10px;align-items:center}
-.nav-btn{background:none;border:1px solid var(--line);color:var(--text);padding:7px 16px;font-size:12px;font-weight:600;border-radius:99px;cursor:pointer;transition:.3s;backdrop-filter:blur(6px)}
+.nav-buttons-group{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.nav-btn{background:none;border:1px solid var(--line);color:var(--text);padding:6px 12px;font-size:11.5px;font-weight:600;border-radius:99px;cursor:pointer;transition:.3s;backdrop-filter:blur(6px)}
 .nav-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 18px rgba(243,184,37,.25)}
 .nav-btn.danger{border-color:rgba(255,77,77,.3);color:#ff5f57}
 .nav-btn.danger:hover{background:#ff5f57;color:#fff}
+.nav-btn.support{border-color:rgba(37,211,102,.4);color:#25d366;}
+.nav-btn.support:hover{background:#25d366;color:#fff;}
 
-.container{max-width:680px;margin:30px auto;padding:0 16px;width:100%;position:relative;z-index:2;flex:1}
-.screen-box{background:var(--glass);backdrop-filter:blur(24px) saturate(160%);border:1px solid transparent;border-radius:32px;
-  padding:36px 24px;margin-bottom:25px;box-shadow:0 35px 80px rgba(0,0,0,.38),var(--glow);text-align:center;position:relative;animation:fadeInScreen .45s cubic-bezier(.16,1,.3,1) forwards}
+.container{max-width:680px;margin:25px auto;padding:0 16px;width:100%;position:relative;z-index:2;flex:1}
+.screen-box{background:var(--glass);backdrop-filter:blur(24px) saturate(160%);border:1px solid transparent;border-radius:28px;
+  padding:28px 20px;margin-bottom:25px;box-shadow:0 35px 80px rgba(0,0,0,.38),var(--glow);text-align:center;position:relative;animation:fadeInScreen .45s cubic-bezier(.16,1,.3,1) forwards}
 .screen-box::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
   background:linear-gradient(165deg,rgba(243,184,37,.65),transparent 35%,transparent 65%,rgba(243,184,37,.4));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 @keyframes fadeInScreen{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.screen-box h1{font-size:clamp(24px,5.5vw,34px);margin-bottom:10px}
-.screen-box h2{font-size:clamp(21px,4.8vw,28px);margin-bottom:8px}
+.screen-box h1{font-size:clamp(22px,5vw,30px);margin-bottom:8px}
+.screen-box h2{font-size:clamp(19px,4.5vw,25px);margin-bottom:8px}
 .screen-box h2 em,.screen-box h1 em{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.screen-box h2::after{content:"";display:block;width:50px;height:3px;margin:10px auto 0;border-radius:99px;background:var(--gold-grad)}
-.screen-box p{color:var(--muted);font-size:14px;margin-bottom:18px}
+.screen-box h2::after{content:"";display:block;width:40px;height:3px;margin:8px auto 0;border-radius:99px;background:var(--gold-grad)}
+.screen-box p{color:var(--muted);font-size:13.5px;margin-bottom:14px}
 
-.top-back-row{display:flex;justify-content:flex-start;margin-bottom:12px;width:100%}
-.back-nav-btn{display:inline-block;background:var(--input-bg);border:1px solid var(--line);color:var(--text);padding:8px 18px;font-size:12px;border-radius:99px;cursor:pointer;transition:.3s;z-index:10;backdrop-filter:blur(6px)}
+.top-back-row{display:flex;justify-content:flex-start;margin-bottom:10px;width:100%}
+.back-nav-btn{display:inline-block;background:var(--input-bg);border:1px solid var(--line);color:var(--text);padding:6px 16px;font-size:11.5px;border-radius:99px;cursor:pointer;transition:.3s;z-index:10;backdrop-filter:blur(6px)}
 .back-nav-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateX(3px)}
 
-.form-group{margin-bottom:18px;text-align:right}
-.form-group label{display:block;margin-bottom:6px;color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.3px}
-.form-group input,.form-group select{width:100%;padding:14px 18px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:16px;color:var(--text);font-size:14px;outline:none;transition:all .4s ease}
+.form-group{margin-bottom:15px;text-align:right}
+.form-group label{display:block;margin-bottom:5px;color:var(--muted);font-size:12.5px;font-weight:600;letter-spacing:.3px}
+.form-group input,.form-group select{width:100%;padding:12px 16px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:14px;color:var(--text);font-size:13.5px;outline:none;transition:all .4s ease}
 .form-group select{appearance:none;-webkit-appearance:none;cursor:pointer;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f3b825' stroke-width='3'><polyline points='6 9 12 15 18 9'/></svg>");
-  background-repeat:no-repeat;background-position:left 18px center;padding-left:42px}
+  background-repeat:no-repeat;background-position:left 16px center;padding-left:40px}
 .form-group select option{background:#0b0b0f;color:#f8f6f0}
 body.light-mode .form-group select option{background:#ffffff;color:#121216}
 body.light-mode .form-group input,body.light-mode .form-group select{background-color:rgba(255,255,255,.9)}
@@ -109,84 +111,80 @@ body.light-mode .form-group input,body.light-mode .form-group select{background-
   border-color: var(--gold);
   background: rgba(243,184,37,0.04);
   transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(243,184,37,0.35), 0 0 10px rgba(243,184,37,0.2), inset 0 0 8px rgba(243,184,37,0.15);
+  box-shadow: 0 0 20px rgba(243,184,37,0.3);
 }
 
-.form-group input[type="file"]{padding:10px;background:rgba(243,184,37,.03);border:1px dashed rgba(243,184,37,.5);cursor:pointer}
+.form-group input[type="file"]{padding:8px;background:rgba(243,184,37,.03);border:1px dashed rgba(243,184,37,.5);cursor:pointer}
 
-.action-btn{display:inline-block;position:relative;overflow:hidden;padding:15px 26px;border-radius:99px;background:var(--gold-grad);color:#120d00;font-weight:700;letter-spacing:.4px;font-size:14.5px;border:none;cursor:pointer;transition:.3s;width:100%;margin-top:10px;text-align:center;
-  box-shadow:0 12px 30px rgba(243,184,37,.3),inset 0 1px 0 rgba(255,255,255,.45)}
+.action-btn{display:inline-block;position:relative;overflow:hidden;padding:13px 22px;border-radius:99px;background:var(--gold-grad);color:#120d00;font-weight:700;letter-spacing:.4px;font-size:14px;border:none;cursor:pointer;transition:.3s;width:100%;margin-top:8px;text-align:center;
+  box-shadow:0 10px 25px rgba(243,184,37,.3),inset 0 1px 0 rgba(255,255,255,.45)}
 .action-btn::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);transition:left .7s ease}
-.action-btn:hover{background:var(--gold-grad);color:#120d00;transform:translateY(-3px);box-shadow:0 18px 40px rgba(243,184,37,.45)}
+.action-btn:hover{background:var(--gold-grad);color:#120d00;transform:translateY(-2px);box-shadow:0 15px 35px rgba(243,184,37,.45)}
 .action-btn:hover::after{left:130%}
 .action-btn:active{transform:translateY(0) scale(.98)}
 .action-btn.ghost{background:transparent;color:var(--text);box-shadow:none;border:1px solid var(--line)}
 .action-btn.ghost:hover{background:rgba(243,184,37,.08);color:var(--gold);border-color:var(--gold);box-shadow:none}
 
-.hero-showcase{position:relative;width:100%;height:175px;border-radius:20px;overflow:hidden;margin-bottom:18px;box-shadow:0 15px 35px rgba(0,0,0,.6);border:1px solid rgba(243,184,37,.3)}
+/* تم تصغير الارتفاع وتظبيط الأبعاد للموبايل */
+.hero-showcase{position:relative;width:100%;height:130px;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 12px 25px rgba(0,0,0,.5);border:1px solid rgba(243,184,37,.3)}
 .hero-showcase img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.82) contrast(1.15);animation:kenBurns 10s ease-in-out infinite alternate}
 @keyframes kenBurns{0%{transform:scale(1)}100%{transform:scale(1.05)}}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,3,5,.9) 0%,rgba(3,3,5,.2) 60%,transparent 100%);display:flex;align-items:flex-end;padding:16px}
-.hero-title-badge{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--gold2);text-shadow:0 2px 10px rgba(0,0,0,.9)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,3,5,.9) 0%,rgba(3,3,5,.2) 60%,transparent 100%);display:flex;align-items:flex-end;padding:12px}
+.hero-title-badge{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--gold2);text-shadow:0 2px 8px rgba(0,0,0,.9)}
 
-.smoke-container{position:absolute;bottom:0;left:0;width:100%;height:80px;pointer-events:none;overflow:hidden;z-index:2}
-.smoke-puff{position:absolute;bottom:-20px;background:radial-gradient(circle,rgba(255,255,255,.28) 0%,rgba(243,184,37,.12) 40%,transparent 70%);border-radius:50%;filter:blur(8px);animation:smokeRise 4s ease-in infinite}
-@keyframes smokeRise{0%{transform:translateY(0) scale(.5);opacity:0}50%{opacity:.5}100%{transform:translateY(-100px) scale(2.4);opacity:0}}
+.smoke-container{position:absolute;bottom:0;left:0;width:100%;height:60px;pointer-events:none;overflow:hidden;z-index:2}
+.smoke-puff{position:absolute;bottom:-15px;background:radial-gradient(circle,rgba(255,255,255,.28) 0%,rgba(243,184,37,.12) 40%,transparent 70%);border-radius:50%;filter:blur(6px);animation:smokeRise 4s ease-in infinite}
+@keyframes smokeRise{0%{transform:translateY(0) scale(.5);opacity:0}50%{opacity:.5}100%{transform:translateY(-80px) scale(2);opacity:0}}
 
-.fleet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
-.fleet-card{background:var(--input-bg);border-radius:22px;overflow:hidden;position:relative;cursor:pointer;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px 16px;text-align:center;transition:all .35s ease;background-size:cover;background-position:center;min-height:170px;box-shadow:0 14px 35px rgba(0,0,0,.3)}
+.fleet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.fleet-card{background:var(--input-bg);border-radius:18px;overflow:hidden;position:relative;cursor:pointer;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 12px;text-align:center;transition:all .3s ease;background-size:cover;background-position:center;min-height:140px;box-shadow:0 10px 25px rgba(0,0,0,.25)}
 .fleet-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,3,5,.5),rgba(3,3,5,.92));z-index:1}
-.fleet-card:hover{transform:translateY(-8px) scale(1.02);border-color:var(--gold);box-shadow:0 24px 50px rgba(243,184,37,.25)}
-.fleet-card:hover .fleet-icon{transform:scale(1.2) rotate(-6deg)}
-.fleet-card.selected{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 0 0 2px var(--gold),0 0 45px rgba(243,184,37,.5)}
-.fleet-card.selected::after{content:"✓";position:absolute;top:12px;left:12px;z-index:3;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--gold-grad);color:#120d00;font-weight:900;font-size:14px}
+.fleet-card:hover{transform:translateY(-5px);border-color:var(--gold)}
+.fleet-card.selected{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 0 0 2px var(--gold),0 0 35px rgba(243,184,37,.4)}
+.fleet-card.selected::after{content:"✓";position:absolute;top:10px;left:10px;z-index:3;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--gold-grad);color:#120d00;font-weight:900;font-size:12px}
 .fleet-card-content{position:relative;z-index:2;width:100%}
-.fleet-title{font-family:var(--serif);font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,.7)}
-.fleet-desc{font-size:12px;color:#ded8cd}
-.fleet-icon{font-size:42px;margin-bottom:8px;display:inline-block;transition:transform .35s cubic-bezier(.3,1.6,.5,1);filter:drop-shadow(0 6px 12px rgba(0,0,0,.6))}
+.fleet-title{font-family:var(--serif);font-size:16px;font-weight:700;color:#fff;margin-bottom:2px}
+.fleet-desc{font-size:11px;color:#ded8cd}
+.fleet-icon{font-size:36px;margin-bottom:6px;display:inline-block;transition:transform .3s ease}
 
-.tuktuk-type-box{margin-top:6px;padding:18px;border-radius:20px;background:rgba(243,184,37,.08);border:1px dashed rgba(243,184,37,.6);animation:pulseIn .4s ease}
-.tuktuk-type-box h4{font-family:var(--serif);color:var(--gold);font-size:16px;margin-bottom:12px;text-align:center}
-.tuktuk-type-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tuktuk-type-btn{padding:16px 10px;border-radius:18px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--text);cursor:pointer;font-weight:700;font-size:14px;transition:.3s;display:flex;flex-direction:column;align-items:center;gap:4px}
-.tuktuk-type-btn span.em{font-size:30px}
-.tuktuk-type-btn small{font-weight:400;font-size:11.5px;color:var(--muted)}
-.tuktuk-type-btn:hover{border-color:var(--gold);transform:translateY(-3px)}
-.tuktuk-type-btn.selected{border-color:var(--gold);background:rgba(243,184,37,.18);box-shadow:0 0 0 1px var(--gold),0 12px 28px rgba(243,184,37,.3)}
+.tuktuk-type-box{margin-top:6px;padding:14px;border-radius:16px;background:rgba(243,184,37,.08);border:1px dashed rgba(243,184,37,.6)}
+.tuktuk-type-box h4{font-family:var(--serif);color:var(--gold);font-size:15px;margin-bottom:10px;text-align:center}
+.tuktuk-type-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tuktuk-type-btn{padding:12px 8px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--text);cursor:pointer;font-weight:700;font-size:13px;transition:.3s;display:flex;flex-direction:column;align-items:center;gap:2px}
+.tuktuk-type-btn span.em{font-size:24px}
+.tuktuk-type-btn small{font-weight:400;font-size:10.5px;color:var(--muted)}
+.tuktuk-type-btn.selected{border-color:var(--gold);background:rgba(243,184,37,.18);box-shadow:0 0 0 1px var(--gold)}
 
-.big-mode-grid{display:flex;flex-direction:column;gap:12px;margin:18px 0}
-.big-mode-card{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:22px;padding:20px 18px;text-align:center;cursor:pointer;transition:all .35s ease;display:flex;flex-direction:column;align-items:center}
-.big-mode-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 14px 32px rgba(243,184,37,.18)}
-.big-mode-card.selected{border-color:var(--gold);background:rgba(243,184,37,.1);box-shadow:0 0 0 1px var(--gold),0 14px 38px rgba(243,184,37,.32)}
-.big-mode-icon{font-size:36px;margin-bottom:6px;display:block;animation:floatY 3s ease-in-out infinite}
-@keyframes floatY{50%{transform:translateY(-5px)}}
-.big-mode-title{font-family:var(--serif);font-size:15.5px;font-weight:700;color:var(--text);margin-bottom:2px}
-.big-mode-desc{font-size:12px;color:var(--muted)}
+.big-mode-grid{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.big-mode-card{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:18px;padding:16px 14px;text-align:center;cursor:pointer;transition:all .3s ease;display:flex;flex-direction:column;align-items:center}
+.big-mode-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.big-mode-card.selected{border-color:var(--gold);background:rgba(243,184,37,.1);box-shadow:0 0 0 1px var(--gold)}
+.big-mode-icon{font-size:30px;margin-bottom:4px;display:block}
+.big-mode-title{font-family:var(--serif);font-size:14.5px;font-weight:700;color:var(--text);margin-bottom:2px}
+.big-mode-desc{font-size:11.5px;color:var(--muted)}
 
-.star-rating{display:flex;gap:6px;justify-content:center;font-size:24px;cursor:pointer;margin:8px 0}
-.star{color:var(--line);font-size:32px;transition:transform .2s,color .2s}
-.star:hover{transform:scale(1.3) rotate(-8deg);color:var(--gold2)}
-.star.rated{color:var(--gold);text-shadow:0 0 12px rgba(243,184,37,.6)}
+.star-rating{display:flex;gap:6px;justify-content:center;font-size:24px;cursor:pointer;margin:6px 0}
+.star{color:var(--line);font-size:28px;transition:transform .2s,color .2s}
+.star.rated{color:var(--gold);text-shadow:0 0 10px rgba(243,184,37,.6)}
 
-.social-links{display:flex;gap:8px;justify-content:center;margin-top:12px}
-.social-btn{padding:8px 18px;font-size:12px;border-radius:99px;font-weight:600;border:1px solid var(--line);background:var(--input-bg);color:var(--text);transition:.3s}
-.social-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);background:rgba(243,184,37,.12)}
+.social-links{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.social-btn{padding:6px 14px;font-size:11px;border-radius:99px;font-weight:600;border:1px solid var(--line);background:var(--input-bg);color:var(--text);transition:.3s}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(243,184,37,.12)}
 
-.creator-box{margin:14px 0;padding:18px;background:linear-gradient(145deg,rgba(243,184,37,.12),rgba(0,0,0,.28));border:1px solid rgba(243,184,37,.35);border-radius:22px}
-.creator-name{font-family:var(--serif);font-size:26px;font-weight:700;margin-top:2px;font-style:italic;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.creator-box{margin:12px 0;padding:14px;background:linear-gradient(145deg,rgba(243,184,37,.12),rgba(0,0,0,.28));border:1px solid rgba(243,184,37,.35);border-radius:18px}
+.creator-name{font-family:var(--serif);font-size:22px;font-weight:700;margin-top:2px;font-style:italic;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-.wallet-box,.admin-stat-card,.schedule-offer-box,.driver-offer-box{background:rgba(0,0,0,.28);border:1px solid var(--line);padding:18px;border-radius:20px;margin-bottom:12px;text-align:right;box-shadow:0 10px 25px rgba(0,0,0,.22)}
+.wallet-box,.admin-stat-card,.schedule-offer-box,.driver-offer-box{background:rgba(0,0,0,.28);border:1px solid var(--line);padding:14px;border-radius:16px;margin-bottom:10px;text-align:right;box-shadow:0 8px 20px rgba(0,0,0,.2)}
 .wallet-box{border-right:3px solid var(--gold)}
-.schedule-offer-box,.driver-offer-box{margin-top:12px;padding:16px;border-right:3px solid var(--gold);animation:pulseIn .5s ease}
-@keyframes pulseIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.schedule-offer-box,.driver-offer-box{margin-top:10px;padding:14px;border-right:3px solid var(--gold)}
 
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 16px}
-.stat-card{padding:16px 8px;border-radius:20px;text-align:center;background:linear-gradient(145deg,rgba(243,184,37,.14),rgba(0,0,0,.28));border:1px solid rgba(243,184,37,.35);box-shadow:0 10px 25px rgba(0,0,0,.22)}
-.stat-card .num{font-family:var(--serif);font-size:26px;font-weight:700;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
-.stat-card .lbl{font-size:11.5px;color:var(--muted);margin-top:4px}
-.stat-card .ico{font-size:22px;display:block;margin-bottom:4px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 14px}
+.stat-card{padding:12px 6px;border-radius:16px;text-align:center;background:linear-gradient(145deg,rgba(243,184,37,.14),rgba(0,0,0,.28));border:1px solid rgba(243,184,37,.35)}
+.stat-card .num{font-family:var(--serif);font-size:22px;font-weight:700;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.stat-card .lbl{font-size:11px;color:var(--muted);margin-top:3px}
+.stat-card .ico{font-size:18px;display:block;margin-bottom:3px}
 
-footer{border-top:1px solid var(--line);padding:22px 6vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:12px;position:relative;z-index:1;background:var(--glass);backdrop-filter:blur(16px)}
+footer{border-top:1px solid var(--line);padding:18px 5vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;color:var(--muted);font-size:11.5px;position:relative;z-index:1;background:var(--glass);backdrop-filter:blur(16px)}
 </style>
 </head>
 <body onclick="handleScreenClick(event)">
@@ -207,12 +205,12 @@ footer{border-top:1px solid var(--line);padding:22px 6vw;display:flex;justify-co
 <script>
 const introSmoke = document.getElementById('introSmokeBox');
 if(introSmoke) {
-  for(let i=0; i<10; i++) {
+  for(let i=0; i<8; i++) {
     let p = document.createElement('div');
     p.className = 'intro-puff';
     p.style.left = (30 + Math.random() * 40) + '%';
-    p.style.width = (40 + Math.random() * 50) + 'px';
-    p.style.height = (40 + Math.random() * 50) + 'px';
+    p.style.width = (30 + Math.random() * 40) + 'px';
+    p.style.height = (30 + Math.random() * 40) + 'px';
     p.style.animationDuration = (2.5 + Math.random() * 1.5) + 's';
     p.style.animationDelay = (Math.random() * 2) + 's';
     introSmoke.appendChild(p);
@@ -227,12 +225,13 @@ function dismissIntro() {
     setTimeout(() => { intro.remove(); }, 1200);
   }
 }
-setTimeout(dismissIntro, 3800);
+setTimeout(dismissIntro, 3500);
 </script>
 
 <nav>
   <div class="logo">TAWSILA <em>Aswan.</em></div>
   <div class="nav-buttons-group">
+    <a href="https://wa.me/201008204580?text=مرحباً%20Gasser،%20لدي%20شكوى%20أو%20استفسار%20بخصوص%20تطبيق%20توصيلة:" target="_blank" class="nav-btn support">💬 الشكاوي</a>
     <button class="nav-btn" onclick="toggleTheme()" id="themeBtn">فاتح ☀️</button>
     <button class="nav-btn danger" onclick="logoutApp()">خروج 🚪</button>
   </div>
@@ -253,15 +252,15 @@ setTimeout(dismissIntro, 3800);
     <h1>مستقبل المواصلات وخدمات <em>النقل الذكي</em></h1>
     <p>منصة ذكية متكاملة لإدارة الرحلات وجداول المواصلات بجميع قرى ومراكز أسوان.</p>
     <div class="creator-box">
-      <span style="font-size:10px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;">DESIGNED & DEVELOPED BY</span>
+      <span style="font-size:9.5px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;">DESIGNED & DEVELOPED BY</span>
       <div class="creator-name">Gasser Takadom</div>
       <div class="social-links">
         <a href="https://www.facebook.com/share/1HJq2NVJ9u/" target="_blank" class="social-btn">📘 فيسبوك</a>
         <a href="https://www.instagram.com/gass3r_vip?stkn=MTRzYnRyOWNsZjNmcA==" target="_blank" class="social-btn">📸 انستجرام</a>
       </div>
     </div>
-    <button class="action-btn" style="margin-top:10px;" onclick="switchScreen('screenRole')">ابدأ رحلتك الآن</button>
-    <button class="action-btn ghost" style="margin-top:8px;" onclick="openAdminLogin()">🔐 لوحة تحكم الأدمن</button>
+    <button class="action-btn" style="margin-top:8px;" onclick="switchScreen('screenRole')">ابدأ رحلتك الآن</button>
+    <button class="action-btn ghost" style="margin-top:6px;" onclick="openAdminLogin()">🔐 لوحة تحكم الأدمن</button>
   </div>
 
   <!-- نوع الحساب -->
@@ -269,7 +268,7 @@ setTimeout(dismissIntro, 3800);
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenHome')">← رجوع</button></div>
     <h2>اختر نوع <em>الحساب</em></h2>
     <p>حدد طبيعة استخدامك للمنصة لنبدأ التجربة.</p>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-top:15px;">
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
       <button class="action-btn" onclick="selectRole('customer')">أنا زبون (أبحث عن توصيلة)</button>
       <button class="action-btn ghost" onclick="selectRole('driver')">أنا سائق (أريد العمل بالأسطول)</button>
     </div>
@@ -284,7 +283,7 @@ setTimeout(dismissIntro, 3800);
     <div class="form-group"><label>رقم الهاتف المحمول:</label><input type="tel" id="customerPhone" placeholder="01xxxxxxxx0"></div>
     <div class="form-group"><label>البريد الإلكتروني:</label><input type="email" id="customerEmail" placeholder="name@example.com"></div>
     <button class="action-btn" onclick="sendCustomerOTP()">إرسال كود التحقق</button>
-    <div id="customerOtpBox" class="hidden" style="margin-top:15px;">
+    <div id="customerOtpBox" class="hidden" style="margin-top:12px;">
       <div class="form-group"><label style="color:var(--gold);">أدخل كود التحقق المرسل:</label><input type="text" id="enteredCustomerOtp" placeholder="مثال: 4580"></div>
       <button class="action-btn" onclick="verifyCustomerOTP()">تأكيد والدخول</button>
     </div>
@@ -294,7 +293,7 @@ setTimeout(dismissIntro, 3800);
   <div id="screenDriverAuth" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenRole')">← رجوع</button></div>
     <h2 style="text-align:center;">انضم لأسطول <em>السواقين</em></h2>
-    <p style="text-align:center;">اختر قريتك أو مركزك لكي تستقبل طلبات منطقتك فقط.</p>
+    <p style="text-align:center;">اختر قريتك أو مركزك لتستقبل طلبات منطقتك.</p>
     <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="driverNameInput" placeholder="اكتب اسمك الثلاثي..."></div>
     <div class="form-group"><label>رقم الهاتف:</label><input type="tel" id="driverPhoneInput" placeholder="01xxxxxxxx0"></div>
     <div class="form-group"><label>البريد الإلكتروني:</label><input type="email" id="driverEmailInput" placeholder="driver@example.com"></div>
@@ -304,7 +303,7 @@ setTimeout(dismissIntro, 3800);
     </div>
     <div class="form-group"><label>صورة البطاقة الشخصية:</label><input type="file" id="driverIdCardInput" accept="image/*"></div>
     <button class="action-btn" onclick="sendDriverOTP()">إرسال كود التحقق</button>
-    <div id="driverOtpBox" class="hidden" style="margin-top:15px;">
+    <div id="driverOtpBox" class="hidden" style="margin-top:12px;">
       <div class="form-group"><label style="color:var(--gold);">أدخل الكود المرسل:</label><input type="text" id="enteredDriverOtp" placeholder="مثال: 4580"></div>
       <button class="action-btn" onclick="verifyDriverOTP()">تحقق واختار المركبة</button>
     </div>
@@ -323,7 +322,7 @@ setTimeout(dismissIntro, 3800);
         <div class="fleet-card-content"><span class="fleet-icon">🛵</span><div class="fleet-title">موتوسيكل</div><div class="fleet-desc">لتفادي الزحام</div></div>
       </div>
       <div class="fleet-card" id="card-car" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=500&q=80');" onclick="pickVehicle('عربية ملاكي 🚗')">
-        <div class="fleet-card-content"><span class="fleet-icon">🚗</span><div class="fleet-title">عربية ملاكي</div><div class="fleet-desc">لرحلات مريحة وعائلية</div></div>
+        <div class="fleet-card-content"><span class="fleet-icon">🚗</span><div class="fleet-title">عربية ملاكي</div><div class="fleet-desc">لرحلات عائلية</div></div>
       </div>
       <div class="fleet-card" id="card-kashef" style="background-image:url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=500&q=80');" onclick="pickVehicle('عربية كاشف 🚙')">
         <div class="fleet-card-content"><span class="fleet-icon">🚙</span><div class="fleet-title">عربية كاشف</div><div class="fleet-desc">للطرق الخاصة</div></div>
@@ -336,12 +335,12 @@ setTimeout(dismissIntro, 3800);
     <div id="tuktukTypeBox" class="tuktuk-type-box hidden">
       <h4>🛺 اختر نوع التوكتوك</h4>
       <div class="tuktuk-type-row">
-        <button class="tuktuk-type-btn" id="ttOpen" onclick="pickTuktukType('كاشف')"><span class="em">🌬️</span>كاشف<small>مفتوح من الجوانب</small></button>
+        <button class="tuktuk-type-btn" id="ttOpen" onclick="pickTuktukType('كاشف')"><span class="em">🌬️</span>كاشف<small>مفتوح الجوانب</small></button>
         <button class="tuktuk-type-btn" id="ttCovered" onclick="pickTuktukType('مغطى')"><span class="em">☂️</span>مغطى<small>محمي من الشمس</small></button>
       </div>
     </div>
 
-    <button class="action-btn hidden" id="confirmVehicleBtn" style="margin-top:18px;" onclick="confirmVehicleAction()">تأكيد المتابعة</button>
+    <button class="action-btn hidden" id="confirmVehicleBtn" style="margin-top:14px;" onclick="confirmVehicleAction()">تأكيد المتابعة</button>
   </div>
 
   <!-- نظام الرحلة -->
@@ -357,13 +356,13 @@ setTimeout(dismissIntro, 3800);
         <span class="big-mode-icon">🚖</span><div class="big-mode-title">رحلة عادية مفردة</div><div class="big-mode-desc">مشوار سريع ومباشر الآن</div>
       </div>
     </div>
-    <button class="action-btn" style="margin-top:10px;" onclick="goToTripFormScreen()">متابعة ملء البيانات ➔</button>
+    <button class="action-btn" style="margin-top:8px;" onclick="goToTripFormScreen()">متابعة ملء البيانات ➔</button>
   </div>
 
   <!-- تفاصيل الرحلة -->
   <div id="screenTripForm" class="screen-box hidden" style="text-align:right;">
     <div class="top-back-row"><button class="back-nav-btn" onclick="switchScreen('screenTripMode')">← رجوع</button></div>
-    <h2 id="formScreenHeading" style="color:var(--gold);font-family:var(--serif);font-size:20px;margin-bottom:15px;text-align:center;"></h2>
+    <h2 id="formScreenHeading" style="color:var(--gold);font-family:var(--serif);font-size:19px;margin-bottom:12px;text-align:center;"></h2>
 
     <div id="formScheduleSection" class="hidden">
       <div class="form-group"><label>اسم صاحب الموعد:</label><input type="text" id="schedulePersonName" placeholder="اكتب الاسم..."></div>
@@ -373,7 +372,7 @@ setTimeout(dismissIntro, 3800);
       </div>
       <div class="form-group"><label>📍 عنوان الانطلاق بالتفصيل:</label><input type="text" id="schedulePickup" placeholder="من أين..."></div>
       <div class="form-group"><label>🏁 عنوان الوجهة بالتفصيل:</label><input type="text" id="scheduleDestination" placeholder="إلى أين..."></div>
-      <div style="display:flex;gap:10px;">
+      <div style="display:flex;gap:8px;">
         <div class="form-group" style="flex:1;"><label>وقت الذهاب:</label><input type="time" id="morningTime" value="08:00"></div>
         <div class="form-group" style="flex:1;"><label>وقت العودة:</label><input type="time" id="returnTime" value="14:00"></div>
       </div>
@@ -397,20 +396,20 @@ setTimeout(dismissIntro, 3800);
   <div id="screenCustomerTracking" class="screen-box hidden" style="text-align:right;">
     <h2>حالة <em>الرحلة والطلبات</em></h2>
 
-    <div id="customerDriverOfferNotification" class="hidden" style="background:var(--input-bg);border:1px solid var(--gold);padding:18px;border-radius:18px;margin-top:15px;">
-      <h3 style="color:var(--gold);font-family:var(--serif);font-size:17px;margin-bottom:8px;">🚖 وصلك عرض سعر جديد!</h3>
-      <div id="customerDriverOfferDetails" style="font-size:14px;line-height:1.6;margin-bottom:12px;"></div>
+    <div id="customerDriverOfferNotification" class="hidden" style="background:var(--input-bg);border:1px solid var(--gold);padding:16px;border-radius:16px;margin-top:12px;">
+      <h3 style="color:var(--gold);font-family:var(--serif);font-size:16px;margin-bottom:6px;">🚖 وصلك عرض سعر جديد!</h3>
+      <div id="customerDriverOfferDetails" style="font-size:13.5px;line-height:1.5;margin-bottom:10px;"></div>
       <div style="display:flex;gap:8px;">
         <button class="action-btn" style="margin-top:0;" onclick="acceptDriverPriceOffer()">قبول ✅</button>
         <button class="action-btn ghost" style="margin-top:0;color:#ff5f57;border-color:rgba(255,95,87,.3);" onclick="rejectDriverPriceOffer()">رفض ❌</button>
       </div>
     </div>
 
-    <div id="customerActiveTripBox" class="hidden" style="background:var(--input-bg);border:1px solid var(--gold);padding:20px;border-radius:18px;margin-top:15px;">
-      <h3 style="color:var(--gold);font-family:var(--serif);font-size:18px;margin-bottom:10px;">✅ تم تأكيد الرحلة بنجاح!</h3>
-      <div id="acceptedTripDetailsContent" style="font-size:14px;line-height:1.6;margin-bottom:12px;"></div>
-      <div style="background:var(--bg);padding:14px;border-radius:14px;margin-top:12px;">
-        <h4 style="font-family:var(--serif);color:var(--gold);margin-bottom:6px;font-size:14px;">تقييم السائق:</h4>
+    <div id="customerActiveTripBox" class="hidden" style="background:var(--input-bg);border:1px solid var(--gold);padding:18px;border-radius:16px;margin-top:12px;">
+      <h3 style="color:var(--gold);font-family:var(--serif);font-size:17px;margin-bottom:8px;">✅ تم تأكيد الرحلة بنجاح!</h3>
+      <div id="acceptedTripDetailsContent" style="font-size:13.5px;line-height:1.5;margin-bottom:10px;"></div>
+      <div style="background:var(--bg);padding:12px;border-radius:12px;margin-top:10px;">
+        <h4 style="font-family:var(--serif);color:var(--gold);margin-bottom:4px;font-size:13.5px;">تقييم السائق:</h4>
         <div class="star-rating" id="starRatingContainer">
           <span class="star" onclick="rateDriver(1)">★</span>
           <span class="star" onclick="rateDriver(2)">★</span>
@@ -418,54 +417,54 @@ setTimeout(dismissIntro, 3800);
           <span class="star" onclick="rateDriver(4)">★</span>
           <span class="star" onclick="rateDriver(5)">★</span>
         </div>
-        <p id="ratingFeedback" style="font-size:12px;color:var(--gold);text-align:center;margin-top:4px;"></p>
+        <p id="ratingFeedback" style="font-size:11.5px;color:var(--gold);text-align:center;margin-top:2px;"></p>
       </div>
     </div>
 
-    <p id="waitingDriverStatusMsg" style="color:var(--muted);text-align:center;margin-top:20px;">⏳ جارِ البحث عن سائق في منطقتك بأسوان...</p>
+    <p id="waitingDriverStatusMsg" style="color:var(--muted);text-align:center;margin-top:16px;">⏳ جارِ البحث عن سائق في منطقتك بأسوان...</p>
   </div>
 
   <!-- لوحة السائق -->
   <div id="screenDriverDashboard" class="screen-box hidden" style="text-align:right;">
-    <div id="driverLockedOverlay" class="hidden" style="background:rgba(3,3,5,.98);border:2px solid #ff5f57;padding:24px 16px;border-radius:20px;margin-bottom:15px;text-align:center;">
-      <span style="font-size:42px;">🔒</span>
-      <h3 style="color:#ff5f57;font-family:var(--serif);font-size:19px;margin:10px 0 6px 0;">انتهت فترة الاشتراك أو توجد مديونية معلقة</h3>
-      <p style="color:var(--text);font-size:13px;margin-bottom:15px;">عذراً يا بطل، لقد مر شهر على حسابك أو بلغت العمولات الحد الأقصى.</p>
+    <div id="driverLockedOverlay" class="hidden" style="background:rgba(3,3,5,.98);border:2px solid #ff5f57;padding:20px 14px;border-radius:18px;margin-bottom:12px;text-align:center;">
+      <span style="font-size:36px;">🔒</span>
+      <h3 style="color:#ff5f57;font-family:var(--serif);font-size:17px;margin:8px 0 4px 0;">انتهت فترة الاشتراك أو توجد مديونية معلقة</h3>
+      <p style="color:var(--text);font-size:12.5px;margin-bottom:12px;">عذراً يا بطل، لقد مر شهر على حسابك أو بلغت العمولات الحد الأقصى.</p>
       <a id="driverPayLockBtn" href="#" target="_blank" class="action-btn" style="background:#25d366;color:#fff;display:block;text-decoration:none;">💬 ادفع عبر واتساب (01008204580)</a>
     </div>
 
     <div id="driverNormalDashboardContent">
-      <h2 style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+      <h2 style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
         <span>لوحة السائق <em>والمحفظة</em></span>
-        <span id="driverStatusBadge" style="font-size:12px;background:rgba(40,200,64,.15);color:#28c840;padding:4px 12px;border-radius:20px;">متصل 🟢</span>
+        <span id="driverStatusBadge" style="font-size:11.5px;background:rgba(40,200,64,.15);color:#28c840;padding:3px 10px;border-radius:20px;">متصل 🟢</span>
       </h2>
 
       <div class="wallet-box">
-        <h3 style="color:var(--gold);font-family:var(--serif);margin-bottom:6px;font-size:16px;">💳 المحفظة (نسبة المنصة 10%)</h3>
+        <h3 style="color:var(--gold);font-family:var(--serif);margin-bottom:5px;font-size:15px;">💳 المحفظة (نسبة المنصة 10%)</h3>
         <p>المركبة: <strong id="driverVehicleDisplay" style="color:var(--text);">---</strong></p>
         <p>منطقة عملك: <strong id="driverAreaDisplay" style="color:var(--gold);">---</strong></p>
-        <p>المديونية لصالح Gasser: <strong id="driverDebt" style="font-size:16px;color:#ff5f57;">0 جنيه</strong></p>
-        <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display:block;text-align:center;text-decoration:none;margin-top:12px;background:#25d366;color:#fff;font-size:13px;">إرسال إيصال التحويل عبر واتساب 💬</a>
+        <p>المديونية لصالح Gasser: <strong id="driverDebt" style="font-size:15px;color:#ff5f57;">0 جنيه</strong></p>
+        <a id="whatsappPayBtn" href="#" target="_blank" class="action-btn" style="display:block;text-align:center;text-decoration:none;margin-top:10px;background:#25d366;color:#fff;font-size:12.5px;">إرسال إيصال التحويل عبر واتساب 💬</a>
       </div>
 
-      <div style="background:var(--input-bg);border:1px solid var(--line);padding:18px;border-radius:16px;margin-bottom:18px;">
-        <h3 style="color:var(--gold);font-family:var(--serif);font-size:16px;margin-bottom:8px;">📅 طلبات التوصيل في منطقتك بأسوان</h3>
-        <div id="driverScheduleFeed"><p style="color:var(--muted);text-align:center;padding:8px;font-size:13px;">لا توجد طلبات جديدة في منطقتك حالياً.</p></div>
+      <div style="background:var(--input-bg);border:1px solid var(--line);padding:14px;border-radius:14px;margin-bottom:14px;">
+        <h3 style="color:var(--gold);font-family:var(--serif);font-size:15px;margin-bottom:6px;">📅 طلبات التوصيل في منطقتك بأسوان</h3>
+        <div id="driverScheduleFeed"><p style="color:var(--muted);text-align:center;padding:6px;font-size:12.5px;">لا توجد طلبات جديدة في منطقتك حالياً.</p></div>
       </div>
 
-      <div id="activeDriverTrip" class="hidden" style="background:var(--input-bg);border:1px solid var(--gold);padding:18px;border-radius:16px;margin-top:12px;">
-        <h3 style="color:var(--gold);font-family:var(--serif);font-size:16px;">🚖 رحلة نشطة الآن</h3>
-        <p id="activeTripDetails" style="margin:6px 0;font-size:14px;"></p>
-        <div class="form-group" style="margin-top:8px;">
+      <div id="activeDriverTrip" class="hidden" style="background:var(--input-bg);border:1px solid var(--gold);padding:14px;border-radius:14px;margin-top:10px;">
+        <h3 style="color:var(--gold);font-family:var(--serif);font-size:15px;">🚖 رحلة نشطة الآن</h3>
+        <p id="activeTripDetails" style="margin:5px 0;font-size:13.5px;"></p>
+        <div class="form-group" style="margin-top:6px;">
           <label>وقت الوصول المتوقع (ETA):</label>
           <input type="text" id="driverEtaInput" placeholder="خلال 10 دقائق...">
-          <button class="action-btn" style="margin-top:6px;" onclick="saveDriverEta()">إرسال وقت الوصول</button>
+          <button class="action-btn" style="margin-top:5px;" onclick="saveDriverEta()">إرسال وقت الوصول</button>
         </div>
-        <button class="action-btn danger" style="background:#ff5f57;color:#fff;margin-top:8px;border:none;" onclick="driverCompleteTrip()">إنهاء الرحلة</button>
+        <button class="action-btn danger" style="background:#ff5f57;color:#fff;margin-top:6px;border:none;" onclick="driverCompleteTrip()">إنهاء الرحلة</button>
       </div>
     </div>
 
-    <button class="action-btn ghost" style="margin-top:14px;border-color:rgba(255,95,87,.3);color:#ff5f57;" onclick="logoutApp()">تسجيل خروج 🚪</button>
+    <button class="action-btn ghost" style="margin-top:12px;border-color:rgba(255,95,87,.3);color:#ff5f57;" onclick="logoutApp()">تسجيل خروج 🚪</button>
   </div>
 
   <!-- لوحة الأدمن -->
@@ -480,12 +479,12 @@ setTimeout(dismissIntro, 3800);
       <div class="stat-card"><span class="ico">👥</span><div class="num" id="statTotal">0</div><div class="lbl">إجمالي المسجلين</div></div>
     </div>
 
-    <div class="admin-stat-card"><p>💰 إجمالي أرباح المنصة: <strong id="adminTotalRevenue" style="color:var(--gold);font-size:16px;">0 جنيه</strong></p></div>
+    <div class="admin-stat-card"><p>💰 إجمالي أرباح المنصة: <strong id="adminTotalRevenue" style="color:var(--gold);font-size:15px;">0 جنيه</strong></p></div>
     
-    <h3 style="color:var(--gold);font-family:var(--serif);margin:16px 0 8px;font-size:17px;">🙋 قائمة الزبائن بالتفصيل:</h3>
+    <h3 style="color:var(--gold);font-family:var(--serif);margin:14px 0 6px;font-size:16px;">🙋 قائمة الزبائن بالتفصيل:</h3>
     <div id="adminCustomersList"><p style="color:var(--muted);text-align:center;">جاري الجلب...</p></div>
 
-    <h3 style="color:var(--gold);font-family:var(--serif);margin:24px 0 8px;font-size:17px;">📋 قائمة السواقين:</h3>
+    <h3 style="color:var(--gold);font-family:var(--serif);margin:20px 0 6px;font-size:16px;">📋 قائمة السواقين:</h3>
     <div id="adminDriversList"><p style="color:var(--muted);text-align:center;">جاري الجلب...</p></div>
   </div>
 
@@ -501,12 +500,12 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 const smokeBox = document.getElementById('smokeBox');
 if(smokeBox) {
-  for(let i=0; i<6; i++) {
+  for(let i=0; i<5; i++) {
     let puff = document.createElement('div');
     puff.className = 'smoke-puff';
     puff.style.left = (25 + Math.random() * 50) + '%';
-    puff.style.width = (25 + Math.random() * 35) + 'px';
-    puff.style.height = (25 + Math.random() * 35) + 'px';
+    puff.style.width = (20 + Math.random() * 30) + 'px';
+    puff.style.height = (20 + Math.random() * 30) + 'px';
     puff.style.animationDuration = (3 + Math.random() * 2) + 's';
     puff.style.animationDelay = (Math.random() * 3) + 's';
     smokeBox.appendChild(puff);
@@ -566,7 +565,7 @@ function handleScreenClick(event) {
   tuk.style.top = event.pageY + 'px';
   document.body.appendChild(tuk);
 
-  setTimeout(() => { tuk.style.transform = 'translate(-50%, -70px) scale(1.3)'; tuk.style.opacity = '0'; }, 30);
+  setTimeout(() => { tuk.style.transform = 'translate(-50%, -60px) scale(1.2)'; tuk.style.opacity = '0'; }, 30);
   setTimeout(() => { ripple.remove(); tuk.remove(); }, 800);
 }
 
@@ -594,6 +593,7 @@ let selectedVehicle = "";
 let currentTripTypeMode = '';
 let currentTripKey = null;
 
+// تم إصلاح مشكلة Session بحيث يدخل مباشرة بدون فقدان الجلسة
 window.onload = function() {
   let savedRole = localStorage.getItem('tawsila_active_role');
   let customerLoggedIn = localStorage.getItem('tawsila_customer_logged');
@@ -626,7 +626,7 @@ function checkBanStatusAndLoad() {
   db.ref('drivers/' + driverPhoneClean).once('value', (snapshot) => {
     let data = snapshot.val();
     if(!data) {
-      logoutApp();
+      switchScreen('screenRole');
       return;
     }
     if(data.isBanned) {
@@ -720,6 +720,7 @@ function sendDriverOTP() {
     registeredDriver.workingArea = workingArea;
     registeredDriver.idCardUrl = e.target.result;
     registeredDriver.registerTimestamp = Date.now();
+    localStorage.setItem('gasser_driver_data', JSON.stringify(registeredDriver));
 
     generatedDriverOtp = Math.floor(1000 + Math.random() * 9000).toString();
     alert("📩 كود السائق للإيميل: " + email + "\n[الكود السريع: " + generatedDriverOtp + "]");
@@ -960,17 +961,17 @@ function listenForTripsFromCloud() {
         feedDiv.innerHTML += `
           <div class="schedule-offer-box" id="trip-${tripId}">
             <p style="color: var(--gold); font-weight: bold; margin-bottom: 4px;">🔔 طلب جديد في منطقتك (${registeredDriver.workingArea})!</p>
-            <p style="margin-bottom: 6px; font-size: 13.5px; line-height: 1.5;">${detailsText}</p>
-            <p style="color: var(--gold); margin: 6px 0; font-size: 14.5px;">سعر الزبون: <strong>${trip.price}</strong> جنيه</p>
+            <p style="margin-bottom: 6px; font-size: 13px; line-height: 1.5;">${detailsText}</p>
+            <p style="color: var(--gold); margin: 6px 0; font-size: 14px;">سعر الزبون: <strong>${trip.price}</strong> جنيه</p>
 
-            <div class="form-group" style="margin-top: 10px;">
+            <div class="form-group" style="margin-top: 8px;">
               <label>اقتراح سعر جديد:</label>
               <input type="number" id="proposedPrice-${tripId}" placeholder="اكتب سعرك...">
             </div>
 
-            <div style="display: flex; gap: 10px;">
-              <button class="action-btn" style="margin-top:0; flex:1; font-size:12.5px;" onclick="acceptTripWithOffer('${tripId}', '${trip.price}')">قبول السعر</button>
-              <button class="action-btn ghost" style="margin-top:0; flex:1; font-size:12.5px;" onclick="proposeNewPrice('${tripId}')">إرسال سعر</button>
+            <div style="display: flex; gap: 8px;">
+              <button class="action-btn" style="margin-top:0; flex:1; font-size:12px;" onclick="acceptTripWithOffer('${tripId}', '${trip.price}')">قبول السعر</button>
+              <button class="action-btn ghost" style="margin-top:0; flex:1; font-size:12px;" onclick="proposeNewPrice('${tripId}')">إرسال سعر</button>
             </div>
           </div>
         `;
@@ -984,7 +985,7 @@ function listenForTripsFromCloud() {
     if(cardElement) { cardElement.remove(); }
     let feedDiv = document.getElementById('driverScheduleFeed');
     if(feedDiv && feedDiv.children.length === 0) {
-      feedDiv.innerHTML = `<p style="color:var(--muted);text-align:center;padding:8px;font-size:13px;">لا توجد طلبات جديدة في منطقتك حالياً.</p>`;
+      feedDiv.innerHTML = `<p style="color:var(--muted);text-align:center;padding:6px;font-size:12.5px;">لا توجد طلبات جديدة في منطقتك حالياً.</p>`;
     }
   });
 }
@@ -1101,6 +1102,7 @@ function refreshStats() {
   document.getElementById('statTotal').innerText = driversCount + customersCount;
 }
 
+// تم حل مشكلة ظهور المسجلين في لوحة الأدمن تلقائياً دون الحاجة لإعادة التسجيل من جهاز الأدمن
 function loadAdminData() {
   document.getElementById('adminTotalRevenue').innerText = totalPlatformRevenue + " جنيه";
 
@@ -1123,7 +1125,7 @@ function loadAdminData() {
           <p><strong>الاسم:</strong> ${c.name || 'بدون اسم'}</p>
           <p><strong>الهاتف:</strong> <a href="tel:${c.phone}" style="color:var(--gold);">${c.phone}</a></p>
           <p><strong>الإيميل:</strong> ${c.email || 'غير متوفر'}</p>
-          <button class="action-btn danger" style="padding:6px; font-size:12px; margin-top:8px; background:#ff5f57; color:#fff; border:none;" onclick="adminDeleteCustomer('${phoneKey}')">حذف الزبون 🗑️</button>
+          <button class="action-btn danger" style="padding:5px; font-size:11.5px; margin-top:6px; background:#ff5f57; color:#fff; border:none;" onclick="adminDeleteCustomer('${phoneKey}')">حذف الزبون 🗑️</button>
         </div>
       `;
     });
@@ -1146,7 +1148,7 @@ function loadAdminData() {
       let d = drivers[phoneKey];
       let banStatusText = d.isBanned ? "محظور 🚫" : "نشط ✅";
       let banBtnText = d.isBanned ? "رفع الحظر" : "حظر ⛔";
-      let idCardImg = d.idCardUrl ? `<div style="margin-top:8px;"><a href="${d.idCardUrl}" target="_blank"><img src="${d.idCardUrl}" style="width:100px; height:60px; object-fit:cover; border-radius:8px; border:1px solid var(--gold);" alt="صورة البطاقة"></a></div>` : `<p style="color:var(--muted); font-size:12px;">لم يتم رفع صورة البطاقة</p>`;
+      let idCardImg = d.idCardUrl ? `<div style="margin-top:6px;"><a href="${d.idCardUrl}" target="_blank"><img src="${d.idCardUrl}" style="width:90px; height:50px; object-fit:cover; border-radius:6px; border:1px solid var(--gold);" alt="صورة البطاقة"></a></div>` : `<p style="color:var(--muted); font-size:11.5px;">لم يتم رفع صورة البطاقة</p>`;
 
       listContainer.innerHTML += `
         <div class="admin-stat-card">
@@ -1155,14 +1157,14 @@ function loadAdminData() {
           <p><strong>منطقة العمل:</strong> <span style="color:var(--gold);">${d.workingArea || 'غير محدد'}</span></p>
           <p><strong>المركبة:</strong> ${d.vehicle || 'غير محدد'}</p>
           <p><strong>المديونية:</strong> <span style="color: #ff5f57;">${d.debt || 0} جنيه</span></p>
-          <p style="margin-top: 4px;"><strong>الحالة:</strong> ${banStatusText}</p>
+          <p style="margin-top: 3px;"><strong>الحالة:</strong> ${banStatusText}</p>
           
-          <div style="margin: 8px 0;"><strong>صورة البطاقة:</strong> ${idCardImg}</div>
+          <div style="margin: 6px 0;"><strong>صورة البطاقة:</strong> ${idCardImg}</div>
 
-          <div style="display: flex; gap: 8px; margin-top: 12px; flex-wrap:wrap;">
-            <button class="action-btn" style="padding: 6px; font-size: 12px; margin:0; flex:1;" onclick="adminResetDebt('${phoneKey}')">تصفير المديونية</button>
-            <button class="action-btn ghost" style="padding: 6px; font-size: 12px; margin:0; color:#ff5f57; border-color:rgba(255,95,87,0.3); flex:1;" onclick="adminToggleBan('${phoneKey}', ${d.isBanned})">${banBtnText}</button>
-            <button class="action-btn danger" style="padding: 6px; font-size: 12px; margin:0; background:#ff5f57; color:#fff; border:none; flex:1;" onclick="adminDeleteDriver('${phoneKey}')">حذف نهائي 🗑️</button>
+          <div style="display: flex; gap: 6px; margin-top: 10px; flex-wrap:wrap;">
+            <button class="action-btn" style="padding: 5px; font-size: 11.5px; margin:0; flex:1;" onclick="adminResetDebt('${phoneKey}')">تصفير المديونية</button>
+            <button class="action-btn ghost" style="padding: 5px; font-size: 11.5px; margin:0; color:#ff5f57; border-color:rgba(255,95,87,0.3); flex:1;" onclick="adminToggleBan('${phoneKey}', ${d.isBanned})">${banBtnText}</button>
+            <button class="action-btn danger" style="padding: 5px; font-size: 11.5px; margin:0; background:#ff5f57; color:#fff; border:none; flex:1;" onclick="adminDeleteDriver('${phoneKey}')">حذف نهائي 🗑️</button>
           </div>
         </div>
       `;
